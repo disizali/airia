@@ -1,0 +1,19 @@
+@import "../static/fonts/scss/fontawesome.scss";
+@import "../static/fonts/scss/brands.scss";
+@import "../static/fonts/scss/solid.scss";
+@import "../static/fonts/scss/regular.scss";
+
+@font-face {
+  font-family: "Iranian Sans";
+  font-weight: normal;
+  src: url("/static/fonts/IranSans.woff2");
+}
+@font-face {
+  font-family: "Samim";
+  font-weight: normal;
+  src: url("/static/fonts/Samim.woff2");
+}
+
+* {
+  font-family: "Samim";
+}

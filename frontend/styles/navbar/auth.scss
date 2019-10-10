@@ -1,0 +1,29 @@
+.auth-panel {
+  background: white;
+  position: absolute;
+  height: 350px;
+  width: 250px;
+  top: 80px;
+  transition: all 0.3s;
+  opacity: 0;
+  left: 0;
+  margin-left: 14em;
+  border-radius: 5px 15px;
+  box-shadow: $boxShadow;
+  margin-top: -20px;
+  &.open {
+    margin-top: 0;
+    opacity: 1;
+  }
+}
+.panel-auth-toogle {
+  cursor: pointer;
+  border-radius: 5%;
+  &:hover {
+    background: $primaryColor;
+  }
+  &.active {
+    background: $primaryColor;
+    border: 1px solid $mainColor;
+  }
+}

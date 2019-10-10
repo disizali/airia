@@ -8,9 +8,11 @@ export class Layout extends Component {
     return (
       <main>
         <Head>
-          <title>AIRIA</title>
+          <title>بالهای آسمانی آیریا</title>
+          <link rel="icon" src="/static/images/icon.png" />
         </Head>
         <Navbar />
+        {this.props.children}
       </main>
     );
   }

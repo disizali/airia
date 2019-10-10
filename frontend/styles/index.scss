@@ -1,1 +1,14 @@
 @import url(~bootstrap/scss/bootstrap.scss);
+@import "variables";
+@import "fonts";
+
+@import "components/index";
+@import "navbar/index";
+@import "splash";
+
+.rtl {
+  direction: rtl;
+}
+.ltr {
+  direction: ltr;
+}

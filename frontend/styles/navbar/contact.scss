@@ -1,0 +1,27 @@
+.contact-panel {
+  background: white;
+  position: absolute;
+  height: 150px;
+  width: 150px;
+  top: 80px;
+  transition: all 0.3s;
+  opacity: 0;
+  left: 0;
+  margin-left: 3em;
+  border-radius: 5px 15px;
+  box-shadow: $boxShadow;
+  margin-top: -20px;
+  &.open {
+    margin-top: 0;
+    opacity: 1;
+  }
+
+  span {
+    color: $headerColor;
+    font-size: 1.2em;
+  }
+  i{
+    color:$secondColor;
+    font-size: 1.2em;
+  }
+}

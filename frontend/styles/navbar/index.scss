@@ -1,0 +1,25 @@
+@import "auth";
+@import "contact";
+
+nav {
+    height: 80px;
+  }
+  
+  .nav-item {
+    padding: 0 20px;
+    font-size: 0.9em;
+    &:first-child {
+      border-left: 1px solid rgb(211, 211, 211);
+    }
+    a {
+      color: $darkTextColor !important;
+    }
+  }
+  
+  
+  .arrow {
+    transition: all 0.5s;
+  }
+  .arrow-up {
+    transform: rotate(180deg);
+  }
