@@ -6,6 +6,11 @@
 @import "navbar/index";
 @import "splash";
 
+body {
+  width: 100%;
+  overflow-x: hidden;
+}
+
 .rtl {
   direction: rtl;
 }

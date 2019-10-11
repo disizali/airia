@@ -11,8 +11,11 @@
   border-radius: 5px 15px;
   box-shadow: $boxShadow;
   margin-top: -20px;
+  z-index: 1;
+  pointer-events: none;
   &.open {
-    margin-top: 0;
+    pointer-events: all;
+    margin-top: 0px;
     opacity: 1;
   }
 
@@ -20,8 +23,8 @@
     color: $headerColor;
     font-size: 1.2em;
   }
-  i{
-    color:$secondColor;
+  i {
+    color: $secondColor;
     font-size: 1.2em;
   }
 }
