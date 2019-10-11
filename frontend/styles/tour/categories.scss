@@ -1,0 +1,23 @@
+.category {
+  width: 200px;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px dotted #bbbbbb;
+  border-radius: 10px;
+  box-shadow: $boxShadow;
+  transition: all 1s;
+  cursor: pointer;
+  &:hover{
+    border-style: dashed;
+  }
+  &.active {
+    background: $secondColor;
+  }
+}
+.splitter{
+  background: $secondColor;
+  width: 150px;
+  height: 5px;
+}
