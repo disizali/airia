@@ -22,3 +22,10 @@ body {
 .ltr {
   direction: ltr;
 }
+
+.text-main {
+  color: $mainColor;
+}
+.text-second {
+  color: $secondColor;
+}

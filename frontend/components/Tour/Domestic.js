@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Slider from "react-slick";
+import Product from "./Product";
 import { Container } from "reactstrap";
 
 export class Domestic extends Component {
@@ -16,22 +17,17 @@ export class Domestic extends Component {
       <Container className="rtl text-right">
         {[1, 2].map((item, index) => {
           return (
-            <div className="d-flex flex-column" key={index}>
+            <div className="d-flex flex-column mt-3" key={index}>
               <div className="splitter my-3"></div>
-              <h3 className=" my-3">لیست شماره {item}</h3>
+              <h3 className="my-3">لیست شماره {item}</h3>
               <Slider {...settings} className="text-center">
                 {[1, 2, 3, 4].map((item, index) => {
                   return (
-                    <div
+                    <Product
                       key={index}
-                      className="bg-danger card d-flex justify-content-center align-items-center"
-                    >
-                      <img
-                        src={`https://picsum.photos/200/20${item}`}
-                        className="rounded shadow"
-                      />
-                      <h3>{item}</h3>
-                    </div>
+                      image={`https://picsum.photos/seed/picsum/10${item}`}
+                      name={`product ${item}`}
+                    />
                   );
                 })}
               </Slider>
