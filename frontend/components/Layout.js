@@ -14,7 +14,7 @@ export default class Layout extends Component {
           <link
             rel="shortcut icon"
             type="image/png"
-            src="/static/images/icon.png"
+            href="/static/images/icon.png"
           />
         </Head>
         <Navbar />

@@ -1,6 +1,5 @@
 .splash {
-  // background: url("https://picsum.photos/500/250") no-repeat;
-  background: coral;
+  background: linear-gradient(to top , $mainColor , transparent),url("/static/images/tour.jpg") no-repeat;
   background-size: 100% 100%;
   min-height: calc(70vh - 80px);
 }
@@ -28,12 +27,11 @@
 .switcher {
   cursor: pointer;
   background: rgb(30, 30, 30);
-  width: 150px;
-  height: 150px;
+  width: 100px;
+  height: 100px;
   border-radius: 10%;
-  transform: translateY(calc(-50% + 25px));
-
-  margin: auto 10em;
+  transform: translateY(calc(-50% - 15px));
+  margin: auto 2em;
   color: white;
   transition: all 0.2s;
   &:hover {

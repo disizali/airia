@@ -1,13 +1,13 @@
 .category {
-  width: 200px;
-  height: 200px;
+  width: 100px;
+  height: 100px;
   display: flex;
   justify-content: center;
   align-items: center;
   border: 1px dotted #bbbbbb;
   border-radius: 10px;
   box-shadow: $boxShadow;
-  transition: all 1s;
+  transition: all 0.3s;
   cursor: pointer;
   &:hover{
     border-style: dashed;
