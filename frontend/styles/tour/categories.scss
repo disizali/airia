@@ -1,6 +1,6 @@
 .category {
-  width: 100px;
-  height: 100px;
+  // width: 100px;
+  // height: 100px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -9,15 +9,29 @@
   box-shadow: $boxShadow;
   transition: all 0.3s;
   cursor: pointer;
-  &:hover{
+  &:hover {
     border-style: dashed;
   }
   &.active {
     background: $secondColor;
   }
 }
-.splitter{
+.splitter {
   background: $secondColor;
   width: 150px;
   height: 5px;
+}
+.category-switcher {
+  color: $mainColor;
+  cursor: pointer;
+  border: 1px solid $mainColor;
+  border-radius: 5px;
+  &:hover {
+    background: rgba($secondColor, 0.1);
+  }
+  &.active {
+    background: $secondColor;
+    color: white;
+    border: none;
+  }
 }

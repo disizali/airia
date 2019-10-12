@@ -8,19 +8,19 @@ export class Product extends Component {
   render() {
     const { image, item } = this.props;
     return (
-      <div className="product-container d-flex flex-column">
-        <div className="product-image-container">
+      <div className="product-item-container d-flex flex-column justify-content-center align-items-center">
+        <div className="product-image-container w-100">
           <img
             src={`https://picsum.photos/20${item}`}
             alt={item + " image"}
-            className="product-image"
+            className="product-item-image"
             width="100%"
           />
         </div>
-        <div className="product-title d-flex justify-content-center align-items-center">
+        <div className="product-item-title d-flex justify-content-center align-items-center w-75">
           <span>Product {item}</span>
         </div>
-        <Container className="product-body text-right rtl d-flex flex-column p-2">
+        <Container className="product-item-body text-right rtl d-flex flex-column p-2">
           <div></div>
           <div className="d-flex">
             <div className="border-left pl-2 d-flex-flex-column">
@@ -56,7 +56,7 @@ export class Product extends Component {
             <span>توضیحات این محصول</span>
           </div>
           <br />
-          <div className="product-description text-dark">
+          <div className="product-item-description text-dark">
             <p className="text-muted">
               ظرفیت باقیمانده <span className="text-second">20</span> نفر
             </p>
@@ -65,7 +65,7 @@ export class Product extends Component {
           <br />
           <div>
             <Row>
-              <Col className="d-flex flex-column product-price">
+              <Col className="d-flex flex-column product-item-price">
                 <span className="text-muted">شروع قیمت از</span>
                 <div>
                   <strong className="text-main mx-2">
@@ -74,7 +74,7 @@ export class Product extends Component {
                   <span className="text-muted mx-2">تومان </span>
                 </div>
               </Col>
-              <Col className="product-action d-flex justify-content-center align-items-center">
+              <Col className="product-item-action d-flex justify-content-center align-items-center">
                 <Button>ثبت نام</Button>
               </Col>
             </Row>

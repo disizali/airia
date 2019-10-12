@@ -25,7 +25,7 @@ export class Splash extends Component {
         <div
           className={`align-items-center splash-switcher-container d-flex text-center rtl justify-content-center flex-column ${this.getTabName()}`}
         >
-          <Row className="text-center rtl">
+          <Row className="text-center rtl splash-switchers">
             <Col>
               <div
                 className={`d-flex switcher flex-column text-center justify-content-center align-items-center ${tab ==
@@ -80,44 +80,6 @@ export class Splash extends Component {
                     className="my-2 flat-icon large-icon"
                   />
                   <span className="my-2">مجله</span>
-                </div>
-              </div>
-            </Col>
-            <Col>
-              <div
-                className={`d-flex switcher flex-column text-center justify-content-center align-items-center ${tab ==
-                  4 && "active"}`}
-                onClick={() => changeTab(4)}
-              >
-                <div>
-                  <Icon
-                    icon="COMPANY"
-                    style={{
-                      fill: tab == 4 ? "#ffad00" : "white",
-                      transition: "all 0.3s"
-                    }}
-                    className="my-2 flat-icon large-icon"
-                  />
-                  <span className="my-2">درباره ما</span>
-                </div>
-              </div>
-            </Col>
-            <Col>
-              <div
-                className={`d-flex switcher flex-column text-center justify-content-center align-items-center ${tab ==
-                  5 && "active"}`}
-                onClick={() => changeTab(5)}
-              >
-                <div>
-                  <Icon
-                    icon="VIP"
-                    style={{
-                      fill: tab == 5 ? "#ffad00" : "white",
-                      transition: "all 0.3s"
-                    }}
-                    className="my-2 flat-icon large-icon"
-                  />
-                  <span className="my-2">ویژه</span>
                 </div>
               </div>
             </Col>
