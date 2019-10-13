@@ -1,0 +1,23 @@
+.glance-item {
+  background: #eeeeee;
+  border-radius: 10px;
+  color: $mainColor;
+  .glance-title {
+    &.even {
+      background: $mainColor;
+    }
+    &.odd {
+      background: rgba($mainColor, 0.85);
+    }
+    color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    i {
+      font-size: 1.4em;
+      margin-left: 10px;
+    }
+    span {
+      margin-right: 10px;
+    }
+  }
+}

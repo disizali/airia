@@ -40,7 +40,7 @@ export default class NavbarClass extends React.Component {
     const { authOpen, contactOpen } = this.state;
     return (
       <div>
-        <Navbar color="light" light expand="md" style={{ direction: "rtl" }} fixed="true">
+        <Navbar color="white" light expand="md" className="rtl shadow" fixed="true">
           <NavbarBrand href="/">
             <img src="/static/images/logo.png" alt="airia logo" width="300" />
           </NavbarBrand>

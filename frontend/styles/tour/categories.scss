@@ -1,23 +1,40 @@
 .category {
-  width: 200px;
-  height: 200px;
+  // width: 100px;
+  // height: 100px;
   display: flex;
   justify-content: center;
   align-items: center;
   border: 1px dotted #bbbbbb;
   border-radius: 10px;
   box-shadow: $boxShadow;
-  transition: all 1s;
+  transition: all 0.3s;
   cursor: pointer;
-  &:hover{
+  &:hover {
     border-style: dashed;
   }
   &.active {
     background: $secondColor;
   }
 }
-.splitter{
+.splitter {
   background: $secondColor;
   width: 150px;
   height: 5px;
+}
+.parent-title {
+  min-width: 150px;
+}
+.category-switcher {
+  color: $mainColor;
+  cursor: pointer;
+  border: 1px solid $mainColor;
+  border-radius: 5px;
+  &:hover {
+    background: rgba($secondColor, 0.1);
+  }
+  &.active {
+    background: $secondColor;
+    color: white;
+    border: none;
+  }
 }

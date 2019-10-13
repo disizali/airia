@@ -25,7 +25,7 @@ export class Splash extends Component {
         <div
           className={`align-items-center splash-switcher-container d-flex text-center rtl justify-content-center flex-column ${this.getTabName()}`}
         >
-          <Row className="text-center rtl">
+          <Row className="text-center rtl splash-switchers">
             <Col>
               <div
                 className={`d-flex switcher flex-column text-center justify-content-center align-items-center ${tab ==
