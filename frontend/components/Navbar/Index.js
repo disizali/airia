@@ -23,7 +23,6 @@ export default class NavbarClass extends React.Component {
       contactOpen: false
     };
   }
-
   authFormToggle() {
     this.setState({
       authOpen: !this.state.authOpen,
@@ -53,7 +52,7 @@ export default class NavbarClass extends React.Component {
                     src="/static/icons/user-circle.svg"
                     className="flat-icon mini-icon mx-2"
                   />
-                  <span className=" mx-2">ورود</span>
+                  <span className=" mx-2">ورود - ثبت نام</span>
                   <i
                     className={`fas fa-sort-down mx-2 arrow ${
                       authOpen ? "arrow-up" : ""

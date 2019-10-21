@@ -1,0 +1,21 @@
+.product-overview {
+  .product-order {
+    border: 1px solid #eeeeee;
+    // height: 80%;
+    .product-price {
+      min-height: 100px;
+      span {
+        font-size: 1em;
+      }
+      b {
+        font-size: 1.5em;
+        color: $mainColor;
+      }
+      p {
+        font-size: 0.8em;
+        color: #8a8a8a;
+      }
+      background: #eeeeee;
+    }
+  }
+}

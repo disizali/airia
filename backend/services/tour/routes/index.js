@@ -3,6 +3,6 @@ const router = express.Router();
 
 const categories = require("./tours");
 
-router.use("/tours", categories);
+router.use("/", categories);
 
 module.exports = router;

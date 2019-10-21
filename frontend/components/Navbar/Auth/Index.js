@@ -1,6 +1,8 @@
 import React, { Component } from "react";
-import {Row , Col , Container} from "reactstrap";
-import Email from "./Email";
+import { Row, Col, Container } from "reactstrap";
+import Signin from "./Signin";
+import Signup from "./Signup";
+
 import Mobile from "./Mobile";
 
 export class Auth extends Component {
@@ -12,10 +14,14 @@ export class Auth extends Component {
     this.state = {
       authOpen: false,
       contactOpen: false,
-      authMethod: 1
+      authMethod: 1,
+      signUp: false
     };
   }
 
+  changeSignup(signUp) {
+    this.setState({ signUp });
+  }
   authFormToggle() {
     this.setState({
       authOpen: !this.state.authOpen
@@ -33,10 +39,9 @@ export class Auth extends Component {
 
   render() {
     const { authOpen } = this.props;
-    const { authMethod } = this.state;
+    const { authMethod, signUp } = this.state;
     return (
       <Container className={`auth-panel ${authOpen ? "open" : ""}`}>
-      
         <div className="auth-panel-toggles">
           <Row className="p-2">
             <Col className="m-3 d-flex justify-content-center align-items-center flex-column text-center p-2">
@@ -51,7 +56,7 @@ export class Auth extends Component {
                   />
                 </Col>
                 <Col sm={12} className="my-1">
-                  <span>با ایمیل</span>
+                  <span>با رمز</span>
                 </Col>
               </Row>
             </Col>
@@ -72,7 +77,15 @@ export class Auth extends Component {
               </Row>
             </Col>
           </Row>
-            {authMethod==1 ? <Email /> : <Mobile />}
+          {authMethod == 1 ? (
+            signUp ? (
+              <Signup toggle={this.changeSignup.bind(this)} />
+            ) : (
+              <Signin toggle={this.changeSignup.bind(this)} />
+            )
+          ) : (
+            <Mobile />
+          )}
         </div>
       </Container>
     );

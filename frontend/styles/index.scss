@@ -1,5 +1,5 @@
 @import url(~bootstrap/scss/bootstrap.scss);
-
+@import url(~react-persian-calendar-date-picker/lib/DatePicker.css);
 @import "variables";
 @import "fonts";
 
@@ -8,10 +8,13 @@
 @import "tour/index";
 @import "splash";
 @import "product/index";
+@import "dashboard/index";
+@import "footer";
 
 body {
   width: 100%;
   overflow-x: hidden;
+  background-image: url(/static/images/back-pattern.png);
 }
 
 .rtl {

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Row, Col } from "reactstrap";
-import Icon from "../Icons";
+import Icon from "../../Icons";
 import { Container } from "reactstrap";
 
 export default class Parents extends Component {

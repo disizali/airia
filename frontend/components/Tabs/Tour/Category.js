@@ -32,42 +32,44 @@ export default class Category extends Component {
   render() {
     const { parent, subTab, changeSubTab } = this.props;
     return (
-      <Container className="d-flex flex-column my-3 text-right rtl">
-        <div className="splitter my-3"></div>
-        <div className="d-flex align-items-center">
-          <h3 className="my-3 parent-title">تور {parent.name}</h3>
-          <span
-            className={`category-switcher p-1 mx-2 ${
-              subTab == 0 ? "active" : ""
-            }`}
-            onClick={() => changeSubTab(0)}
-          >
-            همه
-          </span>
-          {parent.Categories.map((item, index) => {
-            return (
-              <span
-                key={index}
-                className={`category-switcher p-1 mx-2 ${
-                  subTab == item.id ? "active" : ""
-                }`}
-                onClick={() => changeSubTab(item.id)}
-              >
-                {item.name}
-              </span>
-            );
-          })}
-        </div>
-        <Row>
+      <div className="d-flex flex-column my-3 text-right rtl">
+        <Container>
+          <div className="splitter my-3"></div>
+          <div className="d-flex align-items-center">
+            <h3 className="my-3 parent-title">تور {parent.name}</h3>
+            <span
+              className={`category-switcher p-1 mx-2 ${
+                subTab == 0 ? "active" : ""
+              }`}
+              onClick={() => changeSubTab(0)}
+            >
+              همه
+            </span>
+            {parent.Categories.map((item, index) => {
+              return (
+                <span
+                  key={index}
+                  className={`category-switcher p-1 mx-2 ${
+                    subTab == item.id ? "active" : ""
+                  }`}
+                  onClick={() => changeSubTab(item.id)}
+                >
+                  {item.name}
+                </span>
+              );
+            })}
+          </div>
+        </Container>
+        <Row className="p-5">
           {this.getData(subTab).map((item, index) => {
             return (
               <Col sm={4} className="my-3" key={index}>
-                <Product product={item} />
+                <Product product={item}/>
               </Col>
             );
           })}
         </Row>
-      </Container>
+      </div>
     );
   }
 }

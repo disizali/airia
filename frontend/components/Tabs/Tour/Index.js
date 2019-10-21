@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import Parents from "./Parents";
-import Body from "./Category";
+import Category from "./Category";
+import Static from "./Static";
+import Actions from "./Actions";
 
 export class Tour extends Component {
   constructor(props) {
@@ -13,7 +15,7 @@ export class Tour extends Component {
     const parent = this.props.tours.find(parent => parent.id == tab);
     this.setState({ tab, subTab: 0, parent });
   }
-  
+
   changeSubTab(subTab) {
     this.setState({ subTab });
   }
@@ -28,12 +30,14 @@ export class Tour extends Component {
           changeTab={this.changeTab.bind(this)}
           tab={tab}
         />
-        <Body
+        <Category
           parent={parent}
           tab={tab}
           subTab={subTab}
           changeSubTab={this.changeSubTab.bind(this)}
         />
+        <Static />
+        <Actions />
       </section>
     );
   }

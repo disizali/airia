@@ -1,5 +1,6 @@
 @import "glance";
 @import "tabs";
+@import "overview";
 
 .product-title {
   font-size: 1.4em;
@@ -12,23 +13,4 @@
 .product-helper-number {
   font-size: 1.1em;
   letter-spacing: 0.3em;
-}
-.product-overview {
-  height: 100%;
-  border: 1px solid #eeeeee;
-  .product-price {
-    min-height: 100px;
-    span {
-      font-size: 1em;
-    }
-    b {
-      font-size: 1.5em;
-      color: $mainColor;
-    }
-    p {
-      font-size: 0.8em;
-      color: #8a8a8a;
-    }
-    background: #eeeeee;
-  }
 }

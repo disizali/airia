@@ -1,5 +1,7 @@
 // import { GoogleMap, Marker } from "react-google-maps";
 
+import { Button } from "reactstrap";
+
 export default props => {
   return (
     <div>
@@ -10,6 +12,9 @@ export default props => {
         frameBorder="0"
         allowFullScreen=""
       ></iframe>
+      <Button className="form-control" color="primary">
+        دانلود PDF سفر
+      </Button>
     </div>
   );
 };

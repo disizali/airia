@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Head from "next/head";
 import Navbar from "./Navbar";
+import Footer from "./Footer";
 import "../styles/index.scss";
 // import "slick-carousel/slick/slick.css";
 // import "slick-carousel/slick/slick-theme.css";
@@ -19,6 +20,7 @@ export default class Layout extends Component {
         </Head>
         <Navbar />
         {this.props.children}
+        <Footer />
       </main>
     );
   }

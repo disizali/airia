@@ -1,6 +1,6 @@
 import { Component } from "react";
 import { Row, Col, Button, Container } from "reactstrap";
-import Icon from "./Icons/Index";
+import Icon from "./Icons";
 export class Splash extends Component {
   constructor(props) {
     super(props);

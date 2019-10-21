@@ -15,6 +15,9 @@
   &.active {
     background: $secondColor;
   }
+  &:not(.active) {
+    background: white;
+  }
 }
 .splitter {
   background: $secondColor;

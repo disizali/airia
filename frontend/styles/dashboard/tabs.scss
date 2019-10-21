@@ -1,0 +1,7 @@
+.dashboard-tab {
+  color: #adadad;
+  cursor: pointer;
+  &.active {
+    color: $secondColor !important;
+  }
+}

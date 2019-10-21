@@ -1,0 +1,59 @@
+footer {
+  text-align: center;
+  .footer-social {
+    background: #f3f3f3;
+    .social-instagram {
+      background: linear-gradient(
+        256deg,
+        #4f5bd5,
+        #962fbf 28%,
+        #d62976 65%,
+        #d62976 75%,
+        #fa7e1f 95%,
+        #feda75
+      );
+      padding: 6px 30px;
+      border-radius: 16px;
+    }
+    .social-twitter {
+      background: #1da1f2;
+      border-radius: 100px;
+      padding: 6px;
+      widows: 30px;
+      height: 30px;
+    }
+    .social-telegram {
+      background: #0088cc;
+      border-radius: 100px;
+      padding: 6px;
+      widows: 30px;
+      height: 30px;
+    }
+  }
+  .footer-links {
+    background: #e1e1e1;
+    ul {
+      list-style: none; /* Remove default bullets */
+      li {
+        color: #666;
+        margin: 10px 0;
+        font-size: 0.9em;
+        &::before {
+          content: "\2022"; /* Add content: \2022 is the CSS Code/unicode for a bullet */
+          color: $secondColor; /* Change the color */
+          font-weight: bold; /* If you want it to be bold */
+          display: inline-block; /* Needed to add space between the bullet and the text */
+          width: 1em; /* Also needed for space (tweak if needed) */
+          margin-right: -1em; /* Also needed for space (tweak if needed) */
+        }
+      }
+    }
+    .footer-logo {
+      transform: translateY(-20%);
+    }
+  }
+  .trus-container {
+    min-width: 100px;
+    min-height: 100px;
+  }
+}

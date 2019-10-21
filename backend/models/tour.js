@@ -5,8 +5,6 @@ module.exports = (sequelize, DataTypes) => {
     {
       name: DataTypes.STRING,
       image: DataTypes.STRING,
-      start: DataTypes.DATE,
-      end: DataTypes.DATE,
       leader: DataTypes.STRING,
       description: DataTypes.TEXT,
       price: DataTypes.INTEGER
@@ -20,6 +18,8 @@ module.exports = (sequelize, DataTypes) => {
     });
 
     Tour.hasMany(models.Detail);
+
+    Tour.hasMany(models.Date);
   };
   return Tour;
 };
