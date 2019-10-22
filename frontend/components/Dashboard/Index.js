@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import Tabs from "./Tabs";
 import Profile from "./Profile";
 import Credit from "./Credit";
-import { Container } from "reactstrap";
+import Favorites from "./Favorites";
+import History from "./History";
 export class dashboard extends Component {
   constructor(props) {
     super(props);
@@ -21,6 +22,10 @@ export class dashboard extends Component {
         return <Profile user={this.props.user} />;
       case 2:
         return <Credit />;
+      case 3:
+        return <Favorites />;
+      case 4:
+        return <History />;
     }
   }
   render() {

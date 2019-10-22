@@ -61,9 +61,6 @@ export class Footer extends Component {
                 </ul>
               </Col>
               <Col>
-                <h5>ستون سوم</h5>
-              </Col>
-              <Col>
                 <img
                   src="/static/images/logo.png"
                   alt="airia logo"

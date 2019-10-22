@@ -73,11 +73,12 @@ export class Overview extends Component {
               >
                 <select>
                   {tour.Dates.map((item, index) => {
-                    return <option key={index} value={index}>
-                      {this.getJalaliDate(item.start)}
-                      <span> - </span>
-                      {this.getJalaliDate(item.end)}
-                    </option>;
+                    return (
+                      <option key={index} value={index}>
+                        {this.getJalaliDate(item.start)}{` - `}
+                        {this.getJalaliDate(item.end)}
+                      </option>
+                    );
                   })}
                 </select>
               </Col>
@@ -103,7 +104,7 @@ export class Overview extends Component {
                 sm={7}
                 className="d-flex justify-content-center align-items-center"
               >
-                <input type="number" className="w-75" value={1} min={1} />
+                <input type="number" className="w-75" defaultValue={1} min={1} />
               </Col>
             </Row>
             <Button color="primary" className="my-3 form-control">

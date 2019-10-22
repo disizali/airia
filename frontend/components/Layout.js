@@ -3,10 +3,40 @@ import Head from "next/head";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import "../styles/index.scss";
-// import "slick-carousel/slick/slick.css";
-// import "slick-carousel/slick/slick-theme.css";
+import { initStore } from "../redux/store";
+import withRedux from "next-redux-wrapper";
+import axios from "axios";
+import jsCookie from "js-cookie";
+class Layout extends Component {
+  constructor(props) {
+    super(props);
+  }
+  async componentDidMount() {
+    const token = jsCookie.get("authtoken");
+    if (token == undefined) {
+      return this.props.store.dispatch({
+        type: "AUTH",
+        payload: { status: -1, user: {} }
+      });
+    }
+    const { data } = await axios.get("http://localhost:3001/profile", {
+      headers: {
+        authorization: `Bearer ${token}`
+      }
+    });
+    if (data != "unauthorized") {
+      return this.props.store.dispatch({
+        type: "AUTH",
+        payload: { status: 1, user: data }
+      });
+    } else {
+      return this.props.store.dispatch({
+        type: "AUTH",
+        payload: { status: -1, user: {} }
+      });
+    }
+  }
 
-export default class Layout extends Component {
   render() {
     return (
       <main>
@@ -25,3 +55,5 @@ export default class Layout extends Component {
     );
   }
 }
+
+export default withRedux(initStore)(Layout);
