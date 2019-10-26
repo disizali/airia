@@ -29,7 +29,7 @@ class NavbarClass extends React.Component {
       contactOpen: this.state.contactOpen && !this.state.contactOpen
     });
   }
-  
+
   contactToggle() {
     this.setState({
       contactOpen: !this.state.contactOpen,
@@ -38,8 +38,13 @@ class NavbarClass extends React.Component {
   }
 
   render() {
+    const { user, status } = this.context;
+    let profile = {};
+    if (user != null) {
+      profile = user.Profile;
+    }
     const { authOpen, contactOpen } = this.state;
-    console.log(this.context)
+    console.log(status);
     return (
       <div>
         <Navbar
@@ -55,36 +60,52 @@ class NavbarClass extends React.Component {
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="mr-auto" navbar>
-              <NavItem>
-                <NavLink href="#" onClick={this.authFormToggle}>
-                  <img
-                    src="/static/icons/user-circle.svg"
-                    className="flat-icon mini-icon mx-2"
-                  />
-                  <span className=" mx-2">ورود - ثبت نام</span>
-                  <i
-                    className={`fas fa-sort-down mx-2 arrow ${
-                      authOpen ? "arrow-up" : ""
-                    }`}
-                  ></i>
-                </NavLink>
-                <Auth authOpen={authOpen} />
-              </NavItem>
-              <NavItem>
-                <NavLink href="#" onClick={this.contactToggle}>
-                  <img
-                    src="/static/icons/phone-circle.svg"
-                    className="flat-icon mini-icon"
-                  />
-                  <span className=" mx-2">تماس با ما</span>
-                  <i
-                    className={`fas fa-sort-down mx-2 arrow ${
-                      contactOpen ? "arrow-up" : ""
-                    }`}
-                  ></i>
-                </NavLink>
-                <Contact contactOpen={contactOpen} />
-              </NavItem>
+              {status == -1 ? (
+                <NavItem>
+                  <NavLink href="#" onClick={this.authFormToggle}>
+                    <img
+                      src="/static/icons/user-circle.svg"
+                      className="flat-icon mini-icon mx-2"
+                    />
+                    <span className=" mx-2">ورود - ثبت نام</span>
+                    <i
+                      className={`fas fa-sort-down mx-2 arrow ${
+                        authOpen ? "arrow-up" : ""
+                      }`}
+                    ></i>
+                  </NavLink>
+                  <Auth authOpen={authOpen} />
+                </NavItem>
+              ) : (
+                <NavItem>
+                  <NavLink href="/dashboard">
+                    <img
+                      src="/static/icons/user-circle.svg"
+                      className="flat-icon mini-icon mx-2"
+                    />
+                    <span className="mx-2 text-success">
+                      {profile.name} {profile.family}
+                    </span>
+                  </NavLink>
+                </NavItem>
+              )}
+              {status != 0 && (
+                <NavItem>
+                  <NavLink href="#" onClick={this.contactToggle}>
+                    <img
+                      src="/static/icons/phone-circle.svg"
+                      className="flat-icon mini-icon"
+                    />
+                    <span className=" mx-2">تماس با ما</span>
+                    <i
+                      className={`fas fa-sort-down mx-2 arrow ${
+                        contactOpen ? "arrow-up" : ""
+                      }`}
+                    ></i>
+                  </NavLink>
+                  <Contact contactOpen={contactOpen} />
+                </NavItem>
+              )}
             </Nav>
           </Collapse>
         </Navbar>

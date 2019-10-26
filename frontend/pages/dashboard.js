@@ -3,8 +3,10 @@ import Layout from "../components/Layout";
 import Dashboard from "../components/Dashboard";
 import axios from "axios";
 import jsCookie from "js-cookie";
+import UserContext from "../components/UserContext";
 
 export class dashboard extends Component {
+  static contextType = UserContext;
   constructor(props) {
     super(props);
     this.state = { garanted: 0, user: {} };
