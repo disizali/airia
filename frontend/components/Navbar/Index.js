@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   Collapse,
   Navbar,
@@ -10,11 +10,10 @@ import {
 } from "reactstrap";
 import Auth from "./Auth/Index";
 import Contact from "./Contact";
-import { initStore } from "../../redux/store";
-import withRedux from "next-redux-wrapper";
-import Link from "next/link";
+import UserContext from "../UserContext";
 
 class NavbarClass extends React.Component {
+  static contextType = UserContext;
   constructor(props) {
     super(props);
     this.authFormToggle = this.authFormToggle.bind(this);
@@ -30,16 +29,17 @@ class NavbarClass extends React.Component {
       contactOpen: this.state.contactOpen && !this.state.contactOpen
     });
   }
+  
   contactToggle() {
     this.setState({
       contactOpen: !this.state.contactOpen,
       authOpen: this.state.authOpen && !this.state.authOpen
     });
   }
+
   render() {
     const { authOpen, contactOpen } = this.state;
-    const status = this.props.store.getState().status;
-    const user = this.props.store.getState().user;
+    console.log(this.context)
     return (
       <div>
         <Navbar
@@ -55,55 +55,36 @@ class NavbarClass extends React.Component {
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="mr-auto" navbar>
-              {status == -1 && (
-                <NavItem>
-                  <NavLink href="#" onClick={this.authFormToggle}>
-                    <img
-                      src="/static/icons/user-circle.svg"
-                      className="flat-icon mini-icon mx-2"
-                    />
-                    <span className=" mx-2">ورود - ثبت نام</span>
-                    <i
-                      className={`fas fa-sort-down mx-2 arrow ${
-                        authOpen ? "arrow-up" : ""
-                      }`}
-                    ></i>
-                  </NavLink>
-                  <Auth authOpen={authOpen} />
-                </NavItem>
-              )}
-              {status == 1 && (
-                <NavItem>
-                  <Link href="/dashboard">
-                    <NavLink href="/dashboard">
-                      <img
-                        src="/static/icons/user-circle.svg"
-                        className="flat-icon mini-icon mx-2"
-                      />
-                      <span className="mx-2">
-                        {user.Profile.name} {user.Profile.family}
-                      </span>
-                    </NavLink>
-                  </Link>
-                </NavItem>
-              )}
-              {status != 0 && (
-                <NavItem>
-                  <NavLink href="#" onClick={this.contactToggle}>
-                    <img
-                      src="/static/icons/phone-circle.svg"
-                      className="flat-icon mini-icon"
-                    />
-                    <span className=" mx-2">تماس با ما</span>
-                    <i
-                      className={`fas fa-sort-down mx-2 arrow ${
-                        contactOpen ? "arrow-up" : ""
-                      }`}
-                    ></i>
-                  </NavLink>
-                  <Contact contactOpen={contactOpen} />
-                </NavItem>
-              )}
+              <NavItem>
+                <NavLink href="#" onClick={this.authFormToggle}>
+                  <img
+                    src="/static/icons/user-circle.svg"
+                    className="flat-icon mini-icon mx-2"
+                  />
+                  <span className=" mx-2">ورود - ثبت نام</span>
+                  <i
+                    className={`fas fa-sort-down mx-2 arrow ${
+                      authOpen ? "arrow-up" : ""
+                    }`}
+                  ></i>
+                </NavLink>
+                <Auth authOpen={authOpen} />
+              </NavItem>
+              <NavItem>
+                <NavLink href="#" onClick={this.contactToggle}>
+                  <img
+                    src="/static/icons/phone-circle.svg"
+                    className="flat-icon mini-icon"
+                  />
+                  <span className=" mx-2">تماس با ما</span>
+                  <i
+                    className={`fas fa-sort-down mx-2 arrow ${
+                      contactOpen ? "arrow-up" : ""
+                    }`}
+                  ></i>
+                </NavLink>
+                <Contact contactOpen={contactOpen} />
+              </NavItem>
             </Nav>
           </Collapse>
         </Navbar>
@@ -112,4 +93,4 @@ class NavbarClass extends React.Component {
   }
 }
 
-export default withRedux(initStore)(NavbarClass);
+export default NavbarClass;

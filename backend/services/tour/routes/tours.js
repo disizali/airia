@@ -18,6 +18,7 @@ router.get("/:id", async (req, res) => {
 router.get("/", async (req, res) => {
   res.json(
     await Parent.findAll({
+      attributes: ["id", "name","icon"],
       include: [
         {
           model: Category,
