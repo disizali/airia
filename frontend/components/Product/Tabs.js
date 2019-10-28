@@ -46,8 +46,8 @@ export class Tabs extends Component {
     const { tabs } = this.props;
     const { selected } = this.state;
     return (
-      <div className="product-tabs-container p-3 d-flex flex-column w-100">
-        <div className="product-tabs-list d-flex justify-content-center align-items-center my-2 w-25">
+      <div className="product-tabs-container d-flex flex-column w-100 m-0 shadow m-3">
+        <div className="product-tabs-list d-flex justify-content-start align-items-center w-100 m-0">
           {tabs.map((item, index) => {
             const data = JSON.parse(item.data);
             return (
@@ -61,7 +61,7 @@ export class Tabs extends Component {
             );
           })}
         </div>
-        <div className="product-body my-2 p-4">{this.getTabBody()}</div>
+        <div className="product-body p-4">{this.getTabBody()}</div>
       </div>
     );
   }

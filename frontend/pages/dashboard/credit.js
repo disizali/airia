@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import Layout from "../../../components/Layout";
-import UserContext from "../../../components/UserContext";
+import Layout from "../../components/Layout";
+import UserContext from "../../components/UserContext";
 import axios from "axios";
-import Success from "../../../components/Payment/Success";
-import Failed from "../../../components/Payment/Failed";
+import Success from "../../components/Payment/Success";
+import Failed from "../../components/Payment/Failed";
 
-export class reserve extends Component {
+export default class Credit extends Component {
   static contextType = UserContext;
 
   static async getInitialProps(context) {
@@ -22,6 +22,8 @@ export class reserve extends Component {
     this.state = { checked };
     this.checkPayment = this.checkPayment.bind(this);
   }
+
+
   checkPayment() {
     const { checked } = this.state;
     const { authority } = this.props;
@@ -32,13 +34,13 @@ export class reserve extends Component {
 
     if (checked == 0) {
       axios
-        .post(`http://localhost:3001/payment/reserve/verify`, {
+        .post(`http://localhost:3001/payment/credit/verify`, {
           MerchantID: "xxx-xxxx-xxxxx-xxxx-xxx-xxxx-xxxx-xx",
           Authority: authority
-        })  
+        })
         .then(({ data }) => {
           if (data == "wrong data") {
-            return this.setState({ checked: -1 });;
+            return this.setState({ checked: -1 });
           } else if (data == "verified") {
             return this.setState({ checked: 1 });
           }
@@ -61,5 +63,3 @@ export class reserve extends Component {
     return <Layout>{this.checkPayment()}</Layout>;
   }
 }
-
-export default reserve;

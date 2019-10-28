@@ -10,11 +10,16 @@
 @import "product/index";
 @import "dashboard/index";
 @import "footer";
+@import "payment/index";
 
 body {
   width: 100%;
   overflow-x: hidden;
   // background-image: url(/static/images/back-pattern.png);
+}
+
+.children{
+  min-height: 30vh;
 }
 
 .rtl {
@@ -35,6 +40,9 @@ body {
   color: $secondColor;
 }
 
-.text-main {
-  color: $mainColor;
+.bg-main {
+  background-color: $mainColor;
+}
+.bg-second {
+  background-color: $secondColor;
 }

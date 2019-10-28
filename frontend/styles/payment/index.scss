@@ -1,0 +1,18 @@
+@import "success";
+@import "failed";
+
+.verify-card {
+  max-width: 500px;
+  width: 80%;
+  overflow: hidden;
+  height: 20vh;
+  max-height: 150px;
+  &.failed {
+    background: linear-gradient(to right , #bc4e9c , #f80759)
+  }
+  &.success {
+    background: linear-gradient(to right , #11998e , #38ef7d)
+  }
+  background-size: cover;
+  background-repeat: no-repeat;
+}

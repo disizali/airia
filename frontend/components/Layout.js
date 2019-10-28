@@ -47,7 +47,9 @@ class Layout extends Component {
           />
         </Head>
         <Navbar />
+        <div className="children">
         {this.props.children}
+        </div>
         <Footer />
       </main>
     );

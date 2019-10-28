@@ -1,6 +1,6 @@
 const express = require("express");
 const { sequelize: db } = require("../../../models");
-const { User, Profile, Reserve, Date, Tour } = db.models;
+const { User, Profile, Reserve, Date, Tour , Credit } = db.models;
 const { Op } = db.Sequelize;
 const router = express.Router();
 const Joi = require("joi");
@@ -19,6 +19,7 @@ router.post("/token", async (req, res) => {
       attributes: ["id", "email", "phone"],
       include: [
         { model: Profile },
+        { model: Credit },
         {
           model: Reserve,
           where: { status: 1 },
@@ -27,7 +28,6 @@ router.post("/token", async (req, res) => {
         }
       ]
     });
-    console.log("USER =>", dbUser);
     if (dbUser) {
       return res.send(dbUser);
     }

@@ -14,23 +14,24 @@ import persianJs from "persianjs";
 import UserContext from "../UserContext";
 import Signin from "../Navbar/Auth/Signin";
 import axios from "axios";
-import Router from "next/router";
-import https from "https";
-
-// const request = require("request");
 
 export class Overview extends Component {
   static contextType = UserContext;
   constructor(props) {
     super(props);
-    this.state = { selectedDate: 0, modal: false };
+    this.state = { selectedDate: 0, count: 1, modal: false };
     this.toggleModal = this.toggleModal.bind(this);
     this.getReserveButton = this.getReserveButton.bind(this);
     this.goToReservePage = this.goToReservePage.bind(this);
+    this.handleCountChanges = this.handleCountChanges.bind(this);
   }
 
   handleDateChanges(e) {
     this.setState({ selectedDate: e.target.value });
+  }
+  handleCountChanges(e) {
+    const count = e.target.value;
+    this.setState({ count: count > 20 ? 20 : count });
   }
 
   getJalaliDate(date) {
@@ -70,8 +71,6 @@ export class Overview extends Component {
 
   getReserveButton() {
     const { status } = this.context;
-    const { selectedDate } = this.state;
-    const { tour } = this.props;
     if (status == 1) {
       return (
         <Button
@@ -99,23 +98,28 @@ export class Overview extends Component {
   async goToReservePage() {
     const { tour } = this.props;
     const { user } = this.context;
-    const { data } = await axios.post("http://localhost:3001/payment", {
+    const { selectedDate, count } = this.state;
+    const { data } = await axios.post("http://localhost:3001/payment/reserve", {
       MerchantID: "xxx-xxxx-xxxxx-xxxx-xxx-xxxx-xxxx-xx",
-      Amount: tour.price,
+      Amount: tour.price * count,
+      count,
       CallbackURL: `http://localhost:3000/product/${tour.id}/reserve`,
       Description: `تور ${tour.name}`,
-      userId: user.id,
-      dateId: tour.Dates[selectedDate].id
+      UserId: user.id,
+      DateId: tour.Dates[selectedDate].id
     });
+    if (data == "wrong data") {
+      return alert("خطایی رخ داده است . هم اکنون در صدد رفع مشکل هستیم");
+    }
     window.location.href = `https://sandbox.zarinpal.com/pg/transaction/pay/${Number(
       data.Authority
     )}`;
   }
   render() {
     const { tour } = this.props;
-    const { selectedDate } = this.state;
+    const { selectedDate, count } = this.state;
     return (
-      <div className="product-overview">
+      <div className="product-overview position-sticky">
         {this.getModal()}
         <div className="bg-dark d-flex flex-column rounded p-2">
           <span className="text-light m-2">به راهنمایی سفر نیاز دارید ؟</span>
@@ -198,8 +202,10 @@ export class Overview extends Component {
                 <input
                   type="number"
                   className="w-100"
-                  defaultValue={1}
+                  value={count}
+                  onChange={this.handleCountChanges}
                   min={1}
+                  max={tour.Dates[selectedDate].Capacity.count}
                 />
               </Col>
             </Row>

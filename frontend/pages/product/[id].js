@@ -38,9 +38,6 @@ export default class Product extends Component {
         <Container className="py-3 rtl text-right">
           <div>
             <h1 className="product-title">تور {tour.name}</h1>
-            {/* <span className="mx-2">-</span> */}
-            {/* <i className="text-muted far fa-clock mx-2"></i> */}
-            {/* <span className="text-muted mx-2">۳ روز</span> */}
           </div>
           <Row className="mt-3">
             <Col sm={12} md={8}>
