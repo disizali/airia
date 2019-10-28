@@ -11,6 +11,7 @@ export default class Product extends Component {
     super(props);
     this.state = {};
   }
+
   getJalaliDate(date) {
     return this.getPersian(
       jMoment(new Date(date))

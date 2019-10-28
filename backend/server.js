@@ -9,6 +9,7 @@ const corsOptions = {
 };
 const TOUR_SERVICE = "http://localhost:3002";
 const USER_SERVICE = "http://localhost:3003";
+const PAYMENT_SERVICE = "http://localhost:3004";
 
 app.use(cors(corsOptions));
 app.use(express.json());
@@ -16,11 +17,18 @@ app.use(express.json());
 
 app.use(async (req, res, next) => {
   if (req.header("authorization") == undefined) {
-    req.auth == false;
+    req.auth = false;
     return next();
   }
+
+  const token = req.header("authorization").replace("Bearer ", "");
+  if (token == "") {
+    req.auth = false;
+    return next();
+  }
+
   const { data } = await axios.post(`${USER_SERVICE}/token`, {
-    token: req.header("authorization").replace("Bearer ", "")
+    token
   });
   if (data == "unauthorized") {
     req.auth = false;
@@ -70,6 +78,12 @@ app.put("/profile", async (req, res) => {
     id: req.user.id,
     ...req.body
   });
+  res.send(data);
+});
+
+app.post("/payment", async (req, res) => {
+  console.log("GOT HERE");
+  const { data } = await axios.post(`${PAYMENT_SERVICE}`, req.body);
   res.send(data);
 });
 

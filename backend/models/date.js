@@ -10,6 +10,8 @@ module.exports = (sequelize, DataTypes) => {
   );
   Date.associate = function(models) {
     Date.belongsTo(models.Tour);
+    Date.hasOne(models.Capacity);
+    Date.hasMany(models.Reserve);
   };
   return Date;
 };

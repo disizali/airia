@@ -35,14 +35,14 @@ export default class Product extends Component {
     const { tour } = this.props;
     return (
       <Layout>
-        <Container className="py-5 rtl text-right">
+        <Container className="py-3 rtl text-right">
           <div>
-            <span className="product-title">تور {tour.name}</span>
+            <h1 className="product-title">تور {tour.name}</h1>
             {/* <span className="mx-2">-</span> */}
             {/* <i className="text-muted far fa-clock mx-2"></i> */}
             {/* <span className="text-muted mx-2">۳ روز</span> */}
           </div>
-          <Row className="mt-5">
+          <Row className="mt-3">
             <Col sm={12} md={8}>
               <Gallery images={tour.images} />
             </Col>
