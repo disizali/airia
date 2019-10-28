@@ -1,6 +1,6 @@
 const express = require("express");
 const { sequelize: db } = require("../../../models");
-const { User, Profile } = db.models;
+const { User, Profile, Reserve, Date, Tour } = db.models;
 const { Op } = db.Sequelize;
 const router = express.Router();
 const Joi = require("joi");
@@ -17,8 +17,17 @@ router.post("/token", async (req, res) => {
     const dbUser = await User.findOne({
       where: { id },
       attributes: ["id", "email", "phone"],
-      include: [{ model: Profile }]
+      include: [
+        { model: Profile },
+        {
+          model: Reserve,
+          where: { status: 1 },
+          required: false,
+          include: [{ model: Date, include: [{ model: Tour }] }]
+        }
+      ]
     });
+    console.log("USER =>", dbUser);
     if (dbUser) {
       return res.send(dbUser);
     }

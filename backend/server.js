@@ -13,7 +13,6 @@ const PAYMENT_SERVICE = "http://localhost:3004";
 
 app.use(cors(corsOptions));
 app.use(express.json());
-// app.use(cookieParser());
 
 app.use(async (req, res, next) => {
   if (req.header("authorization") == undefined) {
@@ -67,6 +66,7 @@ app.post("/login", async (req, res) => {
 
 app.get("/profile", async (req, res) => {
   // const { data } = await axios.get(`${USER_SERVICE}/profile`);
+  console.log("AUTH => ", req.auth);
   if (req.auth) {
     return res.send(req.user);
   }
@@ -81,9 +81,13 @@ app.put("/profile", async (req, res) => {
   res.send(data);
 });
 
-app.post("/payment", async (req, res) => {
-  console.log("GOT HERE");
-  const { data } = await axios.post(`${PAYMENT_SERVICE}`, req.body);
+app.post("/payment/reserve", async (req, res) => {
+  const { data } = await axios.post(`${PAYMENT_SERVICE}/reserve`, req.body);
+  res.send(data);
+});
+
+app.post("/payment/verify", async (req, res) => {
+  const { data } = await axios.post(`${PAYMENT_SERVICE}/verify`, req.body);
   res.send(data);
 });
 

@@ -3,6 +3,8 @@ module.exports = (sequelize, DataTypes) => {
   const Reserve = sequelize.define(
     "Reserve",
     {
+      authority: DataTypes.INTEGER,
+      count: DataTypes.INTEGER,
       amount: DataTypes.INTEGER,
       status: DataTypes.INTEGER,
       refID: DataTypes.STRING
