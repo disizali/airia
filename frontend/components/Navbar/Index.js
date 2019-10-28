@@ -41,10 +41,9 @@ class NavbarClass extends React.Component {
     const { user, status } = this.context;
     let profile = {};
     if (user != null) {
-      profile = user.Profile;
+      profile = user.Profile
     }
     const { authOpen, contactOpen } = this.state;
-    console.log(status);
     return (
       <div>
         <Navbar
@@ -60,7 +59,7 @@ class NavbarClass extends React.Component {
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="mr-auto" navbar>
-              {status == -1 ? (
+              {status == -1 && (
                 <NavItem>
                   <NavLink href="#" onClick={this.authFormToggle}>
                     <img
@@ -76,7 +75,8 @@ class NavbarClass extends React.Component {
                   </NavLink>
                   <Auth authOpen={authOpen} />
                 </NavItem>
-              ) : (
+              )}
+              {status == 1 && (
                 <NavItem>
                   <NavLink href="/dashboard">
                     <img
