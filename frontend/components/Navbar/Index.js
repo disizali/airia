@@ -18,6 +18,7 @@ class NavbarClass extends React.Component {
     super(props);
     this.authFormToggle = this.authFormToggle.bind(this);
     this.contactToggle = this.contactToggle.bind(this);
+    this.getControlPanel = this.getControlPanel.bind(this);
     this.state = {
       authOpen: false,
       contactOpen: false
@@ -35,6 +36,51 @@ class NavbarClass extends React.Component {
       contactOpen: !this.state.contactOpen,
       authOpen: this.state.authOpen && !this.state.authOpen
     });
+  }
+
+  getControlPanel() {
+    const { user, status } = this.context;
+    const { authOpen, contactOpen } = this.state;
+    let profile = {};
+    if (user != null) {
+      profile = user.Profile;
+    }
+    switch (status) {
+      case 0:
+        return "";
+      case 1:
+        return (
+          <NavItem>
+            <NavLink href="/dashboard">
+              <img
+                src="/static/icons/user-circle.svg"
+                className="flat-icon mini-icon mx-2"
+              />
+              <span className="mx-2">
+                {profile.name} {profile.family}
+              </span>
+            </NavLink>
+          </NavItem>
+        );
+      case -1:
+        return (
+          <NavItem>
+            <NavLink href="#" onClick={this.authFormToggle}>
+              <img
+                src="/static/icons/user-circle.svg"
+                className="flat-icon mini-icon mx-2"
+              />
+              <span className="mx-2">ورود - ثبت نام</span>
+              <i
+                className={`fas fa-sort-down mx-2 arrow ${
+                  authOpen ? "arrow-up" : ""
+                }`}
+              ></i>
+            </NavLink>
+            <Auth authOpen={authOpen} />
+          </NavItem>
+        );
+    }
   }
 
   render() {
@@ -59,36 +105,7 @@ class NavbarClass extends React.Component {
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="mr-auto" navbar>
-              {status == -1 && (
-                <NavItem>
-                  <NavLink href="#" onClick={this.authFormToggle}>
-                    <img
-                      src="/static/icons/user-circle.svg"
-                      className="flat-icon mini-icon mx-2"
-                    />
-                    <span className=" mx-2">ورود - ثبت نام</span>
-                    <i
-                      className={`fas fa-sort-down mx-2 arrow ${
-                        authOpen ? "arrow-up" : ""
-                      }`}
-                    ></i>
-                  </NavLink>
-                  <Auth authOpen={authOpen} />
-                </NavItem>
-              )}
-              {status == 1 && (
-                <NavItem>
-                  <NavLink href="/dashboard">
-                    <img
-                      src="/static/icons/user-circle.svg"
-                      className="flat-icon mini-icon mx-2"
-                    />
-                    <span className="mx-2 text-success">
-                      {profile.name} {profile.family}
-                    </span>
-                  </NavLink>
-                </NavItem>
-              )}
+              {this.getControlPanel()}
               {status != 0 && (
                 <NavItem>
                   <NavLink href="#" onClick={this.contactToggle}>

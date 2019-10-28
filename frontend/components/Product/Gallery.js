@@ -14,7 +14,7 @@ export class Gallery extends Component {
             return (
               <Col key={index}>
                 <img
-                  src={`https://picsum.photos/30${item}/20${item}`}
+                  src={`https://picsum.photos/seed/item${item}/150/100`}
                   className="rounded"
                   width="100%"
                 />

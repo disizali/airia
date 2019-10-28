@@ -9,20 +9,20 @@ const jwt = require("jsonwebtoken");
 
 router.post("/token", async (req, res) => {
   const { token } = req.body;
-  if (token != "") {
-    const id = jwt.verify(token, "airiasecret");
-    if (id) {
-      const dbUser = await User.findOne({
-        where: { id },
-        attributes: ["id", "email", "phone"],
-        include: [{ model: Profile }]
-      });
-      if (dbUser) {
-        return res.send(dbUser);
-      }
+  if (token == "" || token == "undefined") {
+    return res.send("unauthorized");
+  }
+  const id = jwt.verify(token, "airiasecret");
+  if (id) {
+    const dbUser = await User.findOne({
+      where: { id },
+      attributes: ["id", "email", "phone"],
+      include: [{ model: Profile }]
+    });
+    if (dbUser) {
+      return res.send(dbUser);
     }
   }
-  return res.send("unauthorized");
 });
 
 router.post("/register", async (req, res) => {
@@ -76,9 +76,7 @@ router.post("/login", async (req, res) => {
     if (!result) {
       return res.status(400).send("login failed");
     }
-
     const token = jwt.sign(dbUser.id, "airiasecret");
-
     return res.send(token);
   } else {
     return res.send(error);

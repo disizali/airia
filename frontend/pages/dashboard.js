@@ -1,34 +1,39 @@
 import React, { Component } from "react";
 import Layout from "../components/Layout";
 import Dashboard from "../components/Dashboard";
-import axios from "axios";
-import jsCookie from "js-cookie";
 import UserContext from "../components/UserContext";
 
 export class dashboard extends Component {
   static contextType = UserContext;
   constructor(props) {
     super(props);
-    this.state = { garanted: 0, user: {} };
+    this.state = {};
+    this.getContent = this.getContent.bind(this);
   }
-  async componentDidMount() {
-    const token = jsCookie.get("authtoken");
-    if (token != undefined) {
-      const { data } = await axios.get("http://localhost:3001/profile", {
-        headers: {
-          authorization: `Bearer ${token}`
-        }
-      });
-      if (data == "login failed") {
-        return alert("Login Failed");
-      }
-      return this.setState({ garanted: 1, user: data });
+  getContent() {
+    const { status, user } = this.context;
+    switch (status) {
+      case -1:
+        return (
+          <div className="text-center my-5 rtl">
+            <i className="far fa-frown mx-2"></i>
+            <span className="mx-2">متاسفانه شما هنوز به سیستم وارد نشده اید</span>
+          </div>
+        );
+      case 0:
+        return (
+          <div className="d-flex justify-content-center my-5">
+            <div className="spinner-grow text-center" role="status">
+              <span className="sr-only">Loading...</span>
+            </div>
+          </div>
+        );
+      case 1:
+        return <Dashboard user={user} />;
     }
   }
-
   render() {
-    const { garanted, user } = this.state;
-    return <Layout>{garanted && <Dashboard user={user} />}</Layout>;
+    return <Layout>{this.getContent()}</Layout>;
   }
 }
 
