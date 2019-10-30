@@ -21,10 +21,14 @@ export class List extends Component {
     const { magazine } = this.props;
     return (
       <div>
-        <h4 className="magazine-list-title pb-3">جدیدترین مطالب</h4>
+        <div className="archive-title">
+          <div className="d-flex align-items-center justify-content-start text-white h-100">
+            <h5 className="m-1">جدیدترین مطالب</h5>
+          </div>
+        </div>
         {magazine.map((item, index) => {
           return (
-            <div key={index} className="bg-white rounded shadow my-3">
+            <div key={index} className="bg-white rounded shadow mb-1">
               <Link href={`mag/${item.id}`}>
                 <a>
                   <Row className="rtl">
@@ -37,10 +41,10 @@ export class List extends Component {
                       />
                     </Col>
                     <Col
-                      sm={6}
+                      sm={7}
                       className="d-flex align-items-center justify-content-start text-right"
                     >
-                      <span className="archive-post-title text-dark">
+                      <span className="archive-post-title text-dark pl-2">
                         {item.title}
                       </span>
                     </Col>

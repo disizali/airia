@@ -35,9 +35,13 @@ export class List extends Component {
                   />
                 </Col>
                 <Col sm={8} className="p-3">
-                  <h5>{item.title}</h5>
+                  <Link href={`mag/${item.id}`}>
+                    <a>
+                      <h5 classNames="text-dark">{item.title}</h5>
+                    </a>
+                  </Link>
                   <div
-                    className="text-muted"
+                    className="text-muted pl-5"
                     dangerouslySetInnerHTML={{
                       __html: item.body.substr(
                         item.body.indexOf("<p>"),
