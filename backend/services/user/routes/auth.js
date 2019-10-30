@@ -1,6 +1,6 @@
 const express = require("express");
 const { sequelize: db } = require("../../../models");
-const { User, Profile, Reserve, Date, Tour , Credit } = db.models;
+const { User, Profile, Reserve, Date, Tour, Credit, Favorites } = db.models;
 const { Op } = db.Sequelize;
 const router = express.Router();
 const Joi = require("joi");
@@ -18,12 +18,17 @@ router.post("/token", async (req, res) => {
       where: { id },
       attributes: ["id", "email", "phone"],
       include: [
-        { model: Profile },
-        { model: Credit },
+        { model: Profile, attributes: { exclude: ["createdAt", "updatedAt"] } },
+        { model: Credit, attributes: { exclude: ["createdAt", "updatedAt"] } },
+        {
+          model: Favorites,
+          attributes: { exclude: ["createdAt", "updatedAt"] }
+        },
         {
           model: Reserve,
           where: { status: 1 },
           required: false,
+          attributes: { exclude: ["createdAt", "updatedAt"] },
           include: [{ model: Date, include: [{ model: Tour }] }]
         }
       ]

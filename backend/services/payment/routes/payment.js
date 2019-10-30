@@ -68,7 +68,7 @@ router.post("/reserve/verify", async (req, res) => {
       }
     }
   );
-  if (data.Status == 100 || data.Status == 101) {
+  if (data.Status == 100) {
     await Reserve.update(
       {
         status: 1,
@@ -84,6 +84,8 @@ router.post("/reserve/verify", async (req, res) => {
       { count: Sequelize.literal(`count - ${reserve.count}`) },
       { where: { DateId: reserve.DateId } }
     );
+    return res.json("verified");
+  } else if (data.Status == 101) {
     return res.json("verified");
   } else {
     return res.send("wrong data");
@@ -104,7 +106,6 @@ router.post("/credit", async (req, res) => {
       }
     }
   );
-
   if (data.Status == 100) {
     await Credit.create({
       authority: Number(data.Authority),
@@ -139,7 +140,7 @@ router.post("/credit/verify", async (req, res) => {
       }
     }
   );
-  if (data.Status == 100 || data.Status == 101) {
+  if (data.Status == 100) {
     await Credit.update(
       {
         status: 1,
@@ -151,6 +152,8 @@ router.post("/credit/verify", async (req, res) => {
         }
       }
     );
+    return res.json("verified");
+  } else if (data.Status == 101) {
     return res.json("verified");
   } else {
     return res.send("wrong data");

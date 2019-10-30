@@ -27,6 +27,10 @@ class MyApp extends App {
     this.setState({ status: -1, user: null });
   };
 
+  updateUser = (user) => {
+    this.setState({ user });
+  };
+
   render() {
     const { Component, pageProps } = this.props;
     return (
@@ -35,7 +39,8 @@ class MyApp extends App {
           user: this.state.user,
           status: this.state.status,
           login: this.login,
-          logout: this.logout
+          logout: this.logout,
+          updateUser: this.updateUser,
         }}
       >
         <Component {...pageProps} />

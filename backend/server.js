@@ -10,6 +10,7 @@ const corsOptions = {
 const TOUR_SERVICE = "http://localhost:3002";
 const USER_SERVICE = "http://localhost:3003";
 const PAYMENT_SERVICE = "http://localhost:3004";
+const MAGAZINE_SERVICE = "http://localhost:3005";
 
 app.use(cors(corsOptions));
 app.use(express.json());
@@ -80,13 +81,21 @@ app.put("/profile", async (req, res) => {
   res.send(data);
 });
 
+app.put("/favorites", async (req, res) => {
+  const { data } = await axios.put(`${USER_SERVICE}/favorites`, req.body);
+  res.send(data);
+});
+
 app.post("/payment/reserve", async (req, res) => {
   const { data } = await axios.post(`${PAYMENT_SERVICE}/reserve`, req.body);
   res.send(data);
 });
 
 app.post("/payment/reserve/verify", async (req, res) => {
-  const { data } = await axios.post(`${PAYMENT_SERVICE}/reserve/verify`, req.body);
+  const { data } = await axios.post(
+    `${PAYMENT_SERVICE}/reserve/verify`,
+    req.body
+  );
   res.send(data);
 });
 
@@ -96,7 +105,23 @@ app.post("/payment/credit", async (req, res) => {
 });
 
 app.post("/payment/credit/verify", async (req, res) => {
-  const { data } = await axios.post(`${PAYMENT_SERVICE}/credit/verify`, req.body);
+  const { data } = await axios.post(
+    `${PAYMENT_SERVICE}/credit/verify`,
+    req.body
+  );
   res.send(data);
 });
+
+app.get("/magazine", async (req, res) => {
+  const { data } = await axios.get(`${MAGAZINE_SERVICE}/`, req.body);
+  res.send(data);
+});
+
+app.get("/magazine/:id", async (req, res) => {
+  const { data } = await axios.get(`${MAGAZINE_SERVICE}/${req.params.id}`, req.body);
+  res.send(data);
+});
+
+
+
 app.listen(3001);

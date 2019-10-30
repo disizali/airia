@@ -2,6 +2,13 @@ import React, { Component } from "react";
 import { Row, Container, Col } from "reactstrap";
 
 export class Failed extends Component {
+  state = { timer: 5 };
+  componentDidMount() {
+    setInterval(() => {
+      this.setState({ timer: this.state.timer - 1 });
+    }, 1000);
+  }
+
   render() {
     return (
       <div>
@@ -15,9 +22,14 @@ export class Failed extends Component {
             </Col>
             <Col
               sm={10}
-              className="text-light align-items-center d-flex justify-content-center"
+              className="d-flex flex-column text-light align-items-center d-flex justify-content-center"
             >
               <h5>پرداخت موفقیت امیز نبود</h5>
+              <p>
+                <span>بازگشت به صفحه اصلی در </span>
+                <span> {this.state.timer} </span>
+                <span>ثانیه</span>
+              </p>
             </Col>
           </Row>
         </div>

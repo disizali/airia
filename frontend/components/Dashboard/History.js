@@ -51,7 +51,7 @@ export default class Favorites extends Component {
                 <Row className="rtl">
                   <Col sm={1}>{index + 1}</Col>
                   <Col>{item.Date.Tour.name}</Col>
-                  <Col>{item.Date.Tour.price}</Col>
+                  <Col>{this.getPersian(item.Date.Tour.price.toLocaleString())}</Col>
                   <Col>
                     {this.getJalaliDate(item.Date.start)}
                     <span> تا </span>

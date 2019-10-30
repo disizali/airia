@@ -10,8 +10,9 @@ module.exports = (sequelize, DataTypes) => {
     {
       hooks: {
         afterCreate(user, options) {
-          const { Profile } = sequelize.models;
+          const { Profile, Favorites } = sequelize.models;
           Profile.create({ UserId: user.id });
+          Favorites.create({ UserId: user.id });
         }
       }
     }
@@ -20,6 +21,7 @@ module.exports = (sequelize, DataTypes) => {
     User.hasOne(models.Profile);
     User.hasMany(models.Reserve);
     User.hasMany(models.Credit);
+    User.hasOne(models.Favorites);
   };
 
   return User;

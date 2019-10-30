@@ -11,15 +11,18 @@
 @import "dashboard/index";
 @import "footer";
 @import "payment/index";
+@import "magazine/index";
 
 body {
   width: 100%;
   overflow-x: hidden;
+  background : #f1f1f1;
   // background-image: url(/static/images/back-pattern.png);
 }
 
 .children{
   min-height: 30vh;
+  margin: 0;
 }
 
 .rtl {

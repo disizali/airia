@@ -7,7 +7,7 @@ import History from "./History";
 export class dashboard extends Component {
   constructor(props) {
     super(props);
-    this.state = { tab: 1 };
+    this.state = { tab:3 };
     this.changeTab = this.changeTab.bind(this);
     this.getTabContent = this.getTabContent.bind(this);
   }

@@ -1,0 +1,38 @@
+.header-post-title {
+  height: 30px;
+  position: absolute;
+  margin: auto;
+  bottom: 30px;
+  right: 10px;
+  font-size: 1.1em;
+  transition: all 0.3s;
+
+}
+
+.magazine-header {
+  .col {
+    padding: 0;
+    margin: 10px;
+  }
+}
+.header-post-item {
+  left: 0;
+  top: 0;
+  width: 100%;
+  transition: all 0.3s;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  &:hover {
+    background-size: 105% 105%;
+  }
+  &:hover > span {
+    font-size: 1.11em;
+  }
+}
+.header-post-cover {
+  width: 100%;
+}
+.header-post-size{
+    visibility: hidden;
+}
