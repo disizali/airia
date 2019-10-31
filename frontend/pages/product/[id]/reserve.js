@@ -32,44 +32,7 @@ export class reserve extends Component {
   constructor(props) {
     super(props);
     this.state = {};
-    // this.checkPayment = this.checkPayment.bind(this);
   }
-  // checkPayment() {
-  //   const { checked, checking } = this.state;
-  //   const { authority } = this.props;
-
-  //   console.log(checked);
-  //   if (checked == -1) {
-  //     return <Failed />;
-  //   }
-
-  //   if (checked == 0 && !checking) {
-  //     axios
-  //       .post(`http://localhost:3001/payment/reserve/verify`, {
-  //         MerchantID: "xxx-xxxx-xxxxx-xxxx-xxx-xxxx-xxxx-xx",
-  //         Authority: authority
-  //       })
-  //       .then(({ data }) => {
-  //         if (data == "wrong data") {
-  //           return this.setState({ checked: -1, checking: false });
-  //         } else if (data == "verified") {
-  //           return this.setState({ checked: 1, checking: false });
-  //         }
-  //       });
-  //     this.setState({ checking: true });
-  //     return (
-  //       <div className="d-flex justify-content-center my-5">
-  //         <div className="spinner-grow text-center" role="status">
-  //           <span className="sr-only">Loading...</span>
-  //         </div>
-  //       </div>
-  //     );
-  //   }
-
-  //   if (checked == 1) {
-  //     return <Success />;
-  //   }
-  // }
   redirect() {
     if (Router.router != null) {
       setTimeout(() => {

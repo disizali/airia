@@ -11,7 +11,6 @@ export class Footer extends Component {
               <Col className="border-left d-flex align-items-center">
                 <i className="far fa-share-alt text-main mx-2"></i>
                 <span className="mx-2">آیریا در شبکه های اجتماعی</span>
-                {/* <i className="far fa-arrow-left text-main mx-2"></i> */}
                 <div className="social-instagram p-1 text-right text-light">
                   <i className="fab fa-instagram mx-2"></i>
                   <span className=" mx-2">اینستاگرام</span>

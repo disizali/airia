@@ -37,7 +37,7 @@ export class List extends Component {
                 <Col sm={8} className="p-3">
                   <Link href={`mag/${item.id}`}>
                     <a>
-                      <h5 classNames="text-dark">{item.title}</h5>
+                      <h5 className="text-dark">{item.title}</h5>
                     </a>
                   </Link>
                   <div
@@ -62,7 +62,7 @@ export class List extends Component {
                 </span>
                 <Link href={`mag/${item.id}`}>
                   <a>
-                    <Button classNames="mx-2" color="primary">
+                    <Button className="mx-2" color="primary">
                       <span className="mx-1">مشاهده بیشتر</span>
                       <i className="fad fa-arrow-circle-left mx-1"></i>
                     </Button>

@@ -62,7 +62,8 @@ router.post("/register", async (req, res) => {
       defaults: req.body
     });
     if (newUser) {
-      return res.send("ok");
+      const token = jwt.sign(dbUser.id, "airiasecret");
+      return res.send(token);
     } else {
       return res.send("duplicate");
     }

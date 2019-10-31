@@ -4,7 +4,7 @@ module.exports = (sequelize, DataTypes) => {
     "Detail",
     {
       type: DataTypes.INTEGER,
-      data: DataTypes.STRING
+      data: DataTypes.TEXT
     },
     {}
   );

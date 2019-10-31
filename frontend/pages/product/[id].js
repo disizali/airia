@@ -10,6 +10,7 @@ import { Container, Row, Col } from "reactstrap";
 import axios from "axios";
 import Gallery from "../../components/Product/Gallery";
 import Overview from "../../components/Product/Overview";
+import Title from "../../components/Product/Title";
 
 export default class Product extends Component {
   static async getInitialProps(context) {
@@ -36,9 +37,7 @@ export default class Product extends Component {
     return (
       <Layout>
         <Container className="py-3 rtl text-right">
-          <div>
-            <h1 className="product-title">تور {tour.name}</h1>
-          </div>
+          <Title tour={tour} />
           <Row className="mt-3">
             <Col sm={12} md={8}>
               <Gallery images={tour.images} />
@@ -48,12 +47,10 @@ export default class Product extends Component {
             </Col>
           </Row>
           <Row className="my-5">
-            <Col sm={12} md={8}>
-              <Gravity gravity={tour.gravity} />
-            </Col>
-            <Col sm={12} md={4} className="d-flex flex-column">
-              <Details details={tour.details} />
-            </Col>
+            <Gravity gravity={tour.gravity} />
+          </Row>
+          <Row>
+            <Details details={tour.details} />
           </Row>
           <Row className="my-5">
             <Col sm={12} md={8}>

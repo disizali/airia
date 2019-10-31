@@ -3,11 +3,11 @@ module.exports = (sequelize, DataTypes) => {
   const Favorites = sequelize.define(
     "Favorites",
     {
-      smoking: DataTypes.INTEGER,
-      sleeping: DataTypes.INTEGER,
-      camping: DataTypes.INTEGER,
-      walking: DataTypes.INTEGER,
-      allergies: DataTypes.INTEGER
+      smoking: { type: DataTypes.INTEGER, defaultValue: 0 },
+      sleeping: { type: DataTypes.INTEGER, defaultValue: 0 },
+      camping: { type: DataTypes.INTEGER, defaultValue: 0 },
+      walking: { type: DataTypes.INTEGER, defaultValue: 0 },
+      allergies: { type: DataTypes.INTEGER, defaultValue: 0 }
     },
     {}
   );

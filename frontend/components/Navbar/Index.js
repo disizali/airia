@@ -57,7 +57,7 @@ class NavbarClass extends React.Component {
                 className="flat-icon mini-icon mx-2"
               />
               <span className="mx-2">
-                {profile.name} {profile.family}
+                {profile.name || "مدیریت"} {profile.family || "حساب"}
               </span>
             </NavLink>
           </NavItem>

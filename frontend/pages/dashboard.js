@@ -29,7 +29,7 @@ export class dashboard extends Component {
           </div>
         );
       case 1:
-        return <Dashboard user={user} />;
+        return <Dashboard/>;
     }
   }
   render() {

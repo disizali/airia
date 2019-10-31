@@ -21,15 +21,18 @@
   align-items: center;
   padding: 0 20px;
   width: 10%;
-  height: 70%;
-  border-radius: 10px;
+  height: 90%;
+  top: 10%;
+  position: relative;
+  border-radius: 10px 10px 0 0;
   margin: 0 10px;
   transition: 0.5s all;
   &:hover:not(.active) {
     background: rgba(white, 0.08);
   }
   &.active {
-    background: rgb(39, 61, 114);
+    background: #f8f8f8;
+    color: rgb(75, 108, 183);
   }
 }
 

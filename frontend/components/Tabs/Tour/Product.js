@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Container, Row, Col, Button } from "reactstrap";
 import Link from "next/link";
-
 import moment from "moment";
 import jMoment from "jalali-moment";
 import persianJs from "persianjs";

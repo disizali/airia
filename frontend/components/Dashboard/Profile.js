@@ -1,9 +1,11 @@
 import React, { Component } from "react";
-import { Container, Row, Col } from "reactstrap";
+import { Container, Row, Col, Table } from "reactstrap";
 import axios from "axios";
 import jsCookie from "js-cookie";
-
+import UserContext from "../UserContext";
 export default class Profile extends Component {
+  static contextType = UserContext;
+
   constructor(props) {
     super(props);
     this.state = { editable: false };
@@ -20,8 +22,8 @@ export default class Profile extends Component {
   }
 
   async edit() {
+    const { updateUser, user } = this.context;
     const token = jsCookie.get("authtoken");
-
     let profile = this.state;
     delete profile.editable;
     const { data } = await axios.put("http://localhost:3001/profile", profile, {
@@ -29,6 +31,12 @@ export default class Profile extends Component {
         authorization: `Bearer ${token}`
       }
     });
+
+    const newUser = {
+      ...user,
+      Profile: { ...user.Profile, ...profile }
+    };
+    updateUser(newUser);
     if (data == "updated") {
       this.setState({ editable: false });
     }
@@ -36,9 +44,8 @@ export default class Profile extends Component {
   render() {
     const { editable } = this.state;
     const {
-      user,
       user: { Profile: profile }
-    } = this.props;
+    } = this.context;
 
     return (
       <Container className="bg-white rounded w-100 my-3 shadow text-right rtl p-4">
@@ -53,50 +60,56 @@ export default class Profile extends Component {
           </button>
         </div>
         <div>
-          <Row className="my-5 text-right rtl">
-            <Col sm={2} className="my-3">
-              <span className="text-muted">نام</span>
-            </Col>
-            <Col sm={10} className="my-3">
-              {editable ? (
-                <input
-                  type="text"
-                  name="name"
-                  defaultValue={this.state.name || profile.name}
-                  onChange={this.changeTextHandler}
-                  placeholder="نام  خود را وارد کنید"
-                  className="form-control"
-                />
-              ) : profile.name ? (
-                <span>{this.state.name || profile.name}</span>
-              ) : (
-                <span className="text-muted">
-                  شما هنوز نام خود را وارد نکرده اید
-                </span>
-              )}
-            </Col>
-            <Col sm={2} className="my-3">
-              <span className="text-muted">نام خانوادگی</span>
-            </Col>
-            <Col sm={10} className="my-3">
-              {editable ? (
-                <input
-                  type="text"
-                  name="family"
-                  defaultValue={this.state.family || profile.family}
-                  onChange={this.changeTextHandler}
-                  placeholder="نام خانوادگی خود را وارد کنید"
-                  className="form-control"
-                />
-              ) : profile.family ? (
-                <span>{this.state.family || profile.family}</span>
-              ) : (
-                <span className="text-muted">
-                  شما هنوز نام خانوادگی خود را وارد نکرده اید
-                </span>
-              )}
-            </Col>
-          </Row>
+          <Table responsive striped className="mt-3">
+            <tbody>
+              <tr>
+                <td width="3%" className="text-muted">
+                  ◗
+                </td>
+                <td width="17%">نام</td>
+                <td>
+                  {editable ? (
+                    <input
+                      type="text"
+                      name="name"
+                      defaultValue={this.state.name || profile.name}
+                      onChange={this.changeTextHandler}
+                      placeholder="نام  خود را وارد کنید"
+                      className="form-control mx-0"
+                    />
+                  ) : profile.name ? (
+                    <span>{this.state.name || profile.name}</span>
+                  ) : (
+                    <span className="text-muted" onClick={this.changeEditable}>
+                      شما هنوز نام خود را وارد نکرده اید
+                    </span>
+                  )}
+                </td>
+              </tr>
+              <tr>
+                <td className="text-muted">◗</td>
+                <td>نام خانوادگی</td>
+                <td>
+                  {editable ? (
+                    <input
+                      type="text"
+                      name="family"
+                      defaultValue={this.state.family || profile.family}
+                      onChange={this.changeTextHandler}
+                      placeholder="نام خانوادگی خود را وارد کنید"
+                      className="form-control"
+                    />
+                  ) : profile.family ? (
+                    <span>{this.state.family || profile.family}</span>
+                  ) : (
+                    <span className="text-muted" onClick={this.changeEditable}>
+                      شما هنوز نام خانوادگی خود را وارد نکرده اید
+                    </span>
+                  )}
+                </td>
+              </tr>
+            </tbody>
+          </Table>
         </div>
         {editable && (
           <div className="w-100 d-flex justify-content-end">

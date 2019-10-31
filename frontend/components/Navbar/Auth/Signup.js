@@ -1,8 +1,12 @@
 import React, { Component } from "react";
 import axios from "axios";
 import validator from "validator";
-
+import UserContext from "../../UserContext";
+import Router from "next/router";
+import jsCookie from "js-cookie";
 export default class Signup extends Component {
+  static contextType = UserContext;
+
   constructor(props) {
     super(props);
     this.state = {
@@ -19,6 +23,8 @@ export default class Signup extends Component {
   }
 
   async signUp() {
+    const { login } = this.context;
+
     const {
       email,
       phone,
@@ -37,21 +43,24 @@ export default class Signup extends Component {
       phoneResult &&
       passwordResult &&
       repasswordResult &&
-      rules &&
-      newsletter
+      rules
     ) {
       const { data } = await axios.post("http://localhost:3001/register", {
         email,
         phone,
         password
       });
-      if (data == "ok") {
-        return alert("registered");
-      } else if (data == "duplicate") {
-        return alert("duplicate");
+      if (data == "duplicate") {
+        return alert("این ایمیل قبلا استفاده شده است");
       }
+      jsCookie.set("authtoken", data);
+      const { data: user } = await axios.get("http://localhost:3001/profile", {
+        headers: { authorization: `Bearer ${data}` }
+      });
+      Router.push("/dashboard");
+      return login(user);
     }
-    return alert("error in inputs");
+    return alert("لطفا ورودی های خودتون رو چک کنید");
   }
 
   textChangeHandler(e) {

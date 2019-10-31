@@ -56,7 +56,7 @@ export default class Credit extends Component {
         <div className="d-flex justify-content-between">
           <h5>
             <i className="fal fa-wallet text-second mx-2"></i>
-            <span className="mx-2 text-second">کیف پول خود را شارژ کنید</span>
+            <span className="mx-2 text-second">کیف پولتون رو شارژ کنید</span>
           </h5>
           <div>
             <span className="text-muted mx-2">موجودی فعلی : </span>
@@ -81,7 +81,7 @@ export default class Credit extends Component {
             />
             <Button
               color="warning"
-              className="w-50 mx-2"
+              className="w-75 mx-2"
               onClick={this.goToPaymentPage}
             >
               شارژ حساب

@@ -119,107 +119,110 @@ export class Overview extends Component {
     const { tour } = this.props;
     const { selectedDate, count } = this.state;
     return (
-      <div className="product-overview position-sticky">
-        {this.getModal()}
-        <div className="bg-dark d-flex flex-column rounded p-2">
-          <span className="text-light m-2">به راهنمایی سفر نیاز دارید ؟</span>
-          <div className="d-flex m-2 justify-content-between">
-            <img
-              src={`https://picsum.photos/50`}
-              className="product-helper-image"
-            />
-            <div className="d-flex flex-column m-2 text-light">
+      <div
+        sm={12}
+        md={4}
+        className="box-container d-flex justify-content-start flex-column align-items-start w-100 h-100 px-2"
+      >
+        <h3 className="box-title pr-3">خرید</h3>
+        <div className="product-overview w-100">
+          {this.getModal()}
+          <div className="bg-dark d-flex flex-column rounded p-2">
+            <span className="text-light m-2">به راهنمایی سفر نیاز دارید ؟</span>
+            <div className="d-flex m-2 justify-content-between">
+              <div className="d-flex flex-column m-2 text-light">
+                <span>
+                  سفر یار : <b>{tour.leader}</b>
+                </span>
+                <b className="product-helper-number">۵۷۸۹۲ - ۰۲۱</b>
+              </div>
+              <div className="display-4 text-muted d-flex justify-center-end align-items-center">
+                <i className="far fa-phone-square-alt"></i>
+              </div>
+            </div>
+          </div>
+          <div className="product-order mt-2 d-flex flex-column rounded">
+            <div className="product-price text-center d-flex flex-column align-items-center justify-content-center">
               <span>
-                سفر یار : <b>{tour.leader}</b>
+                شروع از <b>{tour.price.toLocaleString()}</b> تومان
               </span>
-              <b className="product-helper-number">۵۷۸۹۲ - ۰۲۱</b>
+              <p>قیمت بر اساس یک نفر در اتاق دو تخته محاسبه شده است</p>
             </div>
-            <div className="display-4 text-muted d-flex justify-center-end align-items-center">
-              <i className="far fa-phone-square-alt"></i>
-            </div>
-          </div>
-        </div>
-        <div className="product-order mt-2 d-flex flex-column rounded">
-          <div className="product-price text-center d-flex flex-column align-items-center justify-content-center">
-            <span>
-              شروع از <b>{tour.price.toLocaleString()}</b> تومان
-            </span>
-            <p>قیمت بر اساس یک نفر در اتاق دو تخته محاسبه شده است</p>
-          </div>
-          <Container className="p-5 product-order d-flex flex-column bg-white">
-            <h5>فرم رزرو</h5>
-            <Row className="my-3">
-              <Col
-                sm={1}
-                className="d-flex justify-content-center align-items-center"
-              >
-                <i className="fad fa-calendar text-main"></i>
-              </Col>
-              <Col
-                sm={3}
-                className="d-flex justify-content-center align-items-center"
-              >
-                <span>تاریخ</span>
-              </Col>
-              <Col
-                sm={7}
-                className="d-flex justify-content-center align-items-center"
-              >
-                <select
-                  className="w-100"
-                  value={selectedDate}
-                  onChange={this.handleDateChanges.bind(this)}
+            <Container className="p-5 product-order d-flex flex-column bg-white">
+              <h5 className="border-bottom pb-3">فرم رزرو</h5>
+              <Row className="my-3">
+                <Col
+                  sm={1}
+                  className="d-flex justify-content-center align-items-center"
                 >
-                  {tour.Dates.map((item, index) => {
-                    return (
-                      <option key={index} value={index}>
-                        {this.getJalaliDate(item.start)}
-                        {` - `}
-                        {this.getJalaliDate(item.end)}
-                      </option>
-                    );
-                  })}
-                </select>
-              </Col>
-            </Row>
-            <Row className="my-3">
-              <Col
-                sm={1}
-                className="d-flex justify-content-center align-items-center"
-              >
-                <i className="fad fa-bed text-main"></i>
-              </Col>
-              <Col
-                sm={3}
-                className="d-flex justify-content-center align-items-center"
-              >
-                <span>تعداد</span>
-              </Col>
-              <Col
-                sm={7}
-                className="d-flex justify-content-center align-items-center"
-              >
-                <input
-                  type="number"
-                  className="w-100"
-                  value={count}
-                  onChange={this.handleCountChanges}
-                  min={1}
-                  max={tour.Dates[selectedDate].Capacity.count}
-                />
-              </Col>
-            </Row>
-            <Row>
-              <span>
-                ظرفیت باقی مانده فقط
-                <strong className="text-danger mx-2">
-                  {tour.Dates[selectedDate].Capacity.count}
-                </strong>
-                <span>نفر</span>
-              </span>
-            </Row>
-            {this.getReserveButton()}
-          </Container>
+                  <i className="fad fa-calendar text-main"></i>
+                </Col>
+                <Col
+                  sm={3}
+                  className="d-flex justify-content-center align-items-center"
+                >
+                  <span>تاریخ</span>
+                </Col>
+                <Col
+                  sm={7}
+                  className="d-flex justify-content-center align-items-center"
+                >
+                  <select
+                    className="w-100 overview-input"
+                    value={selectedDate}
+                    onChange={this.handleDateChanges.bind(this)}
+                  >
+                    {tour.Dates.map((item, index) => {
+                      return (
+                        <option key={index} value={index}>
+                          {this.getJalaliDate(item.start)}
+                          {` - `}
+                          {this.getJalaliDate(item.end)}
+                        </option>
+                      );
+                    })}
+                  </select>
+                </Col>
+              </Row>
+              <Row className="my-3">
+                <Col
+                  sm={1}
+                  className="d-flex justify-content-center align-items-center"
+                >
+                  <i className="fad fa-bed text-main"></i>
+                </Col>
+                <Col
+                  sm={3}
+                  className="d-flex justify-content-center align-items-center"
+                >
+                  <span>تعداد</span>
+                </Col>
+                <Col
+                  sm={7}
+                  className="d-flex justify-content-center align-items-center"
+                >
+                  <input
+                    type="number"
+                    className="w-100 overview-input"
+                    value={count}
+                    onChange={this.handleCountChanges}
+                    min={1}
+                    max={tour.Dates[selectedDate].Capacity.count}
+                  />
+                </Col>
+              </Row>
+              <Row>
+                <span>
+                  ظرفیت باقی مانده فقط
+                  <strong className="text-danger mx-2">
+                    {tour.Dates[selectedDate].Capacity.count}
+                  </strong>
+                  <span>نفر</span>
+                </span>
+              </Row>
+              {this.getReserveButton()}
+            </Container>
+          </div>
         </div>
       </div>
     );

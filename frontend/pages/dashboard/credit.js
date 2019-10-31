@@ -4,6 +4,7 @@ import UserContext from "../../components/UserContext";
 import axios from "axios";
 import Success from "../../components/Payment/Success";
 import Failed from "../../components/Payment/Failed";
+import Router from "next/router";
 
 export default class Credit extends Component {
   static contextType = UserContext;
@@ -22,7 +23,6 @@ export default class Credit extends Component {
     this.state = { checked };
     this.checkPayment = this.checkPayment.bind(this);
   }
-
 
   checkPayment() {
     const { checked } = this.state;
@@ -58,8 +58,20 @@ export default class Credit extends Component {
       return <Success />;
     }
   }
+  redirect() {
+    if (Router.router != null) {
+      setTimeout(() => {
+        Router.push("/");
+      }, 5000);
+    }
+  }
 
   render() {
-    return <Layout>{this.checkPayment()}</Layout>;
+    return (
+      <Layout>
+        {this.checkPayment()}
+        {this.redirect()}
+      </Layout>
+    );
   }
 }
