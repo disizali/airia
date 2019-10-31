@@ -21,15 +21,11 @@ export class Title extends Component {
   render() {
     const { tour } = this.props;
     return (
-      <div className="w-100 box-container shadow mb-5 p-3 d-flex justify-content-between">
+      <div className="w-100 box-container shadow p-3 d-flex justify-content-between m-0 mb-4">
         <h1 className="tour-title text-dark m-0">تور {tour.name}</h1>
         <div className="rtl">
-            <i className="text-warning fad fa-medal mx-2"></i>
-            <span className="text-warning mx-2">پیشنهاد ویژه</span>
-            {/* <i className="text-warning fas fa-star"></i>
-            <i className="text-warning fas fa-star"></i>
-            <i className="text-warning fas fa-star"></i>
-            <i className="text-warning fas fa-star"></i> */}
+            <i className="text-second fad fa-medal mx-2"></i>
+            <span className="text-second mx-2">پیشنهاد ویژه</span>
         </div>
       </div>
     );

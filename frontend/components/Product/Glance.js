@@ -11,7 +11,7 @@ export class Glance extends Component {
       <div
         sm={12}
         md={4}
-        className="box-container d-flex justify-content-start flex-column align-items-start w-100 h-100"
+        className="box-container d-flex justify-content-start flex-column align-items-start w-100 h-100 m-0"
       >
         <h3 className="box-title pr-3">نگاه مختصر</h3>
         {glance.map((item, index) => {

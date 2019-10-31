@@ -1,10 +1,8 @@
 import React, { Component } from "react";
 import { Container, Row, Col } from "reactstrap";
 import UserContext from "../UserContext";
-
 export class Tabs extends Component {
   static contextType = UserContext;
-
   constructor(props) {
     super(props);
   }

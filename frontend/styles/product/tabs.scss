@@ -20,7 +20,6 @@
   justify-content: center;
   align-items: center;
   padding: 0 20px;
-  width: 10%;
   height: 90%;
   top: 10%;
   position: relative;
@@ -32,7 +31,7 @@
   }
   &.active {
     background: #f8f8f8;
-    color: rgb(75, 108, 183);
+    color: $mainColor;
   }
 }
 
@@ -51,11 +50,13 @@
       margin: 20px 0;
     }
     div {
-      background: $secondColor;
-      border-radius: 5px;
-      width: 30px;
-      height: 30px;
-      position: relative;
+      strong {
+        background: $secondColor;
+        border-radius: 5px;
+        width: 30px;
+        height: 30px;
+        position: relative;
+      }
     }
   }
 }

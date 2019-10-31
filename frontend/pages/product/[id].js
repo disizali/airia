@@ -5,13 +5,11 @@ import Gravity from "../../components/Product/Gravity";
 import Glance from "../../components/Product/Glance";
 import Map from "../../components/Product/Map";
 import Tabs from "../../components/Product/Tabs";
-
 import { Container, Row, Col } from "reactstrap";
 import axios from "axios";
 import Gallery from "../../components/Product/Gallery";
 import Overview from "../../components/Product/Overview";
 import Title from "../../components/Product/Title";
-
 export default class Product extends Component {
   static async getInitialProps(context) {
     const {
@@ -39,10 +37,10 @@ export default class Product extends Component {
         <Container className="py-3 rtl text-right">
           <Title tour={tour} />
           <Row className="mt-3">
-            <Col sm={12} md={8}>
+            <Col sm={12} md={8} className="pl-2 pr-0">
               <Gallery images={tour.images} />
             </Col>
-            <Col sm={12} md={4} className="d-flex flex-column">
+            <Col sm={22} md={4} className="pl-0 pr-2">
               <Overview tour={tour} />
             </Col>
           </Row>
@@ -53,10 +51,10 @@ export default class Product extends Component {
             <Details details={tour.details} />
           </Row>
           <Row className="my-5">
-            <Col sm={12} md={8}>
+            <Col sm={12} md={8} className="pl-2 pr-0">
               <Glance glance={tour.glance} />
             </Col>
-            <Col sm={12} md={4}>
+            <Col sm={12} md={4} className="pl-0 pr-2">
               <Map />
             </Col>
           </Row>

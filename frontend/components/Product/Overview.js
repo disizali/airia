@@ -215,7 +215,7 @@ export class Overview extends Component {
                 <span>
                   ظرفیت باقی مانده فقط
                   <strong className="text-danger mx-2">
-                    {tour.Dates[selectedDate].Capacity.count}
+                    {this.getPersian(tour.Dates[selectedDate].Capacity.count)}
                   </strong>
                   <span>نفر</span>
                 </span>
