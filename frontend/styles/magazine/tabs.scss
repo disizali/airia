@@ -1,0 +1,13 @@
+.magazin-tab-item {
+  cursor: pointer;
+  display: inline-block;
+  padding: 20px 20px;
+  transition: color 0.3s;
+  &.active {
+    color: $secondColor !important;
+    border-bottom: $secondColor 4px solid;
+  }
+  &:hover:not(.active) {
+    color: $secondColor !important;
+  }
+}

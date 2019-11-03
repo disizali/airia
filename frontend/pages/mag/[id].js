@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import axios from "axios";
 import Layout from "../../components/Layout";
-import Ads from "../../components/Tabs/Magazine/Ads";
 import Archive from "../../components/Tabs/Magazine/Archive";
+import jMoment from "jalali-moment";
+import persianJs from "persianjs";
 
 import { Row, Container, Col } from "reactstrap";
 export class Mag extends Component {
@@ -28,30 +29,52 @@ export class Mag extends Component {
       </Layout>
     );
   }
+  getJalaliDate(date) {
+    return this.getPersian(
+      jMoment(new Date(date))
+        .locale("fa")
+        .format("D MMMM")
+    );
+  }
+
+  getPersian(data) {
+    return persianJs(data)
+      .englishNumber()
+      .toString();
+  }
   render() {
-    const { post , magazine} = this.props;
+    const { post, magazine } = this.props;
     if (post == "") return this.noPost();
     return (
       <Layout>
-        <Container className="my-5">
+        <div className="my-3 my-md-5 mx-5">
           <Row className="rtl text-right">
-            <Col sm={9} className="bg-white p-0 rounded">
-              <img src={post.cover} width="100%" className="rounded" />
-              <h1 className="postazine-page-title m-3 text-main">
-                {post.title}
-              </h1>
-              <hr className="mx-2" />
-              <div
-                className="m-3"
-                dangerouslySetInnerHTML={{ __html: post.body }}
-              ></div>
+            <Col sm={12} md={9} className="p-0 p-md-2">
+              <div className="magazine-title">
+                <div className="d-flex align-items-center justify-content-start text-white h-100">
+                  <h5 className="m-1">{post.title}</h5>
+                </div>
+              </div>
+              <div className={"bg-white p-0 rounded pb-3"}>
+                <img src={post.cover} width="100%" className="rounded-bottom" />
+                <i className="fas fa-clock ml-2 mt-2 text-muted"></i>
+                <span className="mt-2 text-muted">
+                  {this.getJalaliDate(post.createdAt)}
+                </span>
+                <span> - </span>
+                <span className="badge bg-primary text-light">{post.Tags[0].name}</span>
+                <hr className="mx-2" />
+                <div
+                  className="m-3"
+                  dangerouslySetInnerHTML={{ __html: post.body }}
+                ></div>
+              </div>
             </Col>
-            <Col sm={3}>
-              <Ads />
+            <Col sm={12} md={3} className="p-0 p-md-2">
               <Archive magazine={magazine.slice(0, 10)} />
             </Col>
           </Row>
-        </Container>
+        </div>
       </Layout>
     );
   }

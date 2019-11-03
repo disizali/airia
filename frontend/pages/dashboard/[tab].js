@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import Layout from "../components/Layout";
-import Dashboard from "../components/Dashboard";
-import UserContext from "../components/UserContext";
+import Layout from "../../components/Layout";
+import Dashboard from "../../components/Dashboard";
+import UserContext from "../../components/UserContext";
 import Router from "next/router";
 
 export class dashboard extends Component {

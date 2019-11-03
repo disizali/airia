@@ -74,8 +74,7 @@ export class Overview extends Component {
     if (status == 1) {
       return (
         <Button
-          color="primary"
-          className="my-3 form-control"
+          className="my-3 form-control reserve-button"
           onClick={this.goToReservePage}
         >
           رزرو
@@ -85,8 +84,7 @@ export class Overview extends Component {
     return (
       <div>
         <Button
-          color="primary"
-          className="my-3 form-control"
+          className="my-3 form-control reserve-button"
           onClick={this.toggleModal}
         >
           رزرو

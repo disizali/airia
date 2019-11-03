@@ -1,27 +1,42 @@
 import React, { Component } from "react";
-import { Container, Row, Col } from "reactstrap";
 import Header from "./Header";
 import List from "./List";
-import Ads from "./Ads";
+import Tabs from "./Tabs";
 
 export class Magazine extends Component {
   constructor(props) {
     super(props);
+    const tabs = [
+      ...new Set(
+        props.magazine.map(item => {
+          return item.Tags[0].name;
+        })
+      )
+    ];
+
+    const posts = props.magazine.filter(item => {
+      return item.Tags[0].id == 1;
+    });
+
+    this.state = { tab: 1, tabs, posts };
+  }
+  changeTab(tab) {
+    this.setState({ tab });
+    const posts = this.props.magazine.filter(item => {
+      return item.Tags[0].id == tab;
+    });
+    this.setState({ posts });
   }
   render() {
     return (
-      <div>
-        <Container>
-          <Header posts={this.props.magazine.slice(0,5)} />
-          <Row className="rtl text-right p-5">
-            <Col sm={9}>
-              <List posts={this.props.magazine.slice(5)} />
-            </Col>
-            <Col sm={3}>
-              <Ads />
-            </Col>
-          </Row>
-        </Container>
+      <div className="px-0 px-md-5 mx-5 rtl text-right">
+        <Header posts={this.props.magazine.slice(0, 5)} />
+        <Tabs
+          tab={this.state.tab}
+          tabs={this.state.tabs}
+          changeTab={this.changeTab.bind(this)}
+        />
+        <List posts={this.state.posts} />
       </div>
     );
   }

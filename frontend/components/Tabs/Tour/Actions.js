@@ -5,8 +5,23 @@ export class Actions extends Component {
     return (
       <Container>
         <Row className="my-5">
-          <Col className="action-column">
-            <div className="action-container h-100 w-100">
+          {[1, 2, 3, 4].map((item, index) => {
+            return (
+              <Col key={index} sm={6} md={3}>
+                <div className="action-container">
+                  <img
+                    src={`https://picsum.photos/seed/action${item}/200/100?blur`}
+                    alt="service 1"
+                    width="100%"
+                    className="action-image"
+                  />
+                  <h4 className="action-title">خدمت شماره {item}</h4>
+                </div>
+              </Col>
+            );
+          })}
+          {/* <Col>
+            <div className="action-container">
               <img
                 src="https://picsum.photos/seed/action1/200/100?blur"
                 alt="service 1"
@@ -44,7 +59,7 @@ export class Actions extends Component {
               />
               <h4 className="action-title">خدمت شماره 4</h4>
             </div>
-          </Col>
+          </Col> */}
         </Row>
       </Container>
     );

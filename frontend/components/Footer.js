@@ -8,10 +8,10 @@ export class Footer extends Component {
         <div className="footer-social">
           <Container className="rtl">
             <Row className="py-4">
-              <Col className="border-left d-flex align-items-center">
-                <i className="far fa-share-alt text-main mx-2"></i>
+              <Col className="pr-0 border-left d-flex align-items-center">
+                <i className="far fa-share-alt text-main ml-2"></i>
                 <span className="mx-2">آیریا در شبکه های اجتماعی</span>
-                <div className="social-instagram p-1 text-right text-light">
+                <div className="social-instagram p-1 text-right text-light d-flex align-items-center">
                   <i className="fab fa-instagram mx-2"></i>
                   <span className=" mx-2">اینستاگرام</span>
                 </div>
@@ -22,12 +22,12 @@ export class Footer extends Component {
                   <i className="fab fa-telegram"></i>
                 </div>
               </Col>
-              <Col className="d-flex">
+              <Col className="pl-0 d-flex newsletter">
                 <input
-                  className="form-control mx-2"
+                  className="form-control mx-2 h-100"
                   placeholder="آدرس ایمیل شما"
                 />
-                <Button color="primary" className="mx-2 w-50">
+                <Button color="primary" className="mr-2 w-50">
                   عضویت در خبرنامه
                 </Button>
               </Col>
@@ -37,7 +37,7 @@ export class Footer extends Component {
         <div className="footer-links">
           <Container className="rtl text-right">
             <Row className="py-5">
-              <Col>
+              <Col sm={12} md={4}>
                 <h5>آیریا</h5>
                 <ul className="p-3">
                   <li>درباره ما</li>
@@ -51,7 +51,7 @@ export class Footer extends Component {
                   <li>فرصت های شغلی</li>
                 </ul>
               </Col>
-              <Col>
+              <Col sm={12} md={4}>
                 <h5>اطلاعات تکمیلی</h5>
                 <ul className="p-3">
                   <li>راهنمای رزرو تور داخلی</li>
@@ -59,7 +59,7 @@ export class Footer extends Component {
                   <li>شیوه نامه حقوق مسافر</li>
                 </ul>
               </Col>
-              <Col>
+              <Col sm={12} md={4}>
                 <img
                   src="/static/images/logo.png"
                   alt="airia logo"
@@ -69,26 +69,38 @@ export class Footer extends Component {
                 <span className="my-3">آدرس شرکت آیریا</span>
                 <Row className="p-0 mt-3">
                   <Col
-                    className="trus-container text-center bg-white rounded shadow m-1 d-flex align-items-center"
-                    sm={4}
+                    className="trust-container text-center bg-white rounded shadow m-1 d-flex align-items-center w-25 h-25"
+                    sm={1}
                   >
                     <img src="/static/images/enamad.png" width="100%" />
                   </Col>
                   <Col
-                    className="trus-container text-center bg-white rounded shadow m-1 d-flex align-items-center"
-                    sm={4}
+                    className="trust-container text-center bg-white rounded shadow m-1 d-flex align-items-center w-25 h-25"
+                    sm={1}
                   >
                     <img src="/static/images/samandehi.png" width="100%" />
                   </Col>
                   <Col
-                    className="trus-container text-center bg-white rounded shadow m-1 d-flex align-items-center"
-                    sm={4}
+                    className="trust-container text-center bg-white rounded shadow m-1 d-flex align-items-center w-25 h-25"
+                    sm={1}
                   >
                     <img src="/static/images/etehadie.png" width="100%" />
                   </Col>
                   <Col
-                    className="trus-container text-center bg-white rounded shadow m-1 d-flex align-items-center"
-                    sm={4}
+                    className="trust-container text-center bg-white rounded shadow m-1 d-flex align-items-center w-25 h-25"
+                    sm={1}
+                  >
+                    <img src="/static/images/mosafer.png" width="100%" />
+                  </Col>
+                  <Col
+                    className="trust-container text-center bg-white rounded shadow m-1 d-flex align-items-center w-25 h-25"
+                    sm={1}
+                  >
+                    <img src="/static/images/mosafer.png" width="100%" />
+                  </Col>
+                  <Col
+                    className="trust-container text-center bg-white rounded shadow m-1 d-flex align-items-center w-25 h-25"
+                    sm={1}
                   >
                     <img src="/static/images/mosafer.png" width="100%" />
                   </Col>
@@ -96,6 +108,8 @@ export class Footer extends Component {
               </Col>
             </Row>
           </Container>
+        </div>
+        <div className="footer-fixer d-block d-md-none">
         </div>
       </footer>
     );

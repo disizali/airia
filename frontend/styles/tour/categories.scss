@@ -1,6 +1,4 @@
 .category {
-  // width: 100px;
-  // height: 100px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -39,5 +37,20 @@
     background: $secondColor;
     color: white;
     border: none;
+  }
+}
+
+@include media-breakpoint-down(md){
+  .category-switcher{
+    font-size: 12px;
+  }
+  .parent-title {
+    min-width: 100px;
+    font-size: 20px;
+  }
+  .splitter {
+    background: $secondColor;
+    width: 100px;
+    height: 5px;
   }
 }

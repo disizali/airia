@@ -1,9 +1,16 @@
+$productBackground: radial-gradient(
+  circle farthest-corner at 10% 20%,
+  rgba(75, 108, 183, 1) 0%,
+  rgba(55, 82, 141, 1) 90%
+);
+
 @import "glance";
 @import "tabs";
 @import "overview";
 @import "map";
 @import "gravity";
 @import "title";
+@import "gallery";
 
 .product-title {
   font-size: 1.4em;

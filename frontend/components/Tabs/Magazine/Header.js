@@ -8,7 +8,7 @@ export class Header extends Component {
     return (
       <div className="magazine-header">
         <Row className="rtl my-4">
-          <Col className="p-0">
+          <Col className="my-2 my-md-0" sm={12} md={6}>
             <Link href={`/mag/${posts[0].id}`}>
               <a className="text-right text-white ">
                 <div
@@ -22,12 +22,12 @@ export class Header extends Component {
                     width="100%"
                     className="header-post-size"
                   />
-                  <span className="header-post-title">{posts[0].title}</span>
+                  <span className="header-post-title  mx-4">{posts[0].title}</span>
                 </div>
               </a>
             </Link>
           </Col>
-          <Col>
+          <Col className="my-2 my-md-0" sm={12} md={6}>
             <Link href={`/mag/${posts[1].id}`}>
               <a className="text-right text-white w-100 h-100">
                 <div
@@ -41,14 +41,14 @@ export class Header extends Component {
                     width="100%"
                     className="header-post-size"
                   />
-                  <span className="header-post-title">{posts[1].title}</span>
+                  <span className="header-post-title  mx-4">{posts[1].title}</span>
                 </div>
               </a>
             </Link>
           </Col>
         </Row>
         <Row className="rtl my-4">
-          <Col>
+          <Col className="my-2 my-md-0" sm={12} md={4}>
             <Link href={`/mag/${posts[2].id}`}>
               <a className="text-right text-white ">
                 <div
@@ -62,12 +62,12 @@ export class Header extends Component {
                     width="100%"
                     className="header-post-size"
                   />
-                  <span className="header-post-title">{posts[2].title}</span>
+                  <span className="header-post-title  mx-4">{posts[2].title}</span>
                 </div>
               </a>
             </Link>
           </Col>
-          <Col>
+          <Col className="my-2 my-md-0" sm={12} md={4}>
             <Link href={`/mag/${posts[3].id}`}>
               <a className="text-right text-white ">
                 <div
@@ -81,12 +81,12 @@ export class Header extends Component {
                     width="100%"
                     className="header-post-size"
                   />
-                  <span className="header-post-title">{posts[3].title}</span>
+                  <span className="header-post-title  mx-4">{posts[3].title}</span>
                 </div>
               </a>
             </Link>
           </Col>
-          <Col>
+          <Col className="my-2 my-md-0" sm={12} md={4}>
             <Link href={`/mag/${posts[4].id}`}>
               <a className="text-right text-white ">
                 <div
@@ -100,7 +100,7 @@ export class Header extends Component {
                     width="100%"
                     className="header-post-size"
                   />
-                  <span className="header-post-title">{posts[4].title}</span>
+                  <span className="header-post-title  mx-4">{posts[4].title}</span>
                 </div>
               </a>
             </Link>

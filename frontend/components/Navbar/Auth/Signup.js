@@ -10,10 +10,10 @@ export default class Signup extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: "a.hassssani@gmail.com",
-      phone: "09033033223",
-      password: "123456789",
-      repassword: "123456789",
+      email: "",
+      phone: "",
+      password: "",
+      repassword: "",
       rules: false,
       newsletter: false
     };
@@ -51,7 +51,7 @@ export default class Signup extends Component {
         password
       });
       if (data == "duplicate") {
-        return alert("این ایمیل قبلا استفاده شده است");
+        return alert("ایمیل یا شماره قبلا استفاده شده است");
       }
       jsCookie.set("authtoken", data);
       const { data: user } = await axios.get("http://localhost:3001/profile", {

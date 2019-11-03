@@ -22,6 +22,7 @@ export default class Product extends Component {
     tour.glance = tour.Details.filter(item => item.type == 4);
     tour.map = tour.Details.filter(item => item.type == 5);
     tour.tabs = tour.Details.filter(item => item.type == 6);
+    tour.preview = tour.Details.filter(item => item.type == 7);
     delete tour.Details;
     return { tour };
   }
@@ -38,7 +39,7 @@ export default class Product extends Component {
           <Title tour={tour} />
           <Row className="mt-3">
             <Col sm={12} md={8} className="pl-2 pr-0">
-              <Gallery images={tour.images} />
+              <Gallery images={tour.images} preview={tour.preview}/>
             </Col>
             <Col sm={22} md={4} className="pl-0 pr-2">
               <Overview tour={tour} />

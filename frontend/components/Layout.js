@@ -13,20 +13,25 @@ class Layout extends Component {
   constructor(props) {
     super(props);
   }
-  async componentDidMount() {
+  async UNSAFE_componentWillMount() {
+    const { logout } = this.context;
     const token = jsCookie.get("authtoken");
-    if (token == undefined) {
+    if (token == undefined){
+      return logout();
     }
   }
 
   async checkAuth() {
     const { login, logout } = this.context;
     const token = jsCookie.get("authtoken");
+    if (token == undefined){
+      return ;
+    }
     const { data: user } = await axios.get("http://localhost:3001/profile", {
       headers: { authorization: `Bearer ${token}` }
     });
     if (user == "unauthorized") {
-      return logout(user);
+      return logout();
     }
     return login(user);
   }

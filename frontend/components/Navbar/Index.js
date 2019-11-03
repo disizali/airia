@@ -19,11 +19,19 @@ class NavbarClass extends React.Component {
     this.authFormToggle = this.authFormToggle.bind(this);
     this.contactToggle = this.contactToggle.bind(this);
     this.getControlPanel = this.getControlPanel.bind(this);
+    this.collapseToggle = this.collapseToggle.bind(this);
+
     this.state = {
+      collapsed: true,
       authOpen: false,
       contactOpen: false
     };
   }
+
+  collapseToggle() {
+    this.setState({ collapsed: !this.state.collapsed });
+  }
+
   authFormToggle() {
     this.setState({
       authOpen: !this.state.authOpen,
@@ -54,7 +62,7 @@ class NavbarClass extends React.Component {
             <NavLink href="/dashboard">
               <img
                 src="/static/icons/user-circle.svg"
-                className="flat-icon mini-icon mx-2"
+                className="flat-icon mini-icon mx-2 d-inline-block"
               />
               <span className="mx-2">
                 {profile.name || "مدیریت"} {profile.family || "حساب"}
@@ -70,7 +78,9 @@ class NavbarClass extends React.Component {
                 src="/static/icons/user-circle.svg"
                 className="flat-icon mini-icon mx-2"
               />
-              <span className="mx-2">ورود - ثبت نام</span>
+              <span className="mx-2 d-none d-sm-inline-block">
+                ورود - ثبت نام
+              </span>
               <i
                 className={`fas fa-sort-down mx-2 arrow ${
                   authOpen ? "arrow-up" : ""
@@ -87,7 +97,7 @@ class NavbarClass extends React.Component {
     const { user, status } = this.context;
     let profile = {};
     if (user != null) {
-      profile = user.Profile
+      profile = user.Profile;
     }
     const { authOpen, contactOpen } = this.state;
     return (
@@ -96,15 +106,25 @@ class NavbarClass extends React.Component {
           color="white"
           light
           expand="md"
-          className="rtl shadow"
+          className="rtl shadow bg-white"
           fixed="true"
         >
           <NavbarBrand href="/">
-            <img src="/static/images/logo.png" alt="airia logo" width="300" />
+            <img
+              src="/static/images/logo.png"
+              alt="airia logo"
+              width="300"
+              className="d-none d-md-block"
+            />
+            <img
+              src="/static/images/icon.png"
+              alt="airia logo"
+              width="70"
+              className="d-sm-block d-md-none d-lg-none d-xl-none"
+            />
           </NavbarBrand>
-          <NavbarToggler onClick={this.toggle} />
-          <Collapse isOpen={this.state.isOpen} navbar>
-            <Nav className="mr-auto" navbar>
+          <Nav className="mr-sm-auto" navbar>
+            <div className="navbar-container d-flex">
               {this.getControlPanel()}
               {status != 0 && (
                 <NavItem>
@@ -113,7 +133,9 @@ class NavbarClass extends React.Component {
                       src="/static/icons/phone-circle.svg"
                       className="flat-icon mini-icon"
                     />
-                    <span className=" mx-2">تماس با ما</span>
+                    <span className="mx-2 d-none d-sm-inline-block">
+                      تماس با ما
+                    </span>
                     <i
                       className={`fas fa-sort-down mx-2 arrow ${
                         contactOpen ? "arrow-up" : ""
@@ -123,8 +145,8 @@ class NavbarClass extends React.Component {
                   <Contact contactOpen={contactOpen} />
                 </NavItem>
               )}
-            </Nav>
-          </Collapse>
+            </div>
+          </Nav>
         </Navbar>
       </div>
     );

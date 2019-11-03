@@ -25,7 +25,6 @@ export default class Signin extends Component {
     const usernameResult =
       validator.isEmail(username) || validator.isNumeric(username);
     const passwordResult = !validator.isEmpty(password) && password.length >= 8;
-
     if (usernameResult && passwordResult) {
       const { data } = await axios.post("http://localhost:3001/login", {
         username,

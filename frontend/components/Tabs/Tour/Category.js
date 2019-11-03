@@ -22,6 +22,7 @@ export default class Category extends Component {
           index ===
           self.findIndex(t => t.place === item.place && t.name === item.name)
       ); // remove duplicates
+
       return tours;
     } else {
       const category = parent.Categories.find(item => item.id == subTab);
@@ -38,7 +39,7 @@ export default class Category extends Component {
           <div className="d-flex align-items-center">
             <h3 className="my-3 parent-title">تور {parent.name}</h3>
             <span
-              className={`category-switcher p-1 mx-2 ${
+              className={`category-switcher p-1 mx-1 mx-md-2 ${
                 subTab == 0 ? "active" : ""
               }`}
               onClick={() => changeSubTab(0)}
@@ -49,7 +50,7 @@ export default class Category extends Component {
               return (
                 <span
                   key={index}
-                  className={`category-switcher p-1 mx-2 ${
+                  className={`category-switcher p-1 mx-1 mx-md-2 ${
                     subTab == item.id ? "active" : ""
                   }`}
                   onClick={() => changeSubTab(item.id)}
@@ -60,15 +61,17 @@ export default class Category extends Component {
             })}
           </div>
         </Container>
-        <Row className="p-5">
-          {this.getData(subTab).map((item, index) => {
-            return (
-              <Col sm={4} className="my-3" key={index}>
-                <Product product={item}/>
-              </Col>
-            );
-          })}
-        </Row>
+        <Container>
+          <Row>
+            {this.getData(subTab).map((item, index) => {
+              return (
+                <Col sm={4} className="my-3" key={index}>
+                  <Product product={item} />
+                </Col>
+              );
+            })}
+          </Row>
+        </Container>
       </div>
     );
   }

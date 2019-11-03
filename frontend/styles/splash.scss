@@ -11,21 +11,22 @@
   height: 20vh;
   background-color: rgb(30, 30, 30);
   .splash-switchers {
-    transform: translateY(-3vh);
+    transform: translateY(-4vh);
   }
   transition: all 0.5s;
-  &.magazine {
-    background-image: url(/static/icons/magazine.svg);
-  }
-  &.service {
-    background-image: url(/static/icons/service.svg);
-  }
-  &.tour {
-    background-image: url(/static/icons/tour.svg);
-  }
+  // &.magazine {
+  //   background-image: url(/static/icons/magazine.svg);
+  // }
+  // &.service {
+  //   background-image: url(/static/icons/service.svg);
+  // }
+  // &.tour {
+  //   background-image: url(/static/icons/tour.svg);
+  // }
   background-position: right bottom;
   background-size: calc(25vh / 5);
   // text-align: justify;
+  background: transparent;
 }
 
 .switcher {
@@ -34,7 +35,7 @@
   width: 150px;
   height: 150px;
   border-radius: 10%;
-  margin: auto 5em;
+  margin: auto 4em;
   color: white;
   transition: all 0.2s;
   font-size: 1.1em;
@@ -69,4 +70,43 @@
 .search-panel {
   margin-bottom: 80px;
   min-height: 50px;
+}
+
+@include media-breakpoint-down(md) {
+  .splash {
+    min-height: 20vh;
+  }
+
+  .splash-switcher-container {
+    height: 12vh;
+    top: 88vh;
+    position: fixed;
+    z-index: 2;
+    border-radius: 10px 10px 0 0;
+    background: rgb(30, 30, 30);
+    .splash-switchers {
+      transform: translateY(-3vh);
+    }
+    .switcher {
+      padding: 5px;
+      top: 1vh;
+      width: 10vh;
+      height: 10vh;
+      margin: 0 0;
+      span {
+        font-size: 15px;
+        margin: 0 !important;
+      }
+      &.active {
+        border: 2px dotted $secondColor;
+        color: $secondColor;
+        background: rgb(30, 30, 30);
+      }
+      background: transparent;
+    }
+    .flat-icon {
+      width: 35px;
+      height: 35px;
+    }
+  }
 }

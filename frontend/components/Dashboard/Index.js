@@ -1,29 +1,38 @@
 import React, { Component } from "react";
 import Tabs from "./Tabs";
-import Profile from "./Profile";
+import Profile from "./Profile/Index";
 import Credit from "./Credit";
 import Favorites from "./Favorites";
 import History from "./History";
+import Router from "next/router";
 export class dashboard extends Component {
   constructor(props) {
     super(props);
-    this.state = { tab: 1 };
+    const garantedTabs = ["profile", "credit", "favorites", "history"];
+
+    this.state = {
+      tab: garantedTabs.includes(props.tab) ? props.tab : "profile"
+    };
     this.changeTab = this.changeTab.bind(this);
     this.getTabContent = this.getTabContent.bind(this);
   }
   changeTab(tab) {
+    const href = `/dashboard/${tab}`;
+    Router.push(Router.pathname, href, { shallow: true });
     this.setState({ tab });
   }
   getTabContent() {
     switch (this.state.tab) {
-      case 1:
+      case "profile":
         return <Profile />;
-      case 2:
+      case "credit":
         return <Credit />;
-      case 3:
+      case "favorites":
         return <Favorites />;
-      case 4:
+      case "history":
         return <History />;
+      default:
+        return <Profile />;
     }
   }
   render() {

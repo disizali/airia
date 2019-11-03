@@ -5,7 +5,7 @@ const cors = require("cors");
 // const cookieParser = require("cookie-parser");
 
 const corsOptions = {
-  origin: "http://localhost:3000"
+  origin: "*"
 };
 const TOUR_SERVICE = "http://localhost:3002";
 const USER_SERVICE = "http://localhost:3003";
@@ -16,11 +16,21 @@ app.use(cors(corsOptions));
 app.use(express.json());
 
 app.use(async (req, res, next) => {
+  console.log(req.method, req.path);
+  next();
+});
+
+app.use(async (req, res, next) => {
+  if (req.auth) {
+    return next();
+  }
   if (req.header("authorization") == undefined) {
     req.auth = false;
     return next();
   }
-
+  if (req.path == "/profile"){
+    
+  }
   const token = req.header("authorization").replace("Bearer ", "");
   if (token == "") {
     req.auth = false;
@@ -118,10 +128,11 @@ app.get("/magazine", async (req, res) => {
 });
 
 app.get("/magazine/:id", async (req, res) => {
-  const { data } = await axios.get(`${MAGAZINE_SERVICE}/${req.params.id}`, req.body);
+  const { data } = await axios.get(
+    `${MAGAZINE_SERVICE}/${req.params.id}`,
+    req.body
+  );
   res.send(data);
 });
-
-
 
 app.listen(3001);

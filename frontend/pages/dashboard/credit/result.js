@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import Layout from "../../components/Layout";
-import UserContext from "../../components/UserContext";
+import Layout from "../../../components/Layout";
+import UserContext from "../../../components/UserContext";
 import axios from "axios";
-import Success from "../../components/Payment/Success";
-import Failed from "../../components/Payment/Failed";
+import Success from "../../../components/Payment/Success";
+import Failed from "../../../components/Payment/Failed";
 import Router from "next/router";
 
 export default class Credit extends Component {

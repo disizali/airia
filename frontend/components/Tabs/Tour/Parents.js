@@ -17,13 +17,14 @@ export default class Parents extends Component {
             {parents.map((item, index) => {
               return (
                 <Col
-                  className={`category my-5 mx-2 d-flex  ${tab == item.id &&
-                    "active"}`}
+                  className={`category d-flex my-2 my-md-3 mx-1 mx-md-2 ${
+                    tab == item.id ? "active" : ""
+                  }`}
                   onClick={() => changeTab(item.id)}
                   key={index}
                 >
                   <div
-                    className={`d-flex m-5 text-right flex-column text-center`}
+                    className={`d-flex m-1 m-md-5 text-right flex-column text-center`}
                   >
                     <Icon
                       icon={item.icon}
@@ -38,7 +39,7 @@ export default class Parents extends Component {
                       تور {item.name}
                     </span>
                   </div>
-                  <div>
+                  <div className="d-none d-md-inline-block">
                     <ul
                       className={`list-group list-group-flush ${
                         tab == item.id ? "text-white" : "text-muted"
@@ -54,6 +55,11 @@ export default class Parents extends Component {
                           </li>
                         );
                       })}
+                      {index + 1 == parents.length && (
+                        <li className="list-group-item bg-transparent">
+                          تور های پاییز و زمستان ۹۸
+                        </li>
+                      )}
                     </ul>
                   </div>
                 </Col>

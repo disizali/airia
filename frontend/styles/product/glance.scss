@@ -4,10 +4,10 @@
   color: $mainColor;
   .glance-title {
     &.even {
-      background: $mainColor;
+      background: $productBackground;
     }
     &.odd {
-      background: rgba($mainColor, 0.85);
+      background: $productBackground;
     }
     color: white;
     border-radius: 10px;

@@ -1,10 +1,14 @@
-'use strict';
+"use strict";
 module.exports = (sequelize, DataTypes) => {
-  const TAG = sequelize.define('TAG', {
-    name: DataTypes.TEXT
-  }, {});
-  TAG.associate = function(models) {
-    // associations can be defined here
+  const Tag = sequelize.define(
+    "Tag",
+    {
+      name: DataTypes.TEXT
+    },
+    {}
+  );
+  Tag.associate = function(models) {
+    Tag.belongsToMany(models.Magazine, { through: "magazine_tag" });
   };
-  return TAG;
+  return Tag;
 };

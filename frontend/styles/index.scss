@@ -1,4 +1,8 @@
-@import url(~bootstrap/scss/bootstrap.scss);
+@import url("~bootstrap/scss/bootstrap.scss");
+@import "~bootstrap/scss/_functions.scss";
+@import "~bootstrap/scss/_variables.scss";
+@import "~bootstrap/scss/mixins/_breakpoints.scss";
+
 @import url(~react-persian-calendar-date-picker/lib/DatePicker.css);
 @import "variables";
 @import "fonts";

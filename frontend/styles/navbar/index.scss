@@ -2,24 +2,31 @@
 @import "contact";
 
 nav {
-    height: 80px;
+  height: 80px;
+}
+
+.nav-item {
+  padding: 0 20px;
+  font-size: 0.9em;
+  &:first-child {
+    border-left: 1px solid rgb(211, 211, 211);
   }
-  
-  .nav-item {
-    padding: 0 20px;
-    font-size: 0.9em;
-    &:first-child {
-      border-left: 1px solid rgb(211, 211, 211);
-    }
-    a {
-      color: $darkTextColor !important;
-    }
+  a {
+    color: $darkTextColor !important;
   }
-  
-  
-  .arrow {
-    transition: all 0.5s;
+}
+
+.arrow {
+  transition: all 0.5s;
+}
+.arrow-up {
+  transform: rotate(180deg);
+}
+
+@include media-breakpoint-down(md) {
+  .navbar-container {
+    position: absolute;
+    top: 20px;
+    left: 0;
   }
-  .arrow-up {
-    transform: rotate(180deg);
-  }
+}

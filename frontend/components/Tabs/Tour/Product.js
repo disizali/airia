@@ -35,7 +35,7 @@ export default class Product extends Component {
         <div className="w-100">
           <img
             // src={product.image}
-            src={`https://picsum.photos/200/100`}
+            src={`https://picsum.photos/200/200`}
             alt={product.name + " image"}
             className="product-item-image"
             width="100%"
@@ -49,15 +49,27 @@ export default class Product extends Component {
         </div>
         <Container className="product-item-body text-right rtl d-flex flex-column p-3">
           <div className="product-item-body-row d-flex mt-4">
-            <i className="far fa-plane-departure mx-1 text-second"></i>
-            <span className="product-item-date mx-1 text-main">
-              {this.getJalaliDate(product.Dates[0].start)}
-            </span>
-            <span className="mx-1 text-muted">تا</span>
-            <span className="product-item-date mx-1 text-main">
-              {this.getJalaliDate(product.Dates[0].end)}
-            </span>
-            <div className="other-dates mx-2 text-muted border-right pr-2">
+            <div className="d-flex flex-column">
+              <div>
+                <i
+                  className="far fa-plane-departure mx-1 text-second"
+                  style={{ transform: `scaleX(-1)` }}
+                ></i>
+                <span className="product-item-date mx-1 text-main">
+                  {this.getJalaliDate(product.Dates[0].start)}
+                </span>
+              </div>
+              <div>
+                <i
+                  className="far fa-plane-arrival mx-1 text-second"
+                  style={{ transform: `scaleX(-1)` }}
+                ></i>
+                <span className="product-item-date mx-1 text-main">
+                  {this.getJalaliDate(product.Dates[0].end)}
+                </span>
+              </div>
+            </div>
+            <div className="d-flex justify-content-center align-items-center other-dates mx-2 text-muted border-right pr-2">
               <span className="ml-2">تاریخ های دیگر این تور</span>
               <i className="far fa-arrow-down mr-2"></i>
               <div className="other-dates-body">

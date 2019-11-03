@@ -15,7 +15,7 @@ export default class Index extends React.Component {
   }
   constructor(props) {
     super(props);
-    this.state = { tab: 3 };
+    this.state = { tab: 1 };
   }
   changeTab(tab) {
     this.setState({ tab });

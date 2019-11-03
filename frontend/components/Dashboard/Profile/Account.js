@@ -2,10 +2,9 @@ import React, { Component } from "react";
 import { Container, Row, Col, Table } from "reactstrap";
 import axios from "axios";
 import jsCookie from "js-cookie";
-import UserContext from "../UserContext";
-export default class Profile extends Component {
+import UserContext from "../../UserContext";
+export default class Account extends Component {
   static contextType = UserContext;
-
   constructor(props) {
     super(props);
     this.state = { editable: false };
@@ -13,14 +12,12 @@ export default class Profile extends Component {
     this.edit = this.edit.bind(this);
     this.changeTextHandler = this.changeTextHandler.bind(this);
   }
-
   changeEditable() {
     this.setState({ editable: !this.state.editable });
   }
   changeTextHandler(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
-
   async edit() {
     const { updateUser, user } = this.context;
     const token = jsCookie.get("authtoken");
@@ -48,7 +45,7 @@ export default class Profile extends Component {
     } = this.context;
 
     return (
-      <Container className="bg-white rounded w-100 my-3 shadow text-right rtl p-4">
+      <Container className="bg-white rounded w-100 my-3 shadow text-right rtl p-4 h-100">
         <div className="d-flex justify-content-between">
           <h5>
             <i className="fal fa-user text-second mx-2"></i>

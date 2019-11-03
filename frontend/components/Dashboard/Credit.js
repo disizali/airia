@@ -38,7 +38,7 @@ export default class Credit extends Component {
     const { data } = await axios.post("http://localhost:3001/payment/credit", {
       MerchantID: "xxx-xxxx-xxxxx-xxxx-xxx-xxxx-xxxx-xx",
       Amount: credit,
-      CallbackURL: `http://localhost:3000/dashboard/credit`,
+      CallbackURL: `http://localhost:3000/dashboard/credit/result`,
       Description: `افزودن اعتبار`,
       UserId: user.id
     });
