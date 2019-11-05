@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Head from "next/head";
-import Navbar from "./Navbar";
+import Navbar from "./Navbar/Index";
 import Footer from "./Footer";
 import "../styles/index.scss";
 import UserContext from "./UserContext";
