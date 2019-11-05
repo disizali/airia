@@ -1,8 +1,8 @@
 import React from "react";
 import Layout from "../components/Layout";
 import Splash from "../components/Splash";
-import Tour from "../components/Tabs/Tour";
-import Magazine from "../components/Tabs/Magazine";
+import Tour from "../components/Tabs/Tour/Index";
+import Magazine from "../components/Tabs/Magazine/index";
 import * as api from "../src/api";
 
 export default class Index extends React.Component {
