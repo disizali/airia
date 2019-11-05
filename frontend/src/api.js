@@ -73,10 +73,10 @@ export async function verifyCreditPayment(data) {
 }
 
 export async function login(data) {
-  const { data: token } = await axios.get(`${api}/login`, data);
+  const { data: token } = await axios.post(`${api}/login`, data);
   return token;
 }
 export async function register(data) {
-  const { data: token } = await axios.get(`${api}/register`, data);
+  const { data: token } = await axios.post(`${api}/register`, data);
   return token;
 }
