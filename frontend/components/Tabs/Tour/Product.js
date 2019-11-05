@@ -8,9 +8,15 @@ import persianJs from "persianjs";
 export default class Product extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = { date: props.product.Dates[0] };
+    this.changeDate = this.changeDate.bind(this);
   }
 
+  changeDate(date) {
+    this.setState({
+      date: this.props.product.Dates.find(item => item.id == date)
+    });
+  }
   getJalaliDate(date) {
     return this.getPersian(
       jMoment(new Date(date))
@@ -30,12 +36,13 @@ export default class Product extends Component {
 
   render() {
     const { product } = this.props;
+    const { date } = this.state;
     return (
       <div className="product-item-container d-flex flex-column justify-content-center align-items-center w-100">
         <div className="w-100">
           <img
             // src={product.image}
-            src={`https://picsum.photos/200/200`}
+            src={`/static/uploads/images/${product.image}`}
             alt={product.name + " image"}
             className="product-item-image"
             width="100%"
@@ -56,7 +63,7 @@ export default class Product extends Component {
                   style={{ transform: `scaleX(-1)` }}
                 ></i>
                 <span className="product-item-date mx-1 text-main">
-                  {this.getJalaliDate(product.Dates[0].start)}
+                  {this.getJalaliDate(date.start)}
                 </span>
               </div>
               <div>
@@ -65,7 +72,7 @@ export default class Product extends Component {
                   style={{ transform: `scaleX(-1)` }}
                 ></i>
                 <span className="product-item-date mx-1 text-main">
-                  {this.getJalaliDate(product.Dates[0].end)}
+                  {this.getJalaliDate(date.end)}
                 </span>
               </div>
             </div>
@@ -78,7 +85,8 @@ export default class Product extends Component {
                     return (
                       <li
                         key={index}
-                        className="m-0 list-group-item bg-transparent"
+                        className="m-0 list-group-item list-group-item-action"
+                        onMouseEnter={() => this.changeDate(item.id)}
                       >
                         {this.getJalaliDate(item.start)} -{" "}
                         {this.getJalaliDate(item.end)}
@@ -95,10 +103,7 @@ export default class Product extends Component {
               <div>
                 <i className="far fa-clock ml-2"></i>
                 <span className="ml-2">
-                  {this.getDuration(
-                    product.Dates[0].start,
-                    product.Dates[0].end
-                  )}
+                  {this.getDuration(date.start, date.end)}
                 </span>
                 <span className="mx-2">روز</span>
               </div>
@@ -116,8 +121,11 @@ export default class Product extends Component {
           <br />
           <div className="product-item-body-row product-item-description text-dark">
             <p className="text-muted">
-              ظرفیت باقیمانده{" "}
-              <span className="text-second">{this.getPersian(20)}</span> نفر
+              ظرفیت باقیمانده
+              <span className="text-second mx-2">
+                {this.getPersian(date.Capacity.count)}
+              </span>
+              نفر
             </p>
           </div>
           <br />
@@ -127,7 +135,7 @@ export default class Product extends Component {
                 <span className="text-muted">شروع از</span>
                 <div>
                   <strong className="text-main mx-2">
-                    {this.getPersian(product.price.toLocaleString())}
+                    {this.getPersian(date.price.toLocaleString())}
                   </strong>
                   <span className="text-muted mx-2">تومان </span>
                 </div>

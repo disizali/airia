@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Parents from "./Parents";
 import Category from "./Category";
-import Static from "./Static";
+// import Static from "./Static";
 import Actions from "./Actions";
 
 export class Tour extends Component {
@@ -36,7 +36,7 @@ export class Tour extends Component {
           subTab={subTab}
           changeSubTab={this.changeSubTab.bind(this)}
         />
-        <Static />
+        {/* <Static /> */}
         <Actions />
       </section>
     );

@@ -5,6 +5,7 @@ import axios from "axios";
 import Success from "../../../components/Payment/Success";
 import Failed from "../../../components/Payment/Failed";
 import Router from "next/router";
+import * as api from "../../../src/api";
 
 export class reserve extends Component {
   static contextType = UserContext;
@@ -14,13 +15,10 @@ export class reserve extends Component {
     if (query.Status == "NOK") {
       return { result: false };
     }
-    const { data } = await axios.post(
-      `http://localhost:3001/payment/reserve/verify`,
-      {
-        MerchantID: "xxx-xxxx-xxxxx-xxxx-xxx-xxxx-xxxx-xx",
-        Authority: query.Authority
-      }
-    );
+    const data = await api.verifyReservePayment({
+      MerchantID: "xxx-xxxx-xxxxx-xxxx-xxx-xxxx-xxxx-xx",
+      Authority: query.Authority
+    });
     if (data == "wrong data") {
       return { result: false };
     } else if (data == "verified") {

@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import axios from "axios";
 import validator from "validator";
 import UserContext from "../../UserContext";
 import Router from "next/router";
 import jsCookie from "js-cookie";
+import * as api from "../../../src/api";
 export default class Signup extends Component {
   static contextType = UserContext;
 
@@ -45,7 +45,7 @@ export default class Signup extends Component {
       repasswordResult &&
       rules
     ) {
-      const { data } = await axios.post("http://localhost:3001/register", {
+      const { data } = await api.register({
         email,
         phone,
         password
@@ -54,7 +54,7 @@ export default class Signup extends Component {
         return alert("ایمیل یا شماره قبلا استفاده شده است");
       }
       jsCookie.set("authtoken", data);
-      const { data: user } = await axios.get("http://localhost:3001/profile", {
+      const { data: user } = await api.getProfile({
         headers: { authorization: `Bearer ${data}` }
       });
       Router.push("/dashboard");

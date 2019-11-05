@@ -1,13 +1,46 @@
 const express = require("express");
 const { sequelize: db } = require("../../../models");
-const { Category, Parent, Tour, Detail, Date: Dates, Capacity } = db.models;
+const {
+  Category,
+  Parent,
+  Tour,
+  Detail,
+  Date: Dates,
+  Capacity,
+  Magazine
+} = db.models;
 const router = express.Router();
+
 router.get("/:id", async (req, res) => {
   res.json(
     await Tour.findByPk(req.params.id, {
+      attributes: { exclude: ["createdAt", "updatedAt"] },
       include: [
         { model: Detail, attributes: ["type", "data"] },
-        { model: Dates, include: [{ model: Capacity }] }
+        {
+          model: Dates,
+          attributes: { exclude: ["createdAt", "updatedAt", "TourId"] },
+          order: [["start", "ASC"]],
+          include: [
+            {
+              model: Capacity,
+              attributes: ["id", "count"]
+            }
+          ]
+        },
+        {
+          model: Magazine,
+          as: "Magazines",
+          attributes: ["id", "title", "cover"]
+        },
+        {
+          model: Category,
+          attributes: ["id"],
+          as: "Categories",
+          include: [
+            { model: Tour, as: "Tours", attributes: ["id", "name", "image"] }
+          ]
+        }
       ]
     })
   );
@@ -29,8 +62,10 @@ router.get("/", async (req, res) => {
               attributes: { exclude: ["createdAt", "updatedAt"] },
               orders: [["id", "ASC"]],
               include: [
+                { model: Detail, attributes: ["type", "data"] },
                 {
                   model: Dates,
+                  orders: [["start", "desc"]],
                   include: [{ model: Capacity, attributes: ["id", "count"] }]
                 }
               ]
@@ -41,5 +76,4 @@ router.get("/", async (req, res) => {
     })
   );
 });
-
 module.exports = router;

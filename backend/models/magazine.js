@@ -11,6 +11,10 @@ module.exports = (sequelize, DataTypes) => {
   );
   Magazine.associate = function(models) {
     Magazine.belongsToMany(models.Tag, { through: "magazine_tag" });
+    Magazine.belongsToMany(models.Tour, {
+      through: "magazine_tour",
+      as: "Tours"
+    });
   };
   return Magazine;
 };

@@ -22,7 +22,6 @@ export default class Category extends Component {
           index ===
           self.findIndex(t => t.place === item.place && t.name === item.name)
       ); // remove duplicates
-
       return tours;
     } else {
       const category = parent.Categories.find(item => item.id == subTab);

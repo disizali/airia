@@ -25,7 +25,11 @@ export class Gravity extends Component {
         className="box-container d-flex justify-content-start flex-column align-items-start w-100"
       >
         <h3 className="box-title pr-3">جاذبه های گردشگری</h3>
-        {this.props.gravity[0].data.slice(0, full ? -1 : 500) + "..."}
+        <div
+          dangerouslySetInnerHTML={{
+            __html: this.props.gravity[0].data.slice(0, full ? -1 : 500) + "..."
+          }}
+        ></div>
         <div
           className="gravity-overlay"
           style={{ display: overlay && !full ? "block" : "none" }}

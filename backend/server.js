@@ -14,12 +14,6 @@ const MAGAZINE_SERVICE = "http://localhost:3005";
 
 app.use(cors(corsOptions));
 app.use(express.json());
-
-app.use(async (req, res, next) => {
-  console.log(req.method, req.path);
-  next();
-});
-
 app.use(async (req, res, next) => {
   if (req.auth) {
     return next();
@@ -28,8 +22,7 @@ app.use(async (req, res, next) => {
     req.auth = false;
     return next();
   }
-  if (req.path == "/profile"){
-    
+  if (req.path == "/profile") {
   }
   const token = req.header("authorization").replace("Bearer ", "");
   if (token == "") {
@@ -54,11 +47,23 @@ app.get("/", async (req, res) => {
 });
 
 app.get("/tours", async (req, res) => {
-  const { data } = await axios.get(TOUR_SERVICE);
+  const { data } = await axios.get(`${TOUR_SERVICE}/tours`);
   res.send(data);
 });
 app.get("/tours/:id", async (req, res) => {
-  const { data } = await axios.get(`${TOUR_SERVICE}/${req.params.id}`);
+  const { data } = await axios.get(`${TOUR_SERVICE}/tours/${req.params.id}`);
+  res.send(data);
+});
+
+app.get("/categories", async (req, res) => {
+  const { data } = await axios.get(`${TOUR_SERVICE}/categories`);
+  res.send(data);
+});
+
+app.get("/categories/:id", async (req, res) => {
+  const { data } = await axios.get(
+    `${TOUR_SERVICE}/categories/${req.params.id}`
+  );
   res.send(data);
 });
 

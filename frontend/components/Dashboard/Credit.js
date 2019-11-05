@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { Container, Button } from "reactstrap";
 import axios from "axios";
 import UserContext from "../UserContext";
+import * as config from "../../src/config";
+import * as api from "../../src/api";
 
 export default class Credit extends Component {
   static contextType = UserContext;
@@ -35,10 +37,10 @@ export default class Credit extends Component {
   async goToPaymentPage() {
     const { user } = this.context;
     const { credit } = this.state;
-    const { data } = await axios.post("http://localhost:3001/payment/credit", {
+    const data = await api.makeCreditPayment({
       MerchantID: "xxx-xxxx-xxxxx-xxxx-xxx-xxxx-xxxx-xx",
       Amount: credit,
-      CallbackURL: `http://localhost:3000/dashboard/credit/result`,
+      CallbackURL: `${config.HOST}/dashboard/credit/result`,
       Description: `افزودن اعتبار`,
       UserId: user.id
     });

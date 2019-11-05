@@ -1,8 +1,10 @@
 const express = require("express");
 const router = express.Router();
 
-const categories = require("./tours");
+const tours = require("./tours");
+const categories = require("./categories");
 
-router.use("/", categories);
+router.use("/tours", tours);
+router.use("/categories", categories);
 
 module.exports = router;

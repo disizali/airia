@@ -13,22 +13,20 @@ import jMoment from "jalali-moment";
 import persianJs from "persianjs";
 import UserContext from "../UserContext";
 import Signin from "../Navbar/Auth/Signin";
-import axios from "axios";
+import * as config from "../../src/config";
+import * as api from "../../src/api";
 
 export class Overview extends Component {
   static contextType = UserContext;
   constructor(props) {
     super(props);
-    this.state = { selectedDate: 0, count: 1, modal: false };
+    this.state = { count: 1, modal: false };
     this.toggleModal = this.toggleModal.bind(this);
     this.getReserveButton = this.getReserveButton.bind(this);
     this.goToReservePage = this.goToReservePage.bind(this);
     this.handleCountChanges = this.handleCountChanges.bind(this);
   }
 
-  handleDateChanges(e) {
-    this.setState({ selectedDate: e.target.value });
-  }
   handleCountChanges(e) {
     const count = e.target.value;
     this.setState({ count: count > 20 ? 20 : count });
@@ -44,13 +42,11 @@ export class Overview extends Component {
   getDuration(startDate, endDate) {
     return this.getPersian(moment(endDate).diff(moment(startDate), "days") + 1);
   }
-
   getPersian(data) {
     return persianJs(data)
       .englishNumber()
       .toString();
   }
-
   toggleModal() {
     this.setState({ modal: !this.state.modal });
   }
@@ -94,17 +90,17 @@ export class Overview extends Component {
   }
 
   async goToReservePage() {
-    const { tour } = this.props;
+    const { tour, date } = this.props;
     const { user } = this.context;
-    const { selectedDate, count } = this.state;
-    const { data } = await axios.post("http://localhost:3001/payment/reserve", {
+    const { count } = this.state;
+    const data = await api.makeReservePayment({
       MerchantID: "xxx-xxxx-xxxxx-xxxx-xxx-xxxx-xxxx-xx",
-      Amount: tour.price * count,
+      Amount: date.price * count,
       count,
-      CallbackURL: `http://localhost:3000/product/${tour.id}/reserve`,
+      CallbackURL: `${config.HOST}/product/${tour.id}/reserve`,
       Description: `تور ${tour.name}`,
       UserId: user.id,
-      DateId: tour.Dates[selectedDate].id
+      DateId: date.id
     });
     if (data == "wrong data") {
       return alert("خطایی رخ داده است . هم اکنون در صدد رفع مشکل هستیم");
@@ -114,7 +110,7 @@ export class Overview extends Component {
     )}`;
   }
   render() {
-    const { tour } = this.props;
+    const { tour, date, changeDate } = this.props;
     const { selectedDate, count } = this.state;
     return (
       <div
@@ -142,7 +138,7 @@ export class Overview extends Component {
           <div className="product-order mt-2 d-flex flex-column rounded">
             <div className="product-price text-center d-flex flex-column align-items-center justify-content-center">
               <span>
-                شروع از <b>{tour.price.toLocaleString()}</b> تومان
+                شروع از <b>{date.price.toLocaleString()}</b> تومان
               </span>
               <p>قیمت بر اساس یک نفر در اتاق دو تخته محاسبه شده است</p>
             </div>
@@ -167,12 +163,12 @@ export class Overview extends Component {
                 >
                   <select
                     className="w-100 overview-input"
-                    value={selectedDate}
-                    onChange={this.handleDateChanges.bind(this)}
+                    value={date.id}
+                    onChange={changeDate.bind(this)}
                   >
                     {tour.Dates.map((item, index) => {
                       return (
-                        <option key={index} value={index}>
+                        <option key={index} value={item.id}>
                           {this.getJalaliDate(item.start)}
                           {` - `}
                           {this.getJalaliDate(item.end)}
@@ -205,7 +201,7 @@ export class Overview extends Component {
                     value={count}
                     onChange={this.handleCountChanges}
                     min={1}
-                    max={tour.Dates[selectedDate].Capacity.count}
+                    max={date.Capacity.count}
                   />
                 </Col>
               </Row>
@@ -213,7 +209,7 @@ export class Overview extends Component {
                 <span>
                   ظرفیت باقی مانده فقط
                   <strong className="text-danger mx-2">
-                    {this.getPersian(tour.Dates[selectedDate].Capacity.count)}
+                    {this.getPersian(date.Capacity.count)}
                   </strong>
                   <span>نفر</span>
                 </span>

@@ -23,7 +23,7 @@ export class Tabs extends Component {
     const { selected } = this.state;
     const tab = JSON.parse(tabs[selected].data);
     if (tab.type == "raw") {
-      return tab.body;
+      return <div dangerouslySetInnerHTML={{ __html: tab.body }} />;
     }
     if (tab.type == "list") {
       return (
@@ -34,7 +34,7 @@ export class Tabs extends Component {
               <li
                 className="d-flex flex-column"
                 key={index}
-                onClick={() => this.changeMode(index)}
+                onClick={() => (item.full ? this.changeMode(index) : "")}
               >
                 <div className="d-flex justify-content-between align-items-center">
                   <div className="d-flex align-items-center">
@@ -45,7 +45,16 @@ export class Tabs extends Component {
                     <span className="mx-2">:</span>
                     <span className="mx-2">{item.text}</span>
                   </div>
-                  <Button className="text-muted btn-link" color="light">
+                  <Button
+                    className="text-muted btn-link"
+                    color="light"
+                    style={{
+                      display:
+                        item.full != "" && item.full != undefined
+                          ? "inline-block"
+                          : "none"
+                    }}
+                  >
                     <span className="mx-2">{fullMode ? "بستن" : "بیشتر"}</span>
                     <i
                       className={`fas fa-sort-${fullMode ? "up" : "down"} mx-2`}

@@ -5,7 +5,7 @@ import Footer from "./Footer";
 import "../styles/index.scss";
 import UserContext from "./UserContext";
 
-import axios from "axios";
+import * as api from "../src/api";
 import jsCookie from "js-cookie";
 class Layout extends Component {
   static contextType = UserContext;
@@ -16,7 +16,7 @@ class Layout extends Component {
   async UNSAFE_componentWillMount() {
     const { logout } = this.context;
     const token = jsCookie.get("authtoken");
-    if (token == undefined){
+    if (token == undefined) {
       return logout();
     }
   }
@@ -24,10 +24,10 @@ class Layout extends Component {
   async checkAuth() {
     const { login, logout } = this.context;
     const token = jsCookie.get("authtoken");
-    if (token == undefined){
-      return ;
+    if (token == undefined) {
+      return;
     }
-    const { data: user } = await axios.get("http://localhost:3001/profile", {
+    const user = await api.getProfile({
       headers: { authorization: `Bearer ${token}` }
     });
     if (user == "unauthorized") {
@@ -52,9 +52,7 @@ class Layout extends Component {
           />
         </Head>
         <Navbar />
-        <div className="children">
-        {this.props.children}
-        </div>
+        <div className="children">{this.props.children}</div>
         <Footer />
       </main>
     );

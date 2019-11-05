@@ -5,21 +5,24 @@ module.exports = (sequelize, DataTypes) => {
     {
       name: DataTypes.STRING,
       image: DataTypes.STRING,
-      leader: DataTypes.STRING,
-      description: DataTypes.TEXT,
-      price: DataTypes.INTEGER
+      leader: DataTypes.STRING
     },
     {}
   );
   Tour.associate = function(models) {
     Tour.belongsToMany(models.Category, {
-      as: "Caregories",
+      as: "Categories",
       through: "CategoryTour"
     });
 
     Tour.hasMany(models.Detail);
 
     Tour.hasMany(models.Date);
+
+    Tour.belongsToMany(models.Magazine, {
+      through: "magazine_tour",
+      as: "Magazines"
+    });
   };
   return Tour;
 };

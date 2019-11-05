@@ -3,14 +3,12 @@ import Layout from "../components/Layout";
 import Splash from "../components/Splash";
 import Tour from "../components/Tabs/Tour";
 import Magazine from "../components/Tabs/Magazine";
-import axios from "axios";
+import * as api from "../src/api";
 
 export default class Index extends React.Component {
   static async getInitialProps(context) {
-    const { data: tours } = await axios.get("http://localhost:3001/tours");
-    const { data: magazine } = await axios.get(
-      "http://localhost:3001/magazine"
-    );
+    const tours = await api.getTours();
+    const magazine = await api.getMagazine();
     return { tours, magazine };
   }
   constructor(props) {

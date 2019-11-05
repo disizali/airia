@@ -4,19 +4,15 @@ import Layout from "../../components/Layout";
 import Archive from "../../components/Tabs/Magazine/Archive";
 import jMoment from "jalali-moment";
 import persianJs from "persianjs";
-
-import { Row, Container, Col } from "reactstrap";
+import * as api from "../../src/api";
+import { Row, Col } from "reactstrap";
 export class Mag extends Component {
   static async getInitialProps(context) {
     const {
       query: { id }
     } = context;
-    const { data: post } = await axios.get(
-      `http://localhost:3001/magazine/${id}`
-    );
-    const { data: magazine } = await axios.get(
-      `http://localhost:3001/magazine`
-    );
+    const magazine = await api.getMagazine();
+    const post = magazine.find(item => item.id == id);
     return { post, magazine };
   }
   noPost() {
@@ -62,7 +58,9 @@ export class Mag extends Component {
                   {this.getJalaliDate(post.createdAt)}
                 </span>
                 <span> - </span>
-                <span className="badge bg-primary text-light">{post.Tags[0].name}</span>
+                <span className="badge bg-primary text-light">
+                  {post.Tags[0].name}
+                </span>
                 <hr className="mx-2" />
                 <div
                   className="m-3"

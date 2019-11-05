@@ -4,7 +4,14 @@ module.exports = (sequelize, DataTypes) => {
     "Date",
     {
       start: DataTypes.DATE,
-      end: DataTypes.DATE
+      end: DataTypes.DATE,
+      origin: DataTypes.TEXT,
+      destination: DataTypes.TEXT,
+      departure: DataTypes.TEXT,
+      arrival: DataTypes.TEXT,
+      out: DataTypes.TEXT,
+      in: DataTypes.TEXT,
+      price: DataTypes.INTEGER
     },
     {}
   );

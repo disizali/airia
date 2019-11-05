@@ -4,6 +4,7 @@ import validator from "validator";
 import Router from "next/router";
 import jsCookie from "js-cookie";
 import UserContext from "../../UserContext";
+import * as api from "../../../src/api";
 
 export default class Signin extends Component {
   static contextType = UserContext;
@@ -26,20 +27,17 @@ export default class Signin extends Component {
       validator.isEmail(username) || validator.isNumeric(username);
     const passwordResult = !validator.isEmpty(password) && password.length >= 8;
     if (usernameResult && passwordResult) {
-      const { data } = await axios.post("http://localhost:3001/login", {
+      const data = await api.login({
         username,
         password
       });
       if (data == "login failed") {
         alert("login failed");
       } else {
-        const { data: user } = await axios.get(
-          "http://localhost:3001/profile",
-          {
-            headers: { authorization: `Bearer ${data}` }
-          }
-        );
         jsCookie.set("authtoken", data);
+        const { data: user } = await api.getProfile({
+          headers: { authorization: `Bearer ${data}` }
+        });
         login(user);
         popup && toggleModal();
       }

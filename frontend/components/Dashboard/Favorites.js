@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { Container, Button, Table } from "reactstrap";
 import UserContext from "../UserContext";
-import axios from "axios";
+import * as api from "../../src/api";
+
 import { Card } from "reactstrap";
 export default class Favorites extends Component {
   static contextType = UserContext;
@@ -21,15 +22,13 @@ export default class Favorites extends Component {
     updateUser(newUser);
     this.setState({ changed: true });
   }
-
   saveFavorites() {
     const {
       user: { Favorite: favorite }
     } = this.context;
-    axios.put("http://localhost:3001/favorites", { ...favorite });
+    api.makeCreditPayment(favorite);
     this.setState({ changed: false });
   }
-
   render() {
     const {
       user: {

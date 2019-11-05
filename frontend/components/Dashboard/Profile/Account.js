@@ -3,6 +3,7 @@ import { Container, Row, Col, Table } from "reactstrap";
 import axios from "axios";
 import jsCookie from "js-cookie";
 import UserContext from "../../UserContext";
+import * as api from "../../../src/api";
 export default class Account extends Component {
   static contextType = UserContext;
   constructor(props) {
@@ -23,12 +24,11 @@ export default class Account extends Component {
     const token = jsCookie.get("authtoken");
     let profile = this.state;
     delete profile.editable;
-    const { data } = await axios.put("http://localhost:3001/profile", profile, {
+    const data = await api.updateProfile(profile, {
       headers: {
         authorization: `Bearer ${token}`
       }
     });
-
     const newUser = {
       ...user,
       Profile: { ...user.Profile, ...profile }

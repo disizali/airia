@@ -5,6 +5,7 @@ import axios from "axios";
 import Success from "../../../components/Payment/Success";
 import Failed from "../../../components/Payment/Failed";
 import Router from "next/router";
+import * as api from "../../../src/api";
 
 export default class Credit extends Component {
   static contextType = UserContext;
@@ -33,8 +34,8 @@ export default class Credit extends Component {
     }
 
     if (checked == 0) {
-      axios
-        .post(`http://localhost:3001/payment/credit/verify`, {
+      api
+        .verifyCreditPayment({
           MerchantID: "xxx-xxxx-xxxxx-xxxx-xxx-xxxx-xxxx-xx",
           Authority: authority
         })
