@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Layout from "../../components/Layout";
-import Dashboard from "../../components/Dashboard";
+import Dashboard from "../../components/Dashboard/Index";
 import UserContext from "../../components/UserContext";
 import Router from "next/router";
 
