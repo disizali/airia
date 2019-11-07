@@ -11,9 +11,9 @@ export class Tabs extends Component {
     const { logout } = this.context;
     return (
       <Container className="rtl my-3">
-        <Row className="bg-white shadow py-4 rounded justify-content-start text-center">
+        <Row className="bg-white shadow py-4 rounded justify-content-start text-right text-md-center">
           <Col
-            className={`border-left dashboard-tab ${tab == "profile" && `active`}`}
+            className={`my-2 my-md-0 border-left dashboard-tab ${tab == "profile" && `active`}`}
             onClick={() => changeTab("profile")}
             sm={2}
           >
@@ -22,7 +22,7 @@ export class Tabs extends Component {
           </Col>
           <Col
             sm={2}
-            className={`border-left dashboard-tab ${tab == "credit" && `active`}`}
+            className={`my-2 my-md-0 border-left dashboard-tab ${tab == "credit" && `active`}`}
             onClick={() => changeTab("credit")}
           >
             <i className="fad fa-wallet mx-2"></i>
@@ -30,7 +30,7 @@ export class Tabs extends Component {
           </Col>
           <Col
             sm={2}
-            className={`border-left dashboard-tab ${tab == "favorites" && `active`}`}
+            className={`my-2 my-md-0 border-left dashboard-tab ${tab == "favorites" && `active`}`}
             onClick={() => changeTab("favorites")}
           >
             <i className="fad fa-heart mx-2"></i>
@@ -38,7 +38,7 @@ export class Tabs extends Component {
           </Col>
           <Col
             sm={2}
-            className={` dashboard-tab ${tab == "history" && `active`}`}
+            className={`my-2 my-md-0 dashboard-tab ${tab == "history" && `active`}`}
             onClick={() => changeTab("history")}
           >
             <i className="fad fa-history mx-2"></i>

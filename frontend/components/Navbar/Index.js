@@ -10,6 +10,7 @@ import {
 } from "reactstrap";
 import Auth from "./Auth/Index";
 import Contact from "./Contact";
+import Access from "./Access";
 import UserContext from "../UserContext";
 
 class NavbarClass extends React.Component {
@@ -18,13 +19,16 @@ class NavbarClass extends React.Component {
     super(props);
     this.authFormToggle = this.authFormToggle.bind(this);
     this.contactToggle = this.contactToggle.bind(this);
+    this.accessToggle = this.accessToggle.bind(this);
+
     this.getControlPanel = this.getControlPanel.bind(this);
     this.collapseToggle = this.collapseToggle.bind(this);
 
     this.state = {
       collapsed: true,
       authOpen: false,
-      contactOpen: false
+      contactOpen: false,
+      accessOpen: false
     };
   }
 
@@ -42,13 +46,21 @@ class NavbarClass extends React.Component {
   contactToggle() {
     this.setState({
       contactOpen: !this.state.contactOpen,
-      authOpen: this.state.authOpen && !this.state.authOpen
+      authOpen: this.state.authOpen && !this.state.authOpen,
+      accessOpen: this.state.accessOpen && !this.state.accessOpen,
+    });
+  }
+
+  accessToggle() {
+    this.setState({
+      accessOpen: !this.state.accessOpen,
+      contactOpen: this.state.contactOpen && !this.state.contactOpen
     });
   }
 
   getControlPanel() {
     const { user, status } = this.context;
-    const { authOpen, contactOpen } = this.state;
+    const { authOpen, accessOpen } = this.state;
     let profile = {};
     if (user != null) {
       profile = user.Profile;
@@ -59,7 +71,7 @@ class NavbarClass extends React.Component {
       case 1:
         return (
           <NavItem>
-            <NavLink href="/dashboard">
+            <NavLink href="#" onClick={this.accessToggle}>
               <img
                 src="/static/icons/user-circle.svg"
                 className="flat-icon mini-icon mx-2 d-inline-block"
@@ -67,7 +79,13 @@ class NavbarClass extends React.Component {
               <span className="mx-2">
                 {profile.name || "مدیریت"} {profile.family || "حساب"}
               </span>
+              <i
+                className={`fas fa-sort-down mx-2 arrow ${
+                  accessOpen ? "arrow-up" : ""
+                }`}
+              ></i>
             </NavLink>
+            <Access accessOpen={accessOpen} />
           </NavItem>
         );
       case -1:

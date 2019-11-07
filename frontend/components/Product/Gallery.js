@@ -1,19 +1,48 @@
 import React, { Component } from "react";
 import { Row, Col } from "reactstrap";
-export class Gallery extends Component {
+export default class Gallery extends Component {
   constructor(props) {
     super(props);
     const images = JSON.parse(props.images[0].data);
     this.state = {
       cover: images[0],
+      selectedImage: 0,
       images
     };
-    console.log(images);
     this.changeImage = this.changeImage.bind(this);
   }
-  changeImage(cover) {
-    this.setState({ cover });
+  changeImage(index) {
+    this.setState({ cover: this.state.images[index], selectedImage: index });
   }
+  navigate(e) {
+    const { images, selectedImage } = this.state;
+    if (e.target.classList[1] == "btn-forward") {
+      if (selectedImage < images.length - 1) {
+        this.setState({
+          selectedImage: selectedImage + 1,
+          cover: images[selectedImage + 1]
+        });
+      } else {
+        this.setState({
+          selectedImage: 0,
+          cover: images[0]
+        });
+      }
+    } else {
+      if (selectedImage == 0) {
+        this.setState({
+          selectedImage: images.length - 1,
+          cover: images[images.length - 1]
+        });
+      } else {
+        this.setState({
+          selectedImage: selectedImage - 1,
+          cover: images[selectedImage - 1]
+        });
+      }
+    }
+  }
+
   render() {
     const { cover, images } = this.state;
     const { date } = this.props;
@@ -24,11 +53,28 @@ export class Gallery extends Component {
         className="box-container d-flex justify-content-start flex-column align-items-start w-100 h-100"
       >
         <h3 className="box-title pr-3">پیش نمایش </h3>
-        <img
-          src={`/static/uploads/images/${cover}`}
-          width="100%"
-          className="rounded bg-danger"
-        />
+        <div className="d-inline-block position-relative">
+          <img
+            src={`/static/uploads/images/${cover}`}
+            width="100%"
+            className="rounded bg-danger"
+          />
+          <div className="bg-white shadow p-2 d-flex navigation-container align-items-center">
+            <button
+              className="btn-navigate btn-forward mx-2"
+              onClick={this.navigate.bind(this)}
+            >
+              &lt;
+            </button>
+            <div className="navigation-splitter"></div>
+            <button
+              className="btn-navigate btn-backward mx-2"
+              onClick={this.navigate.bind(this)}
+            >
+              &gt;
+            </button>
+          </div>
+        </div>
         <Row className="my-2 py-2 ltr gallery-row">
           <Col className="gallery-item">
             <img
@@ -45,7 +91,7 @@ export class Gallery extends Component {
                   src={`/static/uploads/images/${item}`}
                   className="rounded"
                   width="100%"
-                  onClick={() => this.changeImage(item)}
+                  onClick={() => this.changeImage(index+1)}
                 />
               </Col>
             );
@@ -87,5 +133,3 @@ export class Gallery extends Component {
     );
   }
 }
-
-export default Gallery;

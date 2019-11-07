@@ -6,7 +6,7 @@ export class Contact extends Component {
     const { contactOpen } = this.props;
     return (
       <div
-        className={`d-flex justify-content-center align-items-center ltr flex-column contact-panel ${
+        className={`contact-panel d-flex justify-content-center align-items-center ltr flex-column ${
           contactOpen ? "open" : ""
         }`}
       >

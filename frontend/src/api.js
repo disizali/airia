@@ -38,13 +38,21 @@ export async function getProfile(data) {
   return profile;
 }
 
-export async function updateProfile(data) {
-  const { data: result } = await axios.put(`${api}/profile`, { ...data });
+export async function updateProfile(data, headers) {
+  const { data: result } = await axios.put(
+    `${api}/profile`,
+    { ...data },
+    headers
+  );
   return result;
 }
 
-export async function updateFavorites(data) {
-  const { data: result } = await axios.put(`${api}/favorites`, { ...data });
+export async function updateFavorites(data, headers) {
+  const { data: result } = await axios.put(
+    `${api}/favorites`,
+    { ...data },
+    headers
+  );
   return result;
 }
 
@@ -79,4 +87,14 @@ export async function login(data) {
 export async function register(data) {
   const { data: token } = await axios.post(`${api}/register`, data);
   return token;
+}
+
+export async function search(query) {
+  const { data: tours } = await axios.get(
+    `${api}/tours/search/${encodeURI(query)}`
+  );
+  const { data: magazines } = await axios.get(
+    `${api}/magazine/search/${encodeURI(query)}`
+  );
+  return { tours, magazines };
 }

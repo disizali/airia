@@ -72,7 +72,7 @@ export class Auth extends Component {
                   />
                 </Col>
                 <Col sm={12} className="my-1">
-                  <span>با تلفن</span>
+                  <span>با موبایل</span>
                 </Col>
               </Row>
             </Col>

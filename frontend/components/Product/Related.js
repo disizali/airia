@@ -18,7 +18,7 @@ export default class Related extends Component {
         <Row className="related-magazines-container">
           {related.map((item, index) => {
             return (
-              <Col sm={6} className="related-magazine h-100" key={index}>
+              <Col sm={6} className="related-magazine m-1 m-md-0" key={index}>
                 <div className="h-100">
                   <Link href={`/product/${item.id}`}>
                     <a>

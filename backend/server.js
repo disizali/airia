@@ -15,14 +15,9 @@ const MAGAZINE_SERVICE = "http://localhost:3005";
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(async (req, res, next) => {
-  if (req.auth) {
-    return next();
-  }
   if (req.header("authorization") == undefined) {
     req.auth = false;
     return next();
-  }
-  if (req.path == "/profile") {
   }
   const token = req.header("authorization").replace("Bearer ", "");
   if (token == "") {
@@ -52,6 +47,12 @@ app.get("/tours", async (req, res) => {
 });
 app.get("/tours/:id", async (req, res) => {
   const { data } = await axios.get(`${TOUR_SERVICE}/tours/${req.params.id}`);
+  res.send(data);
+});
+app.get("/tours/search/:query", async (req, res) => {
+  const { data } = await axios.get(
+    `${TOUR_SERVICE}/tours/search/${encodeURI(req.params.query)}`
+  );
   res.send(data);
 });
 
@@ -89,6 +90,7 @@ app.get("/profile", async (req, res) => {
 });
 
 app.put("/profile", async (req, res) => {
+  console.log(req.auth);
   const { data } = await axios.put(`${USER_SERVICE}/profile`, {
     id: req.user.id,
     ...req.body
@@ -136,6 +138,13 @@ app.get("/magazine/:id", async (req, res) => {
   const { data } = await axios.get(
     `${MAGAZINE_SERVICE}/${req.params.id}`,
     req.body
+  );
+  res.send(data);
+});
+
+app.get("/magazine/search/:query", async (req, res) => {
+  const { data } = await axios.get(
+    `${MAGAZINE_SERVICE}/search/${encodeURI(req.params.query)}`
   );
   res.send(data);
 });

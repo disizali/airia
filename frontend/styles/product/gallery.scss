@@ -6,3 +6,27 @@
     }
   }
 }
+.navigation-container {
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+  .navigation-splitter {
+    background: #f1f1f1;
+    width: 1px;
+    height: 100%;
+    position: absolute;
+    left: 50%;
+    top: 25%;
+    height: 50%;
+  }
+}
+.btn-navigate {
+  color: #b3b3b3;
+  width: 30px;
+  height: 30px;
+  background: white;
+  border: none;
+  &:focus {
+    outline: none;
+  }
+}

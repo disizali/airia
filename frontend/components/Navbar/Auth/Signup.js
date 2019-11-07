@@ -45,16 +45,17 @@ export default class Signup extends Component {
       repasswordResult &&
       rules
     ) {
-      const { data } = await api.register({
+      const data = await api.register({
         email,
         phone,
-        password
+        password,
+        inviter: jsCookie.get("referral") || 0
       });
       if (data == "duplicate") {
         return alert("ایمیل یا شماره قبلا استفاده شده است");
       }
       jsCookie.set("authtoken", data);
-      const { data: user } = await api.getProfile({
+      const user = await api.getProfile({
         headers: { authorization: `Bearer ${data}` }
       });
       Router.push("/dashboard");
@@ -79,7 +80,7 @@ export default class Signup extends Component {
           value={this.state.email}
           onChange={this.textChangeHandler}
           className="form-control my-2"
-          placeholder="* ایمیل / نام کاربری"
+          placeholder="* ایمیل"
         />
         <input
           type="text"
@@ -87,7 +88,7 @@ export default class Signup extends Component {
           value={this.state.phone}
           onChange={this.textChangeHandler}
           className="form-control my-2"
-          placeholder="* شماره تلفن"
+          placeholder="* شماره موبایل"
         />
         <input
           type="password"

@@ -4,7 +4,8 @@ module.exports = (sequelize, DataTypes) => {
     "Profile",
     {
       name: DataTypes.STRING,
-      family: DataTypes.STRING
+      family: DataTypes.STRING,
+      cardNumber: DataTypes.STRING
     },
     {}
   );

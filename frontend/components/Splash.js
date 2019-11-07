@@ -1,10 +1,13 @@
 import { Component } from "react";
 import { Row, Col, Button, Container } from "reactstrap";
+import Link from "next/link";
 import Icon from "./Icons/Index";
 export class Splash extends Component {
   constructor(props) {
     super(props);
     this.getTabName = this.getTabName.bind(this);
+    this.handleQueryChanges = this.handleQueryChanges.bind(this);
+    this.state = { searchQuery: "" };
   }
 
   getTabName() {
@@ -18,8 +21,12 @@ export class Splash extends Component {
     }
   }
 
+  handleQueryChanges(e) {
+    this.setState({ searchQuery: e.target.value });
+  }
   render() {
     const { tab, changeTab } = this.props;
+    const { searchQuery } = this.state;
     return (
       <section className="splash">
         <div
@@ -84,7 +91,6 @@ export class Splash extends Component {
               </div>
             </Col>
           </Row>
-
           <Container className="w-100 search-panel d-none d-md-inline-block">
             <Row className="h-100">
               <Col sm={10}>
@@ -94,10 +100,16 @@ export class Splash extends Component {
                   id="search"
                   className="text-box px-5"
                   placeholder="دنبال چه چیزی میگردید ؟ ..."
+                  value={searchQuery}
+                  onChange={this.handleQueryChanges}
                 />
               </Col>
               <Col sm={2}>
-                <Button className="search-button h-100">جستجو</Button>
+                <Link href={searchQuery ? `/search?query=${searchQuery}` : "/"}>
+                  <a>
+                    <Button className="search-button h-100">جستجو</Button>
+                  </a>
+                </Link>
               </Col>
             </Row>
           </Container>

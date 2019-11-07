@@ -8,7 +8,7 @@ export class Mobile extends Component {
           type="number"
           name="number"
           className="form-control my-2"
-          placeholder="شماره تلفن"
+          placeholder="شماره موبایل"
         />
         <button className="btn btn-primary form-control rounded my-2">
           ورود

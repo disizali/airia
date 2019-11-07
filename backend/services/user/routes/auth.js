@@ -47,7 +47,8 @@ router.post("/register", async (req, res) => {
     email: Joi.string()
       .email({ minDomainAtoms: 2 })
       .required(),
-    phone: Joi.number().required()
+    phone: Joi.number().required(),
+    inviter: Joi.number()
   });
 
   const { error } = Joi.validate(req.body, schema);

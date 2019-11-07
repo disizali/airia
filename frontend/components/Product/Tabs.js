@@ -38,7 +38,7 @@ export class Tabs extends Component {
               >
                 <div className="d-flex justify-content-between align-items-center">
                   <div className="d-flex align-items-center">
-                    <strong className="d-flex justify-content-center align-items-center shadow">
+                    <strong className="d-flex justify-content-center align-items-center shadow px-2 py-1">
                       {index + 1}
                     </strong>
                     <b className="mx-2">{item.title}</b>

@@ -24,11 +24,14 @@ export default class Account extends Component {
     const token = jsCookie.get("authtoken");
     let profile = this.state;
     delete profile.editable;
-    const data = await api.updateProfile(profile, {
-      headers: {
-        authorization: `Bearer ${token}`
+    const data = await api.updateProfile(
+      { ...profile, id: user.id },
+      {
+        headers: {
+          authorization: `Bearer ${token}`
+        }
       }
-    });
+    );
     const newUser = {
       ...user,
       Profile: { ...user.Profile, ...profile }
@@ -45,7 +48,7 @@ export default class Account extends Component {
     } = this.context;
 
     return (
-      <Container className="bg-white rounded w-100 my-3 shadow text-right rtl p-4 h-100">
+      <div className="bg-white rounded w-100 shadow text-right rtl p-4 h-100">
         <div className="d-flex justify-content-between">
           <h5>
             <i className="fal fa-user text-second mx-2"></i>
@@ -105,6 +108,28 @@ export default class Account extends Component {
                   )}
                 </td>
               </tr>
+              <tr>
+                <td className="text-muted">◗</td>
+                <td>شماره کارت</td>
+                <td>
+                  {editable ? (
+                    <input
+                      type="text"
+                      name="cardNumber"
+                      defaultValue={this.state.cardNumber || profile.cardNumber}
+                      onChange={this.changeTextHandler}
+                      placeholder="شماره کارت خود را وارد کنید"
+                      className="form-control"
+                    />
+                  ) : profile.cardNumber ? (
+                    <span>{this.state.cardNumber || profile.cardNumber}</span>
+                  ) : (
+                    <span className="text-muted" onClick={this.changeEditable}>
+                      شما هنوز شماره کارت خود را وارد نکرده اید
+                    </span>
+                  )}
+                </td>
+              </tr>
             </tbody>
           </Table>
         </div>
@@ -115,7 +140,7 @@ export default class Account extends Component {
             </button>
           </div>
         )}
-      </Container>
+      </div>
     );
   }
 }

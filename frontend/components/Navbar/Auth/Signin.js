@@ -10,7 +10,7 @@ export default class Signin extends Component {
   static contextType = UserContext;
   constructor(props) {
     super(props);
-    this.state = { username: "a.hassssani@gmail.com", password: "123456789" };
+    this.state = { username: "", password: "" };
     this.signIn = this.signIn.bind(this);
     this.textChangeHandler = this.textChangeHandler.bind(this);
   }
@@ -35,7 +35,7 @@ export default class Signin extends Component {
         alert("login failed");
       } else {
         jsCookie.set("authtoken", data);
-        const { data: user } = await api.getProfile({
+        const user = await api.getProfile({
           headers: { authorization: `Bearer ${data}` }
         });
         login(user);
@@ -54,7 +54,7 @@ export default class Signin extends Component {
           value={this.state.username}
           onChange={this.textChangeHandler}
           className="form-control my-2"
-          placeholder="ایمیل / شماره تلفن"
+          placeholder="ایمیل / شماره موبایل"
         />
         <input
           type="password"

@@ -29,7 +29,7 @@ export default class Product extends Component {
     tour.tabs = tour.Details.filter(item => item.type == 6);
     tour.pdf = tour.Details.find(item => item.type == 7);
     tour.map = tour.Details.find(item => item.type == 8);
-    
+
     const related = tour.Categories.map(category => {
       return category.Tours.map(tour => {
         return { id: tour.id, name: tour.name, image: tour.image };
@@ -62,31 +62,31 @@ export default class Product extends Component {
         <Container className="py-3 rtl text-right">
           <Title tour={tour} />
           <Row className="mt-3">
-            <Col sm={12} md={8} className="pl-2 pr-0">
+            <Col sm={12} md={8} className="p-3 p-md-0 pl-md-2">
               <Gallery images={tour.images} date={date} />
             </Col>
-            <Col sm={22} md={4} className="pl-0 pr-2">
+            <Col sm={22} md={4} className="p-3 p-md-0 pr-md-2">
               <Overview tour={tour} date={date} changeDate={this.changeDate} />
             </Col>
           </Row>
-          <Row className="my-5">
+          <Row className="my-3 my-md-5 p-3 p-md-0">
             <Gravity gravity={tour.gravity} />
           </Row>
-          <Row>
+          <Row className="my-3 my-md-5 p-3 p-md-0">
             <Details details={tour.details} />
           </Row>
-          <Row className="my-5">
-            <Col sm={12} md={8} className="pl-2 pr-0">
+          <Row className="my-3 my-md-5">
+            <Col sm={12} md={8} className="p-3 p-md-0 pl-md-2">
               <Glance glance={tour.glance} />
             </Col>
-            <Col sm={12} md={4} className="pl-0 pr-2">
+            <Col sm={12} md={4} className="p-3 p-md-0 pr-md-2">
               <Map pdf={tour.pdf.data} map={tour.map.data} />
             </Col>
           </Row>
-          <Row className="my-5">
+          <Row className="my-3 my-md-5 p-3 p-md-0">
             <Tabs tabs={tour.tabs} />
           </Row>
-          <Row className="my-5">
+          <Row className="my-3 my-md-5 p-3 p-md-0">
             <Col
               className="pr-0 pl-2"
               style={{

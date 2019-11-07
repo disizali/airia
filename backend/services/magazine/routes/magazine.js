@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const { sequelize: db } = require("../../../models");
+const { sequelize: db, Sequelize } = require("../../../models");
 const { Magazine, Tag } = db.models;
-
+const {Op} = Sequelize;
 router.get("/", async (req, res) => {
   res.send(
     await Magazine.findAll({
@@ -16,6 +16,19 @@ router.get("/:id", async (req, res) => {
     await Magazine.findOne({
       where: { id: req.params.id },
       include: [{ model: Tag }]
+    })
+  );
+});
+router.get("/search/:query", async (req, res) => {
+  res.send(
+    await Magazine.findAll({
+      where: {
+        [Op.or]: [
+          { title: { [Op.like]: `%${req.params.query}%` } },
+          { body: { [Op.like]: `%${req.params.query}%` } }
+        ]
+      },
+      attributes: ["id", "title", "cover"]
     })
   );
 });

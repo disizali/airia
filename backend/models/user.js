@@ -5,7 +5,8 @@ module.exports = (sequelize, DataTypes) => {
     {
       email: DataTypes.STRING,
       phone: DataTypes.TEXT,
-      password: DataTypes.TEXT
+      password: DataTypes.TEXT,
+      inviter: DataTypes.INTEGER
     },
     {
       hooks: {

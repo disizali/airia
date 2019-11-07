@@ -54,7 +54,7 @@ export default class Credit extends Component {
 
   render() {
     return (
-      <Container className="bg-white rounded w-100 my-3 shadow text-right rtl p-4">
+      <Container className="bg-white rounded w-100 shadow text-right rtl p-4">
         <div className="d-flex justify-content-between">
           <h5>
             <i className="fal fa-wallet text-second mx-2"></i>
@@ -68,7 +68,7 @@ export default class Credit extends Component {
             <span className="text-muted mx-2">تومان</span>
           </div>
         </div>
-        <div className="d-flex justify-content-between">
+        <div className="d-flex justify-content-between flex-column flex-md-row">
           <div className="text-muted my-5">
             با شارژ موجودی حساب خود می‌توانید با سرعت و سهولت بیشتری خرید کنید.
           </div>

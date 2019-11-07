@@ -20,7 +20,8 @@ class Layout extends Component {
       return logout();
     }
   }
-
+ 
+  
   async checkAuth() {
     const { login, logout } = this.context;
     const token = jsCookie.get("authtoken");

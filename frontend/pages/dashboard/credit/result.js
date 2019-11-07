@@ -32,7 +32,6 @@ export default class Credit extends Component {
     if (checked == -1) {
       return <Failed />;
     }
-
     if (checked == 0) {
       api
         .verifyCreditPayment({

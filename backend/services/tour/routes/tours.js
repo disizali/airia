@@ -1,5 +1,5 @@
 const express = require("express");
-const { sequelize: db } = require("../../../models");
+const { sequelize: db, Sequelize } = require("../../../models");
 const {
   Category,
   Parent,
@@ -10,7 +10,7 @@ const {
   Magazine
 } = db.models;
 const router = express.Router();
-
+const { Op } = Sequelize;
 router.get("/:id", async (req, res) => {
   res.json(
     await Tour.findByPk(req.params.id, {
@@ -76,4 +76,16 @@ router.get("/", async (req, res) => {
     })
   );
 });
+
+router.get("/search/:query", async (req, res) => {
+  res.send(
+    await Tour.findAll({
+      where: {
+        [Op.or]: [{ name: { [Op.like]: `%${req.params.query}%` } }]
+      },
+      attributes: ["id", "name", "image"]
+    })
+  );
+});
+
 module.exports = router;
