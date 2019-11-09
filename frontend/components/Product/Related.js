@@ -7,7 +7,7 @@ export default class Related extends Component {
     super(props);
   }
   render() {
-    const { related } = this.props;
+    const { related, magazines } = this.props;
     return (
       <div
         sm={12}
@@ -18,11 +18,19 @@ export default class Related extends Component {
         <Row className="related-magazines-container">
           {related.map((item, index) => {
             return (
-              <Col sm={6} className="related-magazine m-1 m-md-0" key={index}>
+              <Col
+                sm={magazines ? 4 : 2}
+                className="related-magazine m-1 m-md-0"
+                key={index}
+              >
                 <div className="h-100">
                   <Link href={`/product/${item.id}`}>
                     <a>
-                      <img src={item.image} width="100%" className="rounded" />
+                      <img
+                        src={"/static/uploads/images/" + item.image}
+                        width="100%"
+                        className="rounded"
+                      />
                       <p className="m-2">تور {item.name}</p>
                     </a>
                   </Link>

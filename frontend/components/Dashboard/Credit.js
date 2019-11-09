@@ -24,9 +24,9 @@ export default class Credit extends Component {
     if (user != null) {
       const credits = user.Credits;
       const total = credits.reduce((total, currentValue, currentIndex) => {
-        if (currentValue.type) {
+        if (currentValue.type == 1) {
           return +total + +currentValue.amount;
-        } else if (!currentValue.type) {
+        } else if (currentValue.type == -1) {
           return +total - +currentValue.amount;
         }
       }, 0);
@@ -54,7 +54,7 @@ export default class Credit extends Component {
 
   render() {
     return (
-      <Container className="bg-white rounded w-100 shadow text-right rtl p-4">
+      <Container className="bg-white rounded w-100 shadow text-right rtl my-3 p-4">
         <div className="d-flex justify-content-between">
           <h5>
             <i className="fal fa-wallet text-second mx-2"></i>

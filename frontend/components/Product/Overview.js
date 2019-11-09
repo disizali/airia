@@ -11,10 +11,12 @@ import {
 import moment from "moment";
 import jMoment from "jalali-moment";
 import persianJs from "persianjs";
+import jsCookie from "js-cookie";
 import UserContext from "../UserContext";
 import Signin from "../Navbar/Auth/Signin";
 import * as config from "../../src/config";
 import * as api from "../../src/api";
+import Router from "next/router";
 
 export class Overview extends Component {
   static contextType = UserContext;
@@ -93,17 +95,27 @@ export class Overview extends Component {
     const { tour, date } = this.props;
     const { user } = this.context;
     const { count } = this.state;
-    const data = await api.makeReservePayment({
-      MerchantID: "xxx-xxxx-xxxxx-xxxx-xxx-xxxx-xxxx-xx",
-      Amount: date.price * count,
-      count,
-      CallbackURL: `${config.HOST}/product/${tour.id}/reserve`,
-      Description: `تور ${tour.name}`,
-      UserId: user.id,
-      DateId: date.id
-    });
+    const data = await api.makeReservePayment(
+      {
+        MerchantID: "xxx-xxxx-xxxxx-xxxx-xxx-xxxx-xxxx-xx",
+        Amount: date.price * count,
+        count,
+        CallbackURL: `${config.HOST}/product/${tour.id}/reserve`,
+        Description: `تور ${tour.name}`,
+        UserId: user.id,
+        DateId: date.id
+      },
+      {
+        headers: {
+          authorization: `Bearer ${jsCookie.get("authtoken")}`
+        }
+      }
+    );
     if (data == "wrong data") {
       return alert("خطایی رخ داده است . هم اکنون در صدد رفع مشکل هستیم");
+    } else if (data == "credit decrease") {
+      alert("مبلغ از کیف پول شما کسر و تور برای شما رزرو شد");
+      return Router.push("/dashboard/history");
     }
     window.location.href = `https://sandbox.zarinpal.com/pg/transaction/pay/${Number(
       data.Authority
@@ -111,7 +123,7 @@ export class Overview extends Component {
   }
   render() {
     const { tour, date, changeDate } = this.props;
-    const { selectedDate, count } = this.state;
+    const { count } = this.state;
     return (
       <div
         sm={12}
@@ -138,7 +150,8 @@ export class Overview extends Component {
           <div className="product-order mt-2 d-flex flex-column rounded">
             <div className="product-price text-center d-flex flex-column align-items-center justify-content-center">
               <span>
-                شروع از <b>{date.price.toLocaleString()}</b> تومان
+                شروع از <b>{this.getPersian(date.price.toLocaleString())}</b>{" "}
+                تومان
               </span>
               <p>قیمت بر اساس یک نفر در اتاق دو تخته محاسبه شده است</p>
             </div>

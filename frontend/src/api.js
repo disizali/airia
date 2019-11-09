@@ -56,8 +56,8 @@ export async function updateFavorites(data, headers) {
   return result;
 }
 
-export async function makeReservePayment(data) {
-  const { data: reserve } = await axios.post(`${api}/payment/reserve`, data);
+export async function makeReservePayment(data,headers) {
+  const { data: reserve } = await axios.post(`${api}/payment/reserve`, data , headers);
   return reserve;
 }
 export async function verifyReservePayment(data) {

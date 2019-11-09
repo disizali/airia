@@ -104,7 +104,10 @@ app.put("/favorites", async (req, res) => {
 });
 
 app.post("/payment/reserve", async (req, res) => {
-  const { data } = await axios.post(`${PAYMENT_SERVICE}/reserve`, req.body);
+  const { data } = await axios.post(`${PAYMENT_SERVICE}/reserve`, {
+    ...req.body,
+    user: req.user
+  });
   res.send(data);
 });
 

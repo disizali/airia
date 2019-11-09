@@ -10,6 +10,7 @@ export default class Product extends Component {
     super(props);
     this.state = { date: props.product.Dates[0] };
     this.changeDate = this.changeDate.bind(this);
+    console.log("constructor")
   }
 
   changeDate(date) {
@@ -33,13 +34,29 @@ export default class Product extends Component {
       .englishNumber()
       .toString();
   }
-
+  componentDidMount() {
+    const simpleParallax = require("simple-parallax-js");
+    var image = document.getElementsByClassName("product-item-image");
+    new simpleParallax(image, {
+      delay: 0,
+      orientation: "down",
+      scale: 1.3,
+      overfow: false
+    });
+  }
+  componentDidUpdate() {
+    console.log("updated");
+  }
   render() {
     const { product } = this.props;
     const { date } = this.state;
+
     return (
-      <div className="product-item-container d-flex flex-column justify-content-center align-items-center w-100">
-        <div className="w-100">
+      <div
+        className="product-item-container d-flex flex-column justify-content-center align-items-center w-100"
+        style={{ overflow: "hidden" }}
+      >
+        <div className="w-100" style={{ overflow: "hidden" }}>
           <img
             // src={product.image}
             src={`/static/uploads/images/${product.image}`}

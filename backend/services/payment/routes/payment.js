@@ -12,7 +12,8 @@ router.post("/reserve", async (req, res) => {
     CallbackURL,
     Description,
     UserId,
-    DateId
+    DateId,
+    user
   } = req.body;
   if (
     !count ||
@@ -24,6 +25,41 @@ router.post("/reserve", async (req, res) => {
     !DateId
   )
     return res.send("wrong data");
+
+  if (user != null && user != undefined) {
+    const credits = user.Credits;
+    const total = credits.reduce((total, currentValue, currentIndex) => {
+      if (currentValue.type) {
+        return +total + +currentValue.amount;
+      } else if (!currentValue.type) {
+        return +total - +currentValue.amount;
+      }
+    }, 0);
+    if (total > Amount) {
+      await Reserve.create({
+        authority: -1,
+        amount: Amount,
+        status: 1,
+        refID: -1,
+        count,
+        DateId,
+        UserId
+      });
+      await Credit.create({
+        authority: -1,
+        amount: Amount,
+        status: 1,
+        refID: 0,
+        UserId,
+        type: -1
+      });
+      await Capacity.update(
+        { count: Sequelize.literal(`count - ${count}`) },
+        { where: { DateId: DateId } }
+      );
+      return res.send("credit decrease");
+    }
+  }
   const { data } = await axios.post(
     "https://sandbox.zarinpal.com/pg/rest/WebGate/PaymentRequest.json",
     { ...req.body },

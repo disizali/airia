@@ -66,7 +66,7 @@ export class Footer extends Component {
                   width="100%"
                   className="footer-logo mb-3"
                 />
-                <span className="my-3">آدرس شرکت آیریا</span>
+                <span className="my-3">خیابان شهید بهشتی،نبش میرعماد،ساختمان گلدیس،طبقه دوم ،واحد 204</span>
                 <Row className="p-0 mt-3">
                   <Col
                     className="trust-container text-center bg-white rounded shadow m-1 d-flex align-items-center w-25 h-25"

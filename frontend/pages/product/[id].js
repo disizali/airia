@@ -25,10 +25,9 @@ export default class Product extends Component {
     tour.images = tour.Details.filter(item => item.type == 2);
     tour.gravity = tour.Details.filter(item => item.type == 3);
     tour.glance = tour.Details.filter(item => item.type == 4);
-    tour.map = tour.Details.filter(item => item.type == 5);
+    tour.map = tour.Details.find(item => item.type == 5);
     tour.tabs = tour.Details.filter(item => item.type == 6);
     tour.pdf = tour.Details.find(item => item.type == 7);
-    tour.map = tour.Details.find(item => item.type == 8);
 
     const related = tour.Categories.map(category => {
       return category.Tours.map(tour => {
@@ -95,7 +94,10 @@ export default class Product extends Component {
               sm={12}
               md={tour.related.length ? 6 : 12}
             >
-              <Magazine magazine={tour.Magazines} />
+              <Magazine
+                magazine={tour.Magazines}
+                relateds={tour.related.length}
+              />
             </Col>
             <Col
               style={{
@@ -104,7 +106,10 @@ export default class Product extends Component {
               sm={12}
               md={tour.Magazines.length ? 6 : 12}
             >
-              <Related related={tour.related} />
+              <Related
+                related={tour.related}
+                magazines={tour.Magazines.length}
+              />
             </Col>
           </Row>
         </Container>

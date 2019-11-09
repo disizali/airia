@@ -81,7 +81,7 @@ export default class Gallery extends Component {
               src={`/static/uploads/images/${images[0]}`}
               className="rounded"
               width="100%"
-              // onClick={() => this.changeImage(images[0].data)}
+              onClick={() => this.changeImage(0)}
             />
           </Col>
           {images.slice(1).map((item, index) => {

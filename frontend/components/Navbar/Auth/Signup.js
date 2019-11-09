@@ -35,8 +35,7 @@ export default class Signup extends Component {
     } = this.state;
     const emailResult = validator.isEmail(email);
     const phoneResult = validator.isNumeric(phone);
-    const passwordResult =
-      validator.isNumeric(password) && password.length >= 8;
+    const passwordResult = password.length >= 8;
     const repasswordResult = repassword == password;
     if (
       emailResult &&

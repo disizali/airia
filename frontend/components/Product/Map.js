@@ -1,7 +1,5 @@
 // import { GoogleMap, Marker } from "react-google-maps";
-
 import { Button } from "reactstrap";
-
 export default props => {
   return (
     <div

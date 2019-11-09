@@ -15,12 +15,12 @@ router.get("/:id", async (req, res) => {
   res.json(
     await Tour.findByPk(req.params.id, {
       attributes: { exclude: ["createdAt", "updatedAt"] },
+      order: [[Dates, "start", "ASC"]],
       include: [
         { model: Detail, attributes: ["type", "data"] },
         {
           model: Dates,
           attributes: { exclude: ["createdAt", "updatedAt", "TourId"] },
-          order: [["start", "ASC"]],
           include: [
             {
               model: Capacity,
@@ -60,7 +60,7 @@ router.get("/", async (req, res) => {
               model: Tour,
               as: "Tours",
               attributes: { exclude: ["createdAt", "updatedAt"] },
-              orders: [["id", "ASC"]],
+
               include: [
                 { model: Detail, attributes: ["type", "data"] },
                 {

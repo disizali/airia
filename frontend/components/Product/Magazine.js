@@ -7,7 +7,7 @@ export default class Magazine extends Component {
     super(props);
   }
   render() {
-    const { magazine } = this.props;
+    const { magazine, relateds } = this.props;
     return (
       <div
         sm={12}
@@ -18,7 +18,11 @@ export default class Magazine extends Component {
         <Row className="related-magazines-container">
           {magazine.map((item, index) => {
             return (
-              <Col sm={6} className="related-magazine m-1 m-md-0" key={index}>
+              <Col
+                sm={relateds ? 4 : 2}
+                className="related-magazine m-1 m-md-0"
+                key={index}
+              >
                 <div className="h-100">
                   <Link href={`/mag/${item.id}`}>
                     <a>
