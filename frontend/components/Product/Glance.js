@@ -19,7 +19,9 @@ export class Glance extends Component {
           const type = index % 2 == 0 ? "even" : "odd";
           return (
             <div key={index} className="d-flex glance-item my-2 w-100">
-              <div className={`d-flex align-items-center glance-title w-50 w-md-25 p-2 d-flex ${type}`}>
+              <div
+                className={`d-flex align-items-center glance-title w-50 p-2 d-flex ${type}`}
+              >
                 <i className={`fad fa-${data.icon}`}></i>
                 <span>{data.title}</span>
               </div>

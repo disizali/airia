@@ -90,7 +90,6 @@ app.get("/profile", async (req, res) => {
 });
 
 app.put("/profile", async (req, res) => {
-  console.log(req.auth);
   const { data } = await axios.put(`${USER_SERVICE}/profile`, {
     id: req.user.id,
     ...req.body

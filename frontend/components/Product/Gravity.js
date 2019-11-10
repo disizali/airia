@@ -18,6 +18,7 @@ export class Gravity extends Component {
 
   render() {
     const { overlay, full } = this.state;
+    const needFull = this.props.gravity[0].data.length > 500;
     return (
       <div
         sm={12}
@@ -27,18 +28,22 @@ export class Gravity extends Component {
         <h3 className="box-title pr-3">جاذبه های گردشگری</h3>
         <div
           dangerouslySetInnerHTML={{
-            __html: this.props.gravity[0].data.slice(0, full ? -1 : 500) + "..."
+            __html:
+              this.props.gravity[0].data.slice(0, full ? -1 : 500) +
+              (needFull ? "..." : "")
           }}
         ></div>
         <div
           className="gravity-overlay"
           style={{ display: overlay && !full ? "block" : "none" }}
         ></div>
-        <a className="d-flex justify-content-end w-100 text-second">
-          <button className="btn gravity-more" onClick={this.changeMode}>
-            {full ? "بستن" : "بیشتر بخوانید"}
-          </button>
-        </a>
+        {needFull && (
+          <a className="d-flex justify-content-end w-100 text-second">
+            <button className="btn gravity-more" onClick={this.changeMode}>
+              {full ? "بستن" : "بیشتر بخوانید"}
+            </button>
+          </a>
+        )}
       </div>
     );
   }

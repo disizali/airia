@@ -183,7 +183,7 @@ export class Overview extends Component {
                       return (
                         <option key={index} value={item.id}>
                           {this.getJalaliDate(item.start)}
-                          {` - `}
+                          {` تا `}
                           {this.getJalaliDate(item.end)}
                         </option>
                       );

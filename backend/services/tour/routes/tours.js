@@ -12,38 +12,41 @@ const {
 const router = express.Router();
 const { Op } = Sequelize;
 router.get("/:id", async (req, res) => {
-  res.json(
-    await Tour.findByPk(req.params.id, {
-      attributes: { exclude: ["createdAt", "updatedAt"] },
-      order: [[Dates, "start", "ASC"]],
-      include: [
-        { model: Detail, attributes: ["type", "data"] },
-        {
-          model: Dates,
-          attributes: { exclude: ["createdAt", "updatedAt", "TourId"] },
-          include: [
-            {
-              model: Capacity,
-              attributes: ["id", "count"]
-            }
-          ]
-        },
-        {
-          model: Magazine,
-          as: "Magazines",
-          attributes: ["id", "title", "cover"]
-        },
-        {
-          model: Category,
-          attributes: ["id"],
-          as: "Categories",
-          include: [
-            { model: Tour, as: "Tours", attributes: ["id", "name", "image"] }
-          ]
-        }
-      ]
-    })
-  );
+  Tour.findByPk(req.params.id, {
+    attributes: { exclude: ["createdAt", "updatedAt"] },
+    order: [[Dates, "start", "ASC"]],
+    include: [
+      { model: Detail, attributes: ["type", "data"] },
+      {
+        model: Dates,
+        attributes: { exclude: ["createdAt", "updatedAt", "TourId"] },
+        include: [
+          {
+            model: Capacity,
+            attributes: ["id", "count"]
+          }
+        ]
+      },
+      {
+        model: Magazine,
+        as: "Magazines",
+        attributes: ["id", "title", "cover"]
+      },
+      {
+        model: Category,
+        attributes: ["id"],
+        as: "Categories",
+        include: [
+          { model: Tour, as: "Tours", attributes: ["id", "name", "image"] }
+        ]
+      }
+    ]
+  }).then(tour => {
+    if (tour) {
+      return res.send(tour);
+    }
+    return res.send("no tour");
+  });
 });
 
 router.get("/", async (req, res) => {

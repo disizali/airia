@@ -21,6 +21,9 @@ export default class Product extends Component {
     } = context;
     const tours = await api.getTours();
     let tour = await api.getTourPage(id);
+    if (tour == "no tour") {
+      return { noTour: true };
+    }
     tour.details = tour.Details.filter(item => item.type == 1);
     tour.images = tour.Details.filter(item => item.type == 2);
     tour.gravity = tour.Details.filter(item => item.type == 3);
@@ -45,7 +48,10 @@ export default class Product extends Component {
   }
   constructor(props) {
     super(props);
-    this.state = { date: props.tour.Dates[0] };
+    this.state = {};
+    if (props.tour != undefined) {
+      this.state = { date: props.tour.Dates[0] };
+    }
     this.changeDate = this.changeDate.bind(this);
   }
   changeDate(e) {
@@ -53,9 +59,20 @@ export default class Product extends Component {
       date: this.props.tour.Dates.find(item => item.id == e.target.value)
     });
   }
+  noTour() {
+    return (
+      <Layout>
+        <div className="text-center my-5 rtl">
+          <i className="far fa-frown mx-2"></i>
+          <span className="mx-2">متاسفانه هنوز این تور رو اضافه نکردیم</span>
+        </div>
+      </Layout>
+    );
+  }
   render() {
-    const { tour } = this.props;
+    const { tour, noTour } = this.props;
     const { date } = this.state;
+    if (noTour) return this.noTour();
     return (
       <Layout>
         <Container className="py-3 rtl text-right">

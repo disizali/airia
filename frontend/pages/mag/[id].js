@@ -40,7 +40,7 @@ export class Mag extends Component {
   }
   render() {
     const { post, magazine } = this.props;
-    if (post == "") return this.noPost();
+    if (post == "" || post == undefined) return this.noPost();
     return (
       <Layout>
         <div className="my-3 my-md-5 mx-5">

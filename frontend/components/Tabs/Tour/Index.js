@@ -14,7 +14,6 @@ export class Tour extends Component {
   changeTab(tab) {
     const parent = this.props.tours.find(parent => parent.id == tab);
     this.setState({ tab, subTab: 0, parent });
-    console.log(parent);
   }
 
   changeSubTab(subTab) {
