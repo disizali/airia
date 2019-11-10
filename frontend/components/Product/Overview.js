@@ -95,6 +95,9 @@ export class Overview extends Component {
     const { tour, date } = this.props;
     const { user } = this.context;
     const { count } = this.state;
+    if (count > date.Capacity.count) {
+      return alert("متاسفانه ظرفیت مورد نظر شما وجود ندارد");
+    }
     const data = await api.makeReservePayment(
       {
         MerchantID: "xxx-xxxx-xxxxx-xxxx-xxx-xxxx-xxxx-xx",

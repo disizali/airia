@@ -61,15 +61,15 @@ export default class Category extends Component {
           </div>
         </Container>
         <Container>
-          <Row>
-            {this.getData(subTab).map((item, index) => {
-              return (
-                <Col sm={4} className="my-3" key={item.id}>
-                  <Product product={item} />
-                </Col>
-              );
-            })}
-          </Row>
+            <Row>
+              {this.getData(subTab).map((item, index) => {
+                return (
+                  <Col sm={4} className="my-3" key={item.id}>
+                    <Product product={item} />
+                  </Col>
+                );
+              })}
+            </Row>
         </Container>
       </div>
     );

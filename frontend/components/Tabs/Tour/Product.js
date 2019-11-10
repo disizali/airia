@@ -51,7 +51,7 @@ export default class Product extends Component {
         className="product-item-container d-flex flex-column justify-content-center align-items-center w-100"
         style={{ overflow: "hidden" }}
       >
-        <div className="w-100" style={{ overflow: "hidden" }}>
+        <div style={{ overflow: "hidden" }}>
           <img
             // src={product.image}
             src={`/static/uploads/images/${product.image}`}
@@ -60,15 +60,15 @@ export default class Product extends Component {
             width="100%"
           />
         </div>
-        <div className="product-item-title d-flex flex-column p-3 justify-content-center align-items-center w-75">
+        <div className="product-item-title d-flex flex-column p-2 justify-content-center align-items-center w-75">
           <div>
             <i className="mx-2 far fa-map-marker-alt text-second"></i>
             <span className="mx-2 text-main">{product.name}</span>
           </div>
         </div>
-        <Container className="product-item-body text-right rtl d-flex flex-column p-3">
-          <div className="product-item-body-row d-flex mt-4">
-            <div className="d-flex flex-column">
+        <Container className="product-item-body text-right rtl d-flex flex-column px-3 pt-2 pb-3">
+          <div className="product-item-body-row d-flex mt-4 w-100">
+            <div className="d-flex flex-column border-left" style={{ width: "30%" }}>
               <div>
                 <i
                   className="far fa-plane-departure mx-1 text-second"
@@ -88,7 +88,7 @@ export default class Product extends Component {
                 </span>
               </div>
             </div>
-            <div className="d-flex justify-content-center align-items-center other-dates mx-2 text-muted border-right pr-2">
+            <div className="d-flex justify-content-center align-items-center other-dates mx-2 text-muted  ">
               <span className="ml-2">تاریخ های دیگر این تور</span>
               <i className="far fa-arrow-down mr-2"></i>
               <div className="other-dates-body">
@@ -109,20 +109,28 @@ export default class Product extends Component {
               </div>
             </div>
           </div>
-          <hr />
-          <div className="product-item-body-row">
-            <div className="pl-2 d-flex">
-              <div>
-                <i className="far fa-clock ml-2"></i>
-                <span className="ml-2">
+          <div className="product-item-body-row mt-3">
+            <div className="d-flex w-100">
+              <div className="border-left" style={{ width: "30%" }}>
+                <i className="far fa-clock mx-1 text-muted"></i>
+                <span className="ml-2 text-muted">
                   {this.getDuration(date.start, date.end)}
                 </span>
-                <span className="mx-2">روز</span>
+                <span className="mx-1 text-muted">روز</span>
               </div>
-              <span className="text-muted mx-2 border-left"></span>
-              <div>
+              <span className="text-muted mx-2"></span>
+              {/* <div style={{ width: "30%" }}>
                 <i className="far fa-user mx-2"></i>
                 <span className="mx-2 text-muted">{product.leader}</span>
+              </div> */}
+              <div>
+                <i className="far fa-users mx-2 text-muted"></i>
+                <span className="mx-2 text-muted">
+                  ظرفیت :
+                  <span className="text-second mx-2">
+                    {this.getPersian(date.Capacity.count)}
+                  </span>
+                </span>
               </div>
             </div>
           </div>
@@ -131,7 +139,7 @@ export default class Product extends Component {
             <span>{product.description}</span>
           </div>
           <br />
-          <div className="product-item-body-row product-item-description text-dark">
+          {/* <div className="product-item-body-row product-item-description text-dark">
             <p className="text-muted">
               ظرفیت باقیمانده
               <span className="text-second mx-2">
@@ -139,8 +147,7 @@ export default class Product extends Component {
               </span>
               نفر
             </p>
-          </div>
-          <br />
+          </div> */}
           <div className="product-item-body-row">
             <Row>
               <Col className="d-flex flex-column product-item-price">
