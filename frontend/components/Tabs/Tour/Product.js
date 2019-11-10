@@ -11,7 +11,6 @@ export default class Product extends Component {
     this.state = { date: props.product.Dates[0] };
     this.changeDate = this.changeDate.bind(this);
   }
-
   changeDate(date) {
     this.setState({
       date: this.props.product.Dates.find(item => item.id == date)
@@ -68,7 +67,10 @@ export default class Product extends Component {
         </div>
         <Container className="product-item-body text-right rtl d-flex flex-column px-3 pt-2 pb-3">
           <div className="product-item-body-row d-flex mt-4 w-100">
-            <div className="d-flex flex-column border-left" style={{ width: "30%" }}>
+            <div
+              className="d-flex flex-column border-left"
+              style={{ width: "30%" }}
+            >
               <div>
                 <i
                   className="far fa-plane-departure mx-1 text-second"
@@ -88,9 +90,10 @@ export default class Product extends Component {
                 </span>
               </div>
             </div>
-            <div className="d-flex justify-content-center align-items-center other-dates mx-2 text-muted  ">
-              <span className="ml-2">تاریخ های دیگر این تور</span>
-              <i className="far fa-arrow-down mr-2"></i>
+            <div className="d-flex justify-content-center align-items-center other-dates text-muted">
+              <i className="far fa-calendar-day mx-2 text-muted"></i>
+              <span className="mx-1">تاریخ های دیگر این تور</span>
+              <i className="far fa-arrow-down mx-1"></i>
               <div className="other-dates-body">
                 <ul className={`p-0 list-group list-group-flush text-muted`}>
                   {product.Dates.map((item, index) => {
@@ -118,16 +121,15 @@ export default class Product extends Component {
                 </span>
                 <span className="mx-1 text-muted">روز</span>
               </div>
-              <span className="text-muted mx-2"></span>
               {/* <div style={{ width: "30%" }}>
                 <i className="far fa-user mx-2"></i>
                 <span className="mx-2 text-muted">{product.leader}</span>
               </div> */}
               <div>
                 <i className="far fa-users mx-2 text-muted"></i>
-                <span className="mx-2 text-muted">
-                  ظرفیت :
-                  <span className="text-second mx-2">
+                <span className="mx-1 text-muted">
+                  ظرفیت باقی مانده :
+                  <span className="text-second mx-1">
                     {this.getPersian(date.Capacity.count)}
                   </span>
                 </span>
