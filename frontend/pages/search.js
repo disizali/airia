@@ -73,7 +73,9 @@ export default class Search extends Component {
                           width="100%"
                           className="rounded"
                         />
-                        <span className="m-2 text-dark">{item.title}</span>
+                        <div className="w-100 h-100 p-3">
+                          <span className="m-2 text-dark">{item.title}</span>
+                        </div>
                       </a>
                     </Link>
                   </Col>
@@ -108,7 +110,9 @@ export default class Search extends Component {
                           width="100%"
                           className="rounded"
                         />
-                        <span className="text-dark m2-2">{item.name}</span>
+                        <div className="w-100 h-100 p-3">
+                          <span className="text-dark">تور {item.name}</span>
+                        </div>
                       </a>
                     </Link>
                   </Col>
