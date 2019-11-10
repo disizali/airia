@@ -130,7 +130,9 @@ export default class Product extends Component {
                 <span className="mx-1 text-muted">
                   ظرفیت باقی مانده :
                   <span className="text-second mx-1">
-                    {this.getPersian(date.Capacity.count)}
+                    {date.Capacity.count
+                      ? this.getPersian(date.Capacity.count)
+                      : 0}
                   </span>
                 </span>
               </div>

@@ -1,3 +1,7 @@
-.service-icon{
-    font-size: 20px;
+.service-icon {
+  cursor: pointer;
+  font-size: 20px;
+  span {
+    cursor: pointer;
+  }
 }

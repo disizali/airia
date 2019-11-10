@@ -194,43 +194,48 @@ export class Overview extends Component {
                   </select>
                 </Col>
               </Row>
-              <Row className="my-3">
-                <Col
-                  sm={1}
-                  className="d-flex justify-content-center align-items-center"
-                >
-                  <i className="fad fa-bed text-main"></i>
-                </Col>
-                <Col
-                  sm={3}
-                  className="d-flex justify-content-center align-items-center"
-                >
-                  <span>تعداد</span>
-                </Col>
-                <Col
-                  sm={7}
-                  className="d-flex justify-content-center align-items-center"
-                >
-                  <input
-                    type="number"
-                    className="w-100 overview-input"
-                    value={count}
-                    onChange={this.handleCountChanges}
-                    min={1}
-                    max={date.Capacity.count}
-                  />
-                </Col>
-              </Row>
+              {date.Capacity.count ? (
+                <Row className="my-3">
+                  <Col
+                    sm={1}
+                    className="d-flex justify-content-center align-items-center"
+                  >
+                    <i className="fad fa-bed text-main"></i>
+                  </Col>
+                  <Col
+                    sm={3}
+                    className="d-flex justify-content-center align-items-center"
+                  >
+                    <span>تعداد</span>
+                  </Col>
+                  <Col
+                    sm={7}
+                    className="d-flex justify-content-center align-items-center"
+                  >
+                    <input
+                      type="number"
+                      className="w-100 overview-input"
+                      value={count}
+                      onChange={this.handleCountChanges}
+                      min={1}
+                      max={date.Capacity.count}
+                    />
+                  </Col>
+                </Row>
+              ) : (
+                ""
+              )}
               <Row>
                 <span>
                   ظرفیت باقی مانده فقط
                   <strong className="text-danger mx-2">
-                    {this.getPersian(date.Capacity.count)}
+                    {date.Capacity.count &&
+                      this.getPersian(date.Capacity.count)}
                   </strong>
                   <span>نفر</span>
                 </span>
               </Row>
-              {this.getReserveButton()}
+              {date.Capacity.count ? this.getReserveButton() : ""}
             </Container>
           </div>
         </div>
