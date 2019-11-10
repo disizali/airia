@@ -1,18 +1,9 @@
 import React, { useContext } from "react";
-import {
-  Collapse,
-  Navbar,
-  NavbarToggler,
-  NavbarBrand,
-  Nav,
-  NavItem,
-  NavLink
-} from "reactstrap";
+import { Navbar, NavbarBrand, Nav, NavItem, NavLink } from "reactstrap";
 import Auth from "./Auth/Index";
 import Contact from "./Contact";
 import Access from "./Access";
 import UserContext from "../UserContext";
-
 class NavbarClass extends React.Component {
   static contextType = UserContext;
   constructor(props) {
@@ -47,7 +38,7 @@ class NavbarClass extends React.Component {
     this.setState({
       contactOpen: !this.state.contactOpen,
       authOpen: this.state.authOpen && !this.state.authOpen,
-      accessOpen: this.state.accessOpen && !this.state.accessOpen,
+      accessOpen: this.state.accessOpen && !this.state.accessOpen
     });
   }
 
@@ -141,6 +132,26 @@ class NavbarClass extends React.Component {
               className="d-sm-block d-md-none d-lg-none d-xl-none"
             />
           </NavbarBrand>
+          <Nav className="d-none d-md-flex">
+            <NavItem className="border-left">
+              <NavLink href="/?tab=tours">
+                <i className="fas fa-route mx-1"></i>
+                <span className="mx-1">تور ها</span>
+              </NavLink>
+            </NavItem>
+            <NavItem className="border-left">
+              <NavLink href="/?tab=services">
+                <i className="fas fa-clone mx-1"></i>
+                <span className="mx-1">خدمات</span>
+              </NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink href="/?tab=magazine">
+                <i className="fas fa-newspaper mx-1"></i>
+                <span className="mx-1">مجله</span>
+              </NavLink>
+            </NavItem>
+          </Nav>
           <Nav className="mr-sm-auto" navbar>
             <div className="navbar-container d-flex">
               {this.getControlPanel()}
