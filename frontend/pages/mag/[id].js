@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import axios from "axios";
 import Layout from "../../components/Layout";
 import Archive from "../../components/Tabs/Magazine/Archive";
 import jMoment from "jalali-moment";
@@ -32,7 +31,6 @@ export class Mag extends Component {
         .format("D MMMM")
     );
   }
-
   getPersian(data) {
     return persianJs(data)
       .englishNumber()
