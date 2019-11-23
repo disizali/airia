@@ -3,21 +3,22 @@
 @import "~bootstrap/scss/_variables.scss";
 @import "~bootstrap/scss/mixins/_breakpoints.scss";
 
-@import url(~react-persian-calendar-date-picker/lib/DatePicker.css);
 @import "variables";
 @import "fonts";
 
 @import "components/index";
 @import "navbar/index";
 @import "tour/index";
-@import "splash";
 @import "product/index";
 @import "dashboard/index";
-@import "footer";
 @import "payment/index";
 @import "magazine/index";
 @import "service/index";
 
+@import "privacy";
+@import "splash";
+@import "cover";
+@import "footer";
 body {
   width: 100%;
   overflow-x: hidden;

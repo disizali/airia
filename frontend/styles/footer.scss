@@ -38,6 +38,16 @@ footer {
         color: #666;
         margin: 10px 0;
         font-size: 0.9em;
+        a {
+          color: #666;
+          text-decoration: none;
+          transition-duration: 0.5s;
+          transition-property: margin-right, color;
+          &:hover {
+            color: $secondColor;
+            margin-right: 5px;
+          }
+        }
         &::before {
           content: "\2022"; /* Add content: \2022 is the CSS Code/unicode for a bullet */
           color: $secondColor; /* Change the color */

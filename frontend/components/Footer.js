@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Container, Row, Col, Button } from "reactstrap";
-
+import Link from "next/link";
 export class Footer extends Component {
   render() {
     return (
@@ -40,23 +40,28 @@ export class Footer extends Component {
               <Col sm={12} md={4}>
                 <h5>آیریا</h5>
                 <ul className="p-3">
-                  <li>درباره ما</li>
-                  <li>تماس با ما</li>
+                  <li>
+                    <Link href="/policy">
+                      <a>قوانین و مقررات</a>
+                    </Link>
+                  </li>
+
+                  {/* <li>تماس با ما</li>
                   <li>چرا آیریا</li>
                   <li>باشگاه مشتریان</li>
                   <li>قوانین و مقررات</li>
                   <li>راهنمای خرید</li>
                   <li>پرسش و پاسخ</li>
                   <li>مجله</li>
-                  <li>فرصت های شغلی</li>
+                  <li>فرصت های شغلی</li> */}
                 </ul>
               </Col>
               <Col sm={12} md={4}>
                 <h5>اطلاعات تکمیلی</h5>
                 <ul className="p-3">
-                  <li>راهنمای رزرو تور داخلی</li>
+                  {/* <li>راهنمای رزرو تور داخلی</li>
                   <li>راهنمای رزرو تور خارجی</li>
-                  <li>شیوه نامه حقوق مسافر</li>
+                  <li>شیوه نامه حقوق مسافر</li> */}
                 </ul>
               </Col>
               <Col sm={12} md={4}>
@@ -66,7 +71,9 @@ export class Footer extends Component {
                   width="100%"
                   className="footer-logo mb-3"
                 />
-                <span className="my-3">خیابان شهید بهشتی،نبش میرعماد،ساختمان گلدیس،طبقه دوم ،واحد 204</span>
+                <span className="my-3">
+                  خیابان شهید بهشتی،نبش میرعماد،ساختمان گلدیس،طبقه دوم ،واحد 204
+                </span>
                 <Row className="p-0 mt-3">
                   <Col
                     className="trust-container text-center bg-white rounded shadow m-1 d-flex align-items-center w-25 h-25"
@@ -109,8 +116,7 @@ export class Footer extends Component {
             </Row>
           </Container>
         </div>
-        <div className="footer-fixer d-block d-md-none">
-        </div>
+        <div className="footer-fixer d-block d-md-none"></div>
       </footer>
     );
   }

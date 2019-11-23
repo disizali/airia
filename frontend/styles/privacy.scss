@@ -1,0 +1,30 @@
+.privacy-container {
+  ul {
+    margin: 10px 0;
+    padding: 0;
+    list-style: none;
+    li {
+      margin: 10px 0;
+      > div:first-child {
+        display: flex;
+        justify-content: space-between;
+        padding: 20px 10px;
+        background: white;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        > div {
+          i,
+          span {
+            margin: 0 10px;
+          }
+          i{
+            color: $secondColor;
+          }
+        }
+      }
+      > div:last-child {
+        height: 0;
+        overflow: hidden;
+      }
+    }
+  }
+}
