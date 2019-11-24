@@ -25,12 +25,13 @@ export class Overview extends Component {
   static contextType = UserContext;
   constructor(props) {
     super(props);
-    this.state = { count: 1, modal: false, reserveModal: true, total: 0 };
+    this.state = { count: 1, modal: false, reserveModal: false, total: 0 };
     this.toggleModal = this.toggleModal.bind(this);
     this.getReserveButton = this.getReserveButton.bind(this);
     this.goToReservePage = this.goToReservePage.bind(this);
     this.handleCountChanges = this.handleCountChanges.bind(this);
     this.toggleReserveModal = this.toggleReserveModal.bind(this);
+    this.getLowestPrice = this.getLowestPrice.bind(this);
     this.increase = this.increase.bind(this);
     this.decrease = this.decrease.bind(this);
   }
@@ -58,7 +59,21 @@ export class Overview extends Component {
   toggleModal() {
     this.setState({ modal: !this.state.modal });
   }
-
+  getLowestPrice() {
+    let lowestPrice = 100000000;
+    const { date } = this.props;
+    // return JSON.stringify(date.hotelsData);
+    date.hotelsData.slice(1).forEach(row => {
+      row.forEach(col => {
+        if (isNumber(col)) {
+          if (col < lowestPrice) {
+            lowestPrice = col;
+          }
+        }
+      });
+    });
+    return lowestPrice.toLocaleString();
+  }
   getModal() {
     const { modal } = this.state;
     return (
@@ -177,8 +192,7 @@ export class Overview extends Component {
           <div className="product-order mt-2 d-flex flex-column rounded">
             <div className="product-price text-center d-flex flex-column align-items-center justify-content-center">
               <span>
-                شروع از <b>{this.getPersian(date.price.toLocaleString())}</b>{" "}
-                تومان
+                شروع از <b>{this.getPersian(this.getLowestPrice())}</b> تومان
               </span>
               <p>قیمت بر اساس یک نفر در اتاق دو تخته محاسبه شده است</p>
             </div>
