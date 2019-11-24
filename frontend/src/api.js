@@ -2,7 +2,7 @@ import axios from "axios";
 import * as config from "./config";
 
 import axiosRetry from 'axios-retry';
-axiosRetry(axios, { retries: 10 });
+axiosRetry(axios, { retries: 9 });
 
 const api = config.API;
 
