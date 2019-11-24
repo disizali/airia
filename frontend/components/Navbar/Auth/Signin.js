@@ -1,7 +1,5 @@
 import React, { Component } from "react";
-import axios from "axios";
 import validator from "validator";
-import Router from "next/router";
 import jsCookie from "js-cookie";
 import UserContext from "../../UserContext";
 import * as api from "../../../src/api";
@@ -64,7 +62,6 @@ export default class Signin extends Component {
           className="form-control my-2"
           placeholder="رمز عبور"
         />
-
         <button
           className="btn btn-primary form-control rounded my-2"
           onClick={this.signIn}
@@ -79,6 +76,7 @@ export default class Signin extends Component {
             ثبت نام
           </button>
         )}
+       
       </div>
     );
   }

@@ -11,7 +11,9 @@ module.exports = (sequelize, DataTypes) => {
       arrival: DataTypes.TEXT,
       out: DataTypes.TEXT,
       in: DataTypes.TEXT,
-      price: DataTypes.INTEGER
+      price: DataTypes.INTEGER,
+      hotels: DataTypes.STRING,
+      hotelsData: DataTypes.VIRTUAL
     },
     {}
   );

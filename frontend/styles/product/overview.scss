@@ -29,3 +29,32 @@
 .reserve-button {
   background: $productBackground;
 }
+@media (min-width: 576px) {
+  .modal-dialog {
+    max-width: 75%;
+    margin: 1.75rem auto;
+  }
+}
+.reserve-modal {
+  table {
+    td.price > div {
+      display: flex;
+      align-items: center;
+      > div {
+        background: white;
+        border: 1px solid #f1f1f1;
+        display: flex;
+        flex-direction: column;
+        > button {
+          background: white;
+          border-radius: 2px;
+          width: 20px;
+          height: 20px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+      }
+    }
+  }
+}

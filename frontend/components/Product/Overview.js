@@ -4,9 +4,11 @@ import {
   Button,
   Row,
   Col,
+  Table,
   Modal,
   ModalHeader,
-  ModalBody
+  ModalBody,
+  ModalFooter
 } from "reactstrap";
 import moment from "moment";
 import jMoment from "jalali-moment";
@@ -17,16 +19,20 @@ import Signin from "../Navbar/Auth/Signin";
 import * as config from "../../src/config";
 import * as api from "../../src/api";
 import Router from "next/router";
+import { isNumber } from "util";
 
 export class Overview extends Component {
   static contextType = UserContext;
   constructor(props) {
     super(props);
-    this.state = { count: 1, modal: false };
+    this.state = { count: 1, modal: false, reserveModal: true, total: 0 };
     this.toggleModal = this.toggleModal.bind(this);
     this.getReserveButton = this.getReserveButton.bind(this);
     this.goToReservePage = this.goToReservePage.bind(this);
     this.handleCountChanges = this.handleCountChanges.bind(this);
+    this.toggleReserveModal = this.toggleReserveModal.bind(this);
+    this.increase = this.increase.bind(this);
+    this.decrease = this.decrease.bind(this);
   }
 
   handleCountChanges(e) {
@@ -66,14 +72,17 @@ export class Overview extends Component {
       </Modal>
     );
   }
-
+  toggleReserveModal() {
+    const { reserveModal } = this.state;
+    this.setState({ reserveModal: !reserveModal });
+  }
   getReserveButton() {
     const { status } = this.context;
     if (status == 1) {
       return (
         <Button
           className="my-3 form-control reserve-button"
-          onClick={this.goToReservePage}
+          onClick={this.toggleReserveModal}
         >
           رزرو
         </Button>
@@ -90,7 +99,22 @@ export class Overview extends Component {
       </div>
     );
   }
-
+  increase(item, price) {
+    const value = this.state[item] == undefined ? 0 : this.state[item];
+    this.setState({ [item]: value + 1, total: this.state.total + price });
+  }
+  decrease(item, price) {
+    const value =
+      this.state[item] == undefined
+        ? 0
+        : this.state[item] == 0
+        ? 1
+        : this.state[item];
+    this.setState({
+      [item]: value - 1,
+      total: this.state.total != 0 ? this.state.total - price : this.state.total
+    });
+  }
   async goToReservePage() {
     const { tour, date } = this.props;
     const { user } = this.context;
@@ -126,7 +150,7 @@ export class Overview extends Component {
   }
   render() {
     const { tour, date, changeDate } = this.props;
-    const { count } = this.state;
+    const { reserveModal } = this.state;
     return (
       <div
         sm={12}
@@ -194,7 +218,7 @@ export class Overview extends Component {
                   </select>
                 </Col>
               </Row>
-              {date.Capacity.count ? (
+              {/* {date.Capacity.count ? (
                 <Row className="my-3">
                   <Col
                     sm={1}
@@ -224,7 +248,7 @@ export class Overview extends Component {
                 </Row>
               ) : (
                 ""
-              )}
+              )} */}
               <Row>
                 <span>
                   ظرفیت باقی مانده فقط
@@ -239,6 +263,97 @@ export class Overview extends Component {
             </Container>
           </div>
         </div>
+        <Modal
+          isOpen={reserveModal}
+          toggle={this.toggleReserveModal}
+          className="rtl text-right reserve-modal"
+          style={{ maxWidth: "75% !important" }}
+        >
+          <h5 className="m-3">رزرو</h5>
+          <ModalBody>
+            <Table responsive striped>
+              <thead>
+                <tr>
+                  {date.hotelsData[0].map((item, index) => {
+                    return <th key={index}>{item}</th>;
+                  })}
+                </tr>
+              </thead>
+              <tbody>
+                {date.hotelsData.slice(1).map((hotel, hotelIndex) => {
+                  return (
+                    <tr key={hotelIndex}>
+                      {hotel.map((item, itemIndex) => {
+                        if (isNumber(item)) {
+                          return (
+                            <td key={itemIndex} className="price text-center">
+                              <div>
+                                <strong className="ml-2">
+                                  {item.toLocaleString()}
+                                </strong>
+                                <div className="reserveButtons">
+                                  <button
+                                    onClick={() =>
+                                      this.increase(
+                                        `row${hotelIndex}_col${itemIndex}`,
+                                        item
+                                      )
+                                    }
+                                  >
+                                    <i className="fa fa-sort-up" />
+                                  </button>
+                                  <span>
+                                    {this.state[
+                                      `row${hotelIndex}_col${itemIndex}`
+                                    ] || 0}
+                                  </span>
+                                  <button
+                                    onClick={() =>
+                                      this.decrease(
+                                        `row${hotelIndex}_col${itemIndex}`,
+                                        item
+                                      )
+                                    }
+                                  >
+                                    <i className="fa fa-sort-down" />
+                                  </button>
+                                </div>
+                              </div>
+                            </td>
+                          );
+                        }
+                        return <td key={itemIndex}>{item}</td>;
+                      })}
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </Table>
+          </ModalBody>
+          <ModalFooter className="d-flex justify-content-between">
+            <div>
+              <span>جمع خرید : </span>
+              <span className="text-primary">
+                {this.state.total.toLocaleString()}
+              </span>
+            </div>
+            <div>
+              <button
+                className="btn btn-link bg-transparent text-secondary ml-2"
+                onClick={this.toggleReserveModal}
+              >
+                خروج
+              </button>
+              <Button
+                color="primary"
+                onClick={this.toggleReserveModal}
+                disabled
+              >
+                رزرو
+              </Button>
+            </div>
+          </ModalFooter>
+        </Modal>
       </div>
     );
   }

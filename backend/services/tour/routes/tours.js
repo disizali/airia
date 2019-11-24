@@ -1,4 +1,5 @@
 const express = require("express");
+const xlsx = require("node-xlsx");
 const { sequelize: db, Sequelize } = require("../../../models");
 const {
   Category,
@@ -43,6 +44,9 @@ router.get("/:id", async (req, res) => {
     ]
   }).then(tour => {
     if (tour) {
+      tour.Dates.forEach((date, index) => {
+        date.hotelsData = xlsx.parse(`${__dirname}/files/${date.hotels}.xlsx`)[0].data;
+      });
       return res.send(tour);
     }
     return res.send("no tour");
@@ -50,34 +54,33 @@ router.get("/:id", async (req, res) => {
 });
 
 router.get("/", async (req, res) => {
-  res.json(
-    await Parent.findAll({
-      attributes: ["id", "name", "icon"],
-      include: [
-        {
-          model: Category,
-          as: "Categories",
-          attributes: ["id", "name", "parentId"],
-          include: [
-            {
-              model: Tour,
-              as: "Tours",
-              attributes: { exclude: ["createdAt", "updatedAt"] },
+  let all = await Parent.findAll({
+    attributes: ["id", "name", "icon"],
+    include: [
+      {
+        model: Category,
+        as: "Categories",
+        attributes: ["id", "name", "parentId"],
+        include: [
+          {
+            model: Tour,
+            as: "Tours",
+            attributes: { exclude: ["createdAt", "updatedAt"] },
+            include: [
+              { model: Detail, attributes: ["type", "data"] },
+              {
+                model: Dates,
+                orders: [["start", "desc"]],
+                include: [{ model: Capacity, attributes: ["id", "count"] }]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  });
 
-              include: [
-                { model: Detail, attributes: ["type", "data"] },
-                {
-                  model: Dates,
-                  orders: [["start", "desc"]],
-                  include: [{ model: Capacity, attributes: ["id", "count"] }]
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    })
-  );
+  res.send(all);
 });
 
 router.get("/search/:query", async (req, res) => {
