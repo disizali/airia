@@ -106,7 +106,7 @@ export class Overview extends Component {
   decrease(item, price) {
     const value =
       this.state[item] == undefined
-        ? 0
+        ? 1
         : this.state[item] == 0
         ? 1
         : this.state[item];
