@@ -36,13 +36,23 @@ export class Footer extends Component {
         </div>
         <div className="footer-links">
           <Container className="rtl text-right">
-            <Row className="py-5">
+            <Row className="py-5 justify-content-center">
               <Col sm={12} md={4}>
                 <h5>آیریا</h5>
                 <ul className="p-3">
                   <li>
+                    <Link href="/about-us">
+                      <a>درباره ما</a>
+                    </Link>
+                  </li>
+                  <li>
                     <Link href="/policy">
                       <a>قوانین و مقررات</a>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/contact">
+                      <a>تماس با ما</a>
                     </Link>
                   </li>
 
@@ -56,14 +66,14 @@ export class Footer extends Component {
                   <li>فرصت های شغلی</li> */}
                 </ul>
               </Col>
-              <Col sm={12} md={4}>
+              {/* <Col sm={12} md={4}>
                 <h5>اطلاعات تکمیلی</h5>
                 <ul className="p-3">
-                  {/* <li>راهنمای رزرو تور داخلی</li>
+                  <li>راهنمای رزرو تور داخلی</li>
                   <li>راهنمای رزرو تور خارجی</li>
-                  <li>شیوه نامه حقوق مسافر</li> */}
+                  <li>شیوه نامه حقوق مسافر</li>
                 </ul>
-              </Col>
+              </Col> */}
               <Col sm={12} md={4}>
                 <img
                   src="/static/images/logo.png"
