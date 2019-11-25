@@ -5,7 +5,9 @@ export class Failed extends Component {
   state = { timer: 5 };
   componentDidMount() {
     setInterval(() => {
-      this.setState({ timer: this.state.timer - 1 });
+      if (this.state.timer > 0) {
+        this.setState({ timer: this.state.timer - 1 });
+      }
     }, 1000);
   }
 

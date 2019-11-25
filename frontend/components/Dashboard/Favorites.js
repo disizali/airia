@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Container, Button, Table } from "reactstrap";
 import UserContext from "../UserContext";
 import * as api from "../../src/api";
+import Head from "next/head";
 
 import { Card } from "reactstrap";
 export default class Favorites extends Component {
@@ -39,6 +40,9 @@ export default class Favorites extends Component {
     const { changed } = this.state;
     return (
       <Container className="bg-white rounded w-100 my-3 shadow text-right rtl p-4">
+           <Head>
+          <title>بالهای آسمانی آیریا - علایق</title>
+        </Head>
         <div className="d-flex justify-content-between">
           <div className="d-flex flex-column">
             <h5>

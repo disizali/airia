@@ -1,13 +1,16 @@
 import React, { Component } from "react";
 import Account from "./Account";
 import Referral from "./Referral";
-
+import Head from "next/head";
 import { Container, Row, Col } from "reactstrap";
 
 export class Profile extends Component {
   render() {
     return (
       <Container className="w-100 p-md-0">
+        <Head>
+          <title>بالهای آسمانی آیریا - پروفایل</title>
+        </Head>
         <Row className="m-0 w-100 p-0 rtl">
           <Col sm={12} md={8} className="p-0 pl-md-2 mb-1 my-md-0">
             <Account />

@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 import { Container, Button } from "reactstrap";
-import axios from "axios";
 import UserContext from "../UserContext";
 import * as config from "../../src/config";
 import * as api from "../../src/api";
-
+import Head from "next/head";
 export default class Credit extends Component {
   static contextType = UserContext;
   constructor(props) {
@@ -55,6 +54,9 @@ export default class Credit extends Component {
   render() {
     return (
       <Container className="bg-white rounded w-100 shadow text-right rtl my-3 p-4">
+        <Head>
+          <title>بالهای آسمانی آیریا - اعتبار</title>
+        </Head>
         <div className="d-flex justify-content-between">
           <h5>
             <i className="fal fa-wallet text-second mx-2"></i>

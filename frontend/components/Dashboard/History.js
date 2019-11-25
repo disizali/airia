@@ -5,6 +5,8 @@ import { Row, Col } from "reactstrap";
 import jMoment from "jalali-moment";
 import persianJs from "persianjs";
 import Link from "next/link";
+import Head from "next/head";
+
 export default class Favorites extends Component {
   static contextType = UserContext;
   constructor(props) {
@@ -30,6 +32,9 @@ export default class Favorites extends Component {
     } = this.context;
     return (
       <Container className="bg-white rounded w-100 my-3 shadow text-right rtl p-4">
+           <Head>
+          <title>بالهای آسمانی آیریا - تاریخچه خرید</title>
+        </Head>
         <div className="d-flex justify-content-between">
           <h5>
             <i className="fal fa-history text-second mx-2"></i>
