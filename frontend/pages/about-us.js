@@ -23,6 +23,30 @@ const list = [
     "روابط شبکه ای",
     "ما در آیریا به دنبال برقراری روابط میان فردیِ فراتر از سِمَت، سطح و واحد هستیم تا با تجربه‌ها و تخصص یکدیگر آشنا شویم و سرمایه‌ی اجتماعی آیریا را افزایش دهیم."
   ]
+  ,
+  [
+    "briefcase",
+    "تعهد حرفه ای",
+    "ما در علی‌بابا به دنبال ارزیابی تعهد در تمامی ابعاد آن بوده و در پی ارزش افزوده‌ی دو طرفه از سمت سازمان و برای سازمان هستیم."
+  ]
+  ,
+  [
+    "dumbbell",
+    "توانمند سازی",
+    "ما در علی‌بابا به دنبال ارتقای دائمی دانش و مهارت‌ها در ابعاد رفتاری و شغلی، و بهینه‌سازی توانایی‌ها در راستای نیازهای سازمان هستیم."
+  ]
+  ,
+  [
+    "chart-line",
+    "توسعه و تعالی",
+    "ما در علی‌بابا به دنبال تسهیل تعالی علی‌بابا هستیم؛ تا جایی که زمینه‌ی تعالی واحدهای سازمانی و خود را فراهم کنیم."
+  ]
+  ,
+  [
+    "users-class",
+    "تیم سازی",
+    "ما در علی‌بابا برای ایده‌ی خود به دنبال تیم هستیم، تیمی که با همراهی آن، ایده را عملی و در نهایت به محصول تبدیل کنیم."
+  ]
 ];
 export default class About extends Component {
   constructor(props) {
@@ -84,13 +108,13 @@ export default class About extends Component {
               </p>
             </div>
           </div>
-          <Row className="p-2">
+          <Row className="p-2 about-row">
             {list.map((item, index) => {
               return (
                 <Col sm={6} md={3} key={index} className="h-100 p-2">
-                  <div className="d-flex flex-column text-center justify-content-between p-2 box-container h-100">
+                  <div className="d-flex flex-column text-center p-2 box-container h-100">
                     <i
-                      className={`fad fa-${item[0]} text-second font-medium`}
+                      className={`fad fa-${item[0]} text-second font-medium my-2`}
                     />
                     <h5 className="my-2">{item[1]}</h5>
                     <hr className="bg-muted w-100" />

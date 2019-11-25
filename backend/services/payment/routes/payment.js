@@ -6,7 +6,7 @@ const axios = require("axios");
 
 router.post("/reserve", async (req, res) => {
   const {
-    count,
+    codes,
     MerchantID,
     Amount,
     CallbackURL,
@@ -16,7 +16,7 @@ router.post("/reserve", async (req, res) => {
     user
   } = req.body;
   if (
-    !count ||
+    !codes ||
     !MerchantID ||
     !Amount ||
     !CallbackURL ||
@@ -41,7 +41,7 @@ router.post("/reserve", async (req, res) => {
         amount: Amount,
         status: 1,
         refID: -1,
-        count,
+        codes,
         DateId,
         UserId
       });
@@ -54,7 +54,7 @@ router.post("/reserve", async (req, res) => {
         type: -1
       });
       await Capacity.update(
-        { count: Sequelize.literal(`count - ${count}`) },
+        { count: Sequelize.literal(`count - 1`) },
         { where: { DateId: DateId } }
       );
       return res.send("credit decrease");
@@ -76,7 +76,7 @@ router.post("/reserve", async (req, res) => {
       amount: Amount,
       status: 0,
       refID: 0,
-      count,
+      codes,
       DateId,
       UserId
     });
@@ -91,7 +91,7 @@ router.post("/reserve/verify", async (req, res) => {
   if (!MerchantID || !Authority) return res.send("wrong data");
   const reserve = await Reserve.findOne({
     where: { authority: Number(Authority) },
-    attributes: ["amount", "count", "DateId"]
+    attributes: ["amount", "DateId"]
   });
   req.body.Amount = `${reserve.amount}`;
   const { data } = await axios.post(
@@ -117,7 +117,7 @@ router.post("/reserve/verify", async (req, res) => {
       }
     );
     await Capacity.update(
-      { count: Sequelize.literal(`count - ${reserve.count}`) },
+      { count: Sequelize.literal(`count - 1`) },
       { where: { DateId: reserve.DateId } }
     );
     return res.json("verified");

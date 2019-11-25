@@ -12,6 +12,22 @@ const {
 } = db.models;
 const router = express.Router();
 const { Op } = Sequelize;
+
+const getLowestPrice = data => {
+  let lowestPrice = 100000000;
+  // return JSON.stringify(date.hotelsData);
+  data.slice(1).forEach(row => {
+    row.forEach(col => {
+      if (typeof col == "number") {
+        if (col < lowestPrice) {
+          lowestPrice = col;
+        }
+      }
+    });
+  });
+  return lowestPrice;
+};
+
 router.get("/:id", async (req, res) => {
   Tour.findByPk(req.params.id, {
     attributes: { exclude: ["createdAt", "updatedAt"] },
@@ -45,7 +61,9 @@ router.get("/:id", async (req, res) => {
   }).then(tour => {
     if (tour) {
       tour.Dates.forEach((date, index) => {
-        date.hotelsData = xlsx.parse(`${__dirname}/files/${date.hotels}.xlsx`)[0].data;
+        date.hotelsData = xlsx.parse(
+          `${__dirname}/files/${date.hotels}.xlsx`
+        )[0].data;
       });
       return res.send(tour);
     }
@@ -78,6 +96,18 @@ router.get("/", async (req, res) => {
         ]
       }
     ]
+  });
+
+  all.forEach(parent => {
+    parent.Categories.forEach(category => {
+      category.Tours.forEach(tour => {
+        tour.Dates.forEach(date => {
+          date.price = getLowestPrice(
+            xlsx.parse(`${__dirname}/files/${date.hotels}.xlsx`)[0].data
+          );
+        });
+      });
+    });
   });
 
   res.send(all);

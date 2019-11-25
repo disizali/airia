@@ -4,7 +4,7 @@ module.exports = (sequelize, DataTypes) => {
     "Reserve",
     {
       authority: DataTypes.INTEGER,
-      count: DataTypes.INTEGER,
+      codes: DataTypes.INTEGER,
       amount: DataTypes.INTEGER,
       status: DataTypes.INTEGER,
       refID: DataTypes.STRING

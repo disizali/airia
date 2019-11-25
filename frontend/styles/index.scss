@@ -15,10 +15,12 @@
 @import "magazine/index";
 @import "service/index";
 
-@import "privacy";
+@import "policy";
 @import "splash";
 @import "cover";
+@import "about";
 @import "footer";
+
 body {
   width: 100%;
   overflow-x: hidden;

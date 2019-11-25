@@ -1,4 +1,4 @@
-.privacy-container {
+.policy-container {
   ul {
     margin: 10px 0;
     padding: 0;
@@ -11,19 +11,37 @@
         padding: 20px 10px;
         background: white;
         box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        i {
+          transition: transform 0.5s;
+          &.opened {
+            transform: rotate(-180deg);
+          }
+          &.collapsed {
+            transform: rotate(0);
+          }
+        }
         > div {
           i,
           span {
             margin: 0 10px;
           }
-          i{
+          i {
             color: $secondColor;
           }
         }
       }
       > div:last-child {
-        height: 0;
+        &.opened {
+          max-height: 2000rem;
+          opacity: 1;
+        }
+        &.collapsed {
+          max-height: 0;
+          opacity: 0;
+        }
+        transition: max-height 1s ease-in-out, opacity 0.5s ease-in-out;
         overflow: hidden;
+        cursor: pointer;
       }
     }
   }

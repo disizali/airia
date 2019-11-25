@@ -25,22 +25,31 @@ export class Overview extends Component {
   static contextType = UserContext;
   constructor(props) {
     super(props);
-    this.state = { count: 1, modal: false, reserveModal: false, total: 0 };
+    this.state = { modal: false, reserveModal: false, total: 0 };
     this.toggleModal = this.toggleModal.bind(this);
     this.getReserveButton = this.getReserveButton.bind(this);
     this.goToReservePage = this.goToReservePage.bind(this);
-    this.handleCountChanges = this.handleCountChanges.bind(this);
     this.toggleReserveModal = this.toggleReserveModal.bind(this);
     this.getLowestPrice = this.getLowestPrice.bind(this);
+    this.handleDateChanges = this.handleDateChanges.bind(this);
+    this.handleUltimateReserve = this.handleUltimateReserve.bind(this);
     this.increase = this.increase.bind(this);
     this.decrease = this.decrease.bind(this);
   }
 
-  handleCountChanges(e) {
-    const count = e.target.value;
-    this.setState({ count: count > 20 ? 20 : count });
+  handleDateChanges(e) {
+    const { changeDate } = this.props;
+    changeDate(e);
+    let newState = {};
+    Object.entries(this.state).forEach(item => {
+      if (!item[0].startsWith("row")) {
+        newState[[item[0]]] = item[1];
+      } else {
+        newState[[item[0]]] = undefined;
+      }
+    });
+    this.setState({ ...newState, total: 0 });
   }
-
   getJalaliDate(date) {
     return this.getPersian(
       jMoment(new Date(date))
@@ -62,7 +71,6 @@ export class Overview extends Component {
   getLowestPrice() {
     let lowestPrice = 100000000;
     const { date } = this.props;
-    // return JSON.stringify(date.hotelsData);
     date.hotelsData.slice(1).forEach(row => {
       row.forEach(col => {
         if (isNumber(col)) {
@@ -127,21 +135,38 @@ export class Overview extends Component {
         : this.state[item];
     this.setState({
       [item]: value - 1,
-      total: this.state.total != 0 ? this.state.total - price : this.state.total
+      total:
+        this.state.total != 0 && this.state[item] != 0
+          ? this.state.total - price
+          : this.state.total
     });
   }
+  handleUltimateReserve() {
+    const { total } = this.state;
+    if (total == 0) {
+      alert("لطفا گزینه های مد نظر خودتون رو انتخاب کنید");
+    } 
+    this.goToReservePage();
+  }
+
   async goToReservePage() {
     const { tour, date } = this.props;
+    const { total } = this.state;
     const { user } = this.context;
-    const { count } = this.state;
-    if (count > date.Capacity.count) {
+    let codes = [];
+    Object.entries(this.state).forEach(item => {
+      if (item[0].startsWith("row")) {
+        codes.push({ [item[0]]: item[1] });
+      }
+    });
+    if (1 > date.Capacity.count) {
       return alert("متاسفانه ظرفیت مورد نظر شما وجود ندارد");
     }
     const data = await api.makeReservePayment(
       {
         MerchantID: "xxx-xxxx-xxxxx-xxxx-xxx-xxxx-xxxx-xx",
-        Amount: date.price * count,
-        count,
+        Amount: total,
+        codes: JSON.stringify(codes),
         CallbackURL: `${config.HOST}/product/${tour.id}/reserve`,
         Description: `تور ${tour.name}`,
         UserId: user.id,
@@ -164,8 +189,8 @@ export class Overview extends Component {
     )}`;
   }
   render() {
-    const { tour, date, changeDate } = this.props;
-    const { reserveModal } = this.state;
+    const { tour, date } = this.props;
+    const { reserveModal, total } = this.state;
     return (
       <div
         sm={12}
@@ -218,7 +243,7 @@ export class Overview extends Component {
                   <select
                     className="w-100 overview-input"
                     value={date.id}
-                    onChange={changeDate.bind(this)}
+                    onChange={this.handleDateChanges.bind(this)}
                   >
                     {tour.Dates.map((item, index) => {
                       return (
@@ -232,37 +257,6 @@ export class Overview extends Component {
                   </select>
                 </Col>
               </Row>
-              {/* {date.Capacity.count ? (
-                <Row className="my-3">
-                  <Col
-                    sm={1}
-                    className="d-flex justify-content-center align-items-center"
-                  >
-                    <i className="fad fa-bed text-main"></i>
-                  </Col>
-                  <Col
-                    sm={3}
-                    className="d-flex justify-content-center align-items-center"
-                  >
-                    <span>تعداد</span>
-                  </Col>
-                  <Col
-                    sm={7}
-                    className="d-flex justify-content-center align-items-center"
-                  >
-                    <input
-                      type="number"
-                      className="w-100 overview-input"
-                      value={count}
-                      onChange={this.handleCountChanges}
-                      min={1}
-                      max={date.Capacity.count}
-                    />
-                  </Col>
-                </Row>
-              ) : (
-                ""
-              )} */}
               <Row>
                 <span>
                   ظرفیت باقی مانده فقط
@@ -360,8 +354,8 @@ export class Overview extends Component {
               </button>
               <Button
                 color="primary"
-                onClick={this.toggleReserveModal}
-                disabled
+                onClick={this.handleUltimateReserve}
+                disabled={total == 0 ? true : false}
               >
                 رزرو
               </Button>
