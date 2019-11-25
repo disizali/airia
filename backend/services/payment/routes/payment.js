@@ -35,7 +35,8 @@ router.post("/reserve", async (req, res) => {
         return +total - +currentValue.amount;
       }
     }, 0);
-    if (total > Amount) {
+    
+    if (total >= Amount) {
       await Reserve.create({
         authority: -1,
         amount: Amount,
