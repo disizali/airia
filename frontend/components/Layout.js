@@ -45,7 +45,6 @@ class Layout extends Component {
     return (
       <main>
         <Head>
-          <title>بالهای آسمانی آیریا</title>
           <link
             rel="shortcut icon"
             type="image/png"

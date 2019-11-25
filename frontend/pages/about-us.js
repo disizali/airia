@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Layout from "../components/Layout";
 import Cover from "../components/Cover";
+import Head from "next/head";
 import { Container, Row, Col } from "reactstrap";
 const list = [
   [
@@ -22,26 +23,22 @@ const list = [
     "network-wired",
     "روابط شبکه ای",
     "ما در آیریا به دنبال برقراری روابط میان فردیِ فراتر از سِمَت، سطح و واحد هستیم تا با تجربه‌ها و تخصص یکدیگر آشنا شویم و سرمایه‌ی اجتماعی آیریا را افزایش دهیم."
-  ]
-  ,
+  ],
   [
     "briefcase",
     "تعهد حرفه ای",
     "ما در علی‌بابا به دنبال ارزیابی تعهد در تمامی ابعاد آن بوده و در پی ارزش افزوده‌ی دو طرفه از سمت سازمان و برای سازمان هستیم."
-  ]
-  ,
+  ],
   [
     "dumbbell",
     "توانمند سازی",
     "ما در علی‌بابا به دنبال ارتقای دائمی دانش و مهارت‌ها در ابعاد رفتاری و شغلی، و بهینه‌سازی توانایی‌ها در راستای نیازهای سازمان هستیم."
-  ]
-  ,
+  ],
   [
     "chart-line",
     "توسعه و تعالی",
     "ما در علی‌بابا به دنبال تسهیل تعالی علی‌بابا هستیم؛ تا جایی که زمینه‌ی تعالی واحدهای سازمانی و خود را فراهم کنیم."
-  ]
-  ,
+  ],
   [
     "users-class",
     "تیم سازی",
@@ -56,6 +53,9 @@ export default class About extends Component {
   render() {
     return (
       <Layout>
+        <Head>
+          <title>بالهای آسمانی آیریا - درباره ما</title>
+        </Head>
         <Cover title="درباره ما" />
         <Container className="privacy-container rtl text-right">
           <div className="box-container mt-4">

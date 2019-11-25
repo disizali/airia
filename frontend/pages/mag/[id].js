@@ -5,6 +5,8 @@ import jMoment from "jalali-moment";
 import persianJs from "persianjs";
 import * as api from "../../src/api";
 import { Row, Col } from "reactstrap";
+import Head from "next/head";
+
 export class Mag extends Component {
   static async getInitialProps(context) {
     const {
@@ -41,6 +43,9 @@ export class Mag extends Component {
     if (post == "" || post == undefined) return this.noPost();
     return (
       <Layout>
+        <Head>
+          <title>بالهای آسمانی آیریا - {post.title}</title>
+        </Head>
         <div className="my-3 my-md-5 mx-5">
           <Row className="rtl text-right">
             <Col sm={12} md={9} className="p-0 p-md-2">

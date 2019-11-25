@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import Layout from "../components/Layout";
 import Cover from "../components/Cover";
 import { Container, Row, Col } from "reactstrap";
+import Head from "next/head";
+
 export default class About extends Component {
   constructor(props) {
     super(props);
@@ -10,6 +12,9 @@ export default class About extends Component {
   render() {
     return (
       <Layout>
+        <Head>
+          <title>بالهای آسمانی آیریا - تماس با ما</title>
+        </Head>
         <Cover title="تماس با ما" />
         <Container className="rtl text-right">
           <div className="box-container mt-4">

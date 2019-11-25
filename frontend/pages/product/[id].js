@@ -13,6 +13,7 @@ import Title from "../../components/Product/Title";
 import Magazine from "../../components/Product/Magazine";
 import Related from "../../components/Product/Related";
 import _ from "lodash";
+import Head from "next/head";
 
 export default class Product extends Component {
   static async getInitialProps(context) {
@@ -75,6 +76,9 @@ export default class Product extends Component {
     if (noTour) return this.noTour();
     return (
       <Layout>
+        <Head>
+          <title>بالهای آسمانی آیریا - {tour.name}</title>
+        </Head>
         <Container className="py-3 rtl text-right">
           <Title tour={tour} />
           <Row className="mt-3">

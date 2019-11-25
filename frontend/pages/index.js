@@ -6,6 +6,7 @@ import Service from "../components/Tabs/Service/Index";
 import Magazine from "../components/Tabs/Magazine/index";
 import * as api from "../src/api";
 import jsCookie from "js-cookie";
+import Head from "next/head";
 
 export default class Index extends React.Component {
   static async getInitialProps(context) {
@@ -44,6 +45,9 @@ export default class Index extends React.Component {
     }
     return (
       <Layout>
+          <Head>
+        <title>بالهای آسمانی آیریا</title>
+        </Head>
         <Splash tab={tab} changeTab={this.changeTab.bind(this)} />
         {tab == 1 && <Tour tours={tours} />}
         {tab == 2 && <Service />}

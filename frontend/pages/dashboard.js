@@ -3,6 +3,7 @@ import Layout from "../components/Layout";
 import Dashboard from "../components/Dashboard/Index";
 import UserContext from "../components/UserContext";
 import Router from "next/router";
+import Head from "next/head";
 
 export class dashboard extends Component {
   static contextType = UserContext;
@@ -39,7 +40,14 @@ export class dashboard extends Component {
     }
   }
   render() {
-    return <Layout>{this.getContent()}</Layout>;
+    return (
+      <Layout>
+        <Head>
+          <title>بالهای آسمانی آیریا - پروفایل</title>
+        </Head>
+        {this.getContent()}
+      </Layout>
+    );
   }
 }
 

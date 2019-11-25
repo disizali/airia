@@ -3,6 +3,8 @@ import { Container, Button, Row, Col } from "reactstrap";
 import Layout from "../components/Layout";
 import Link from "next/link";
 import * as api from "../src/api";
+import Head from "next/head";
+
 export default class Search extends Component {
   static async getInitialProps(context) {
     const {
@@ -24,6 +26,9 @@ export default class Search extends Component {
     const { newQuery } = this.state;
     return (
       <Layout>
+        <Head>
+          <title>بالهای آسمانی آیریا - جستجو</title>
+        </Head>
         <Container className="py-2 py-md-5 rtl">
           <div className="p-4 bg-white d-flex justify-content-between align-items-center rounded shadow-sm">
             <span>

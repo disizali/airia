@@ -3,6 +3,8 @@ import Layout from "../components/Layout";
 import Cover from "../components/Cover";
 import { Container } from "reactstrap";
 import list from "../public/static/data/policy.json";
+import Head from "next/head";
+
 export class policy extends Component {
   constructor(props) {
     super(props);
@@ -18,6 +20,9 @@ export class policy extends Component {
   render() {
     return (
       <Layout>
+          <Head>
+        <title>بالهای آسمانی آیریا - قوانین و مقررات</title>
+        </Head>
         <Cover title="قوانین و مقررات" />
         <Container className="policy-container rtl text-right">
           <ul>
