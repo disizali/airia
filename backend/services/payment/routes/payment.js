@@ -31,11 +31,11 @@ router.post("/reserve", async (req, res) => {
     const total = credits.reduce((total, currentValue, currentIndex) => {
       if (currentValue.type) {
         return +total + +currentValue.amount;
-      } else if (!currentValue.type) {
+      } else if (currentValue.type == -1) {
         return +total - +currentValue.amount;
       }
     }, 0);
-    
+    console.log("total : ", total, "\n", "amount :", Amount);
     if (total >= Amount) {
       await Reserve.create({
         authority: -1,

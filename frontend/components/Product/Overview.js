@@ -100,26 +100,13 @@ export class Overview extends Component {
     this.setState({ reserveModal: !reserveModal });
   }
   getReserveButton() {
-    const { status } = this.context;
-    if (status == 1) {
-      return (
-        <Button
-          className="my-3 form-control reserve-button"
-          onClick={this.toggleReserveModal}
-        >
-          رزرو
-        </Button>
-      );
-    }
     return (
-      <div>
-        <Button
-          className="my-3 form-control reserve-button"
-          onClick={this.toggleModal}
-        >
-          رزرو
-        </Button>
-      </div>
+      <Button
+        className="my-3 form-control reserve-button"
+        onClick={this.toggleReserveModal}
+      >
+        رزرو
+      </Button>
     );
   }
   increase(item, price) {
@@ -142,10 +129,14 @@ export class Overview extends Component {
     });
   }
   handleUltimateReserve() {
+    const { status } = this.context;
+    if (status == -1) {
+      return this.toggleModal();
+    }
     const { total } = this.state;
     if (total == 0) {
       alert("لطفا گزینه های مد نظر خودتون رو انتخاب کنید");
-    } 
+    }
     this.goToReservePage();
   }
 
@@ -344,6 +335,7 @@ export class Overview extends Component {
               <span className="text-primary">
                 {this.state.total.toLocaleString()}
               </span>
+              <span>تومان </span>
             </div>
             <div>
               <button
@@ -357,7 +349,7 @@ export class Overview extends Component {
                 onClick={this.handleUltimateReserve}
                 disabled={total == 0 ? true : false}
               >
-                رزرو
+                نهایی کردن رزرو
               </Button>
             </div>
           </ModalFooter>

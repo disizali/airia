@@ -32,7 +32,6 @@ export default class Product extends Component {
     tour.map = tour.Details.find(item => item.type == 5);
     tour.tabs = tour.Details.filter(item => item.type == 6);
     tour.pdf = tour.Details.find(item => item.type == 7);
-
     const related = tour.Categories.map(category => {
       return category.Tours.map(tour => {
         return { id: tour.id, name: tour.name, image: tour.image };
