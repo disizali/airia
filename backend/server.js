@@ -45,6 +45,12 @@ app.get("/tours", async (req, res) => {
   const { data } = await axios.get(`${TOUR_SERVICE}/tours`);
   res.send(data);
 });
+
+app.get("/parents", async (req, res) => {
+  const { data } = await axios.get(`${TOUR_SERVICE}/parents`);
+  res.send(data);
+});
+
 app.get("/tours/:id", async (req, res) => {
   const { data } = await axios.get(`${TOUR_SERVICE}/tours/${req.params.id}`);
   res.send(data);

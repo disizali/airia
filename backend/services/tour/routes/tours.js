@@ -72,45 +72,38 @@ router.get("/:id", async (req, res) => {
 });
 
 router.get("/", async (req, res) => {
-  let all = await Parent.findAll({
-    attributes: ["id", "name", "icon"],
+  Tour.findAll({
+    attributes: { exclude: ["createdAt", "updatedAt"] },
+    order: [[Dates, "start", "ASC"]],
     include: [
+      { model: Detail, attributes: ["type", "data"] },
       {
-        model: Category,
-        as: "Categories",
-        attributes: ["id", "name", "parentId"],
+        model: Dates,
+        attributes: { exclude: ["createdAt", "updatedAt", "TourId"] },
         include: [
           {
-            model: Tour,
-            as: "Tours",
-            attributes: { exclude: ["createdAt", "updatedAt"] },
-            include: [
-              { model: Detail, attributes: ["type", "data"] },
-              {
-                model: Dates,
-                orders: [["start", "desc"]],
-                include: [{ model: Capacity, attributes: ["id", "count"] }]
-              }
-            ]
+            model: Capacity,
+            attributes: ["id", "count"]
           }
+        ]
+      },
+      {
+        model: Magazine,
+        as: "Magazines",
+        attributes: ["id", "title", "cover"]
+      },
+      {
+        model: Category,
+        attributes: ["id"],
+        as: "Categories",
+        include: [
+          { model: Tour, as: "Tours", attributes: ["id", "name", "image"] }
         ]
       }
     ]
+  }).then(tours => {
+      return res.send(tours);
   });
-
-  all.forEach(parent => {
-    parent.Categories.forEach(category => {
-      category.Tours.forEach(tour => {
-        tour.Dates.forEach(date => {
-          date.price = getLowestPrice(
-            xlsx.parse(`${__dirname}/files/${date.hotels}.xlsx`)[0].data
-          );
-        });
-      });
-    });
-  });
-
-  res.send(all);
 });
 
 router.get("/search/:query", async (req, res) => {

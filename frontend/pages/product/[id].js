@@ -20,7 +20,7 @@ export default class Product extends Component {
     const {
       query: { id }
     } = context;
-    const tours = await api.getTours();
+    const tours = await api.getParents();
     let tour = await api.getTourPage(id);
     if (tour == "no tour") {
       return { noTour: true };

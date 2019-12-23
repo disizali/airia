@@ -10,7 +10,7 @@ import Head from "next/head";
 
 export default class Index extends React.Component {
   static async getInitialProps(context) {
-    const tours = await api.getTours();
+    const tours = await api.getParents();
     const magazine = await api.getMagazine();
     const {
       query: { referral, tab }

@@ -1,0 +1,21 @@
+.dashboard-tours{
+    background-color: #f6fafd;
+    // background-color: red;
+    position: relative;
+    right: calc(20% + 5px);
+    width: calc(80% - 10px);
+    height: calc(100% - 10px);
+    border-radius: 20px 0 0 20px;
+}
+.dashboard-tours-list{
+    list-style: none;
+    li{
+        cursor: pointer;
+        &.active{
+            background: rgb(65, 65, 87);
+            border-radius: 10px;
+            color: white;
+            box-shadow: 5px 5px 10px rgba(0,0,0,0.1);
+        }
+    }
+}

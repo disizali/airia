@@ -11,6 +11,11 @@ export async function getTours() {
   return tours;
 }
 
+export async function getParents() {
+  const { data: tours } = await axios.get(`${api}/parents`);
+  return tours;
+}
+
 export async function getTourPage(id) {
   const { data: tour } = await axios.get(`${api}/tours/${id}`);
   return tour;
