@@ -9,7 +9,7 @@ export default class Tabs extends Component {
     const { selectedTab, changeTab } = this.props;
     return (
       <div className="dashboard-tabs">
-        <h3 className="m2 mb-5">پنل مدیریت</h3>
+        <h3 className="m3 mb-5">پنل مدیریت</h3>
         <ul>
           <li
             className={`my-3 py-2 ${selectedTab == 1 && "active"}`}
