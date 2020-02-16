@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import _ from "lodash";
-import {Row , Col} from "reactstrap"
+import { Row, Col } from "reactstrap";
+import * as api from "../../../src/api";
+
 export class Tours extends Component {
   constructor(props) {
     super(props);
@@ -11,6 +13,7 @@ export class Tours extends Component {
     };
     this.changeTour = this.changeTour.bind(this);
     this.searchTour = this.searchTour.bind(this);
+    this.updateTour = this.updateTour.bind(this);
   }
   changeTour(selectedTour) {
     const { tours } = this.props;
@@ -41,6 +44,13 @@ export class Tours extends Component {
         this.setState({ editables, selectedTour });
         break;
     }
+  }
+  async updateTour() {
+    const edited = { id: this.state.selectedTour.id, ...this.state.editables };
+    const result = await api.updateTour(edited);
+    alert(
+      result == "updated" ? "تور با موفقیت ویرایش شد" : "ویرایش تور ناموفق بود"
+    );
   }
   render() {
     const { selectedTour, listedTours } = this.state;
@@ -87,7 +97,21 @@ export class Tours extends Component {
           <div className="my-2 rounded border p-3">
             <label htmlFor="tour-name">تصاویر</label>
             <Row>
-              
+              {JSON.parse(
+                _.filter(selectedTour.Details, {
+                  type: 2
+                })[0].data
+              ).map((item, index) => {
+                return (
+                  <Col key={index}>
+                    <img
+                      className="rounded"
+                      src={`/static/uploads/images/${item}`}
+                      width="100%"
+                    />
+                  </Col>
+                );
+              })}
             </Row>
           </div>
 
@@ -170,7 +194,12 @@ export class Tours extends Component {
               // onChange={e => this.textChangeHandler(e)}
             />
           </div>
-          <button className="btn btn-danger">
+
+          <div className="my-2 rounded border p-3">
+            <label htmlFor="tour-name">تب ها</label>
+          </div>
+
+          <button className="btn btn-danger" onClick={this.updateTour}>
             <i className="fas fa-save mx-2" />
             <span className="mx-2">ذخیره</span>
           </button>

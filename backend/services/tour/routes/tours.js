@@ -71,6 +71,13 @@ router.get("/:id", async (req, res) => {
   });
 });
 
+router.put("/:id", async (req, res) => {
+  let data = {};
+  data.name = req.body.general.name;
+  const result = await Tour.update(data, { where: { id: req.body.id } });
+  res.send(result ? "updated" : "error");
+});
+
 router.get("/", async (req, res) => {
   Tour.findAll({
     attributes: { exclude: ["createdAt", "updatedAt"] },
@@ -102,7 +109,7 @@ router.get("/", async (req, res) => {
       }
     ]
   }).then(tours => {
-      return res.send(tours);
+    return res.send(tours);
   });
 });
 

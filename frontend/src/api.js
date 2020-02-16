@@ -1,7 +1,7 @@
 import axios from "axios";
 import * as config from "./config";
 
-import axiosRetry from 'axios-retry';
+import axiosRetry from "axios-retry";
 axiosRetry(axios, { retries: 9 });
 
 const api = config.API;
@@ -64,8 +64,12 @@ export async function updateFavorites(data, headers) {
   return result;
 }
 
-export async function makeReservePayment(data,headers) {
-  const { data: reserve } = await axios.post(`${api}/payment/reserve`, data , headers);
+export async function makeReservePayment(data, headers) {
+  const { data: reserve } = await axios.post(
+    `${api}/payment/reserve`,
+    data,
+    headers
+  );
   return reserve;
 }
 export async function verifyReservePayment(data) {
@@ -105,4 +109,9 @@ export async function search(query) {
     `${api}/magazine/search/${encodeURI(query)}`
   );
   return { tours, magazines };
+}
+
+export async function updateTour(tour) {
+  const { data: result } = await axios.put(`${api}/tours/${tour.id}`, tour);
+    return result;
 }
