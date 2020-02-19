@@ -5,6 +5,9 @@ import * as api from "../../src/api";
 import Head from "next/head";
 
 import { Card } from "reactstrap";
+
+
+
 export default class Favorites extends Component {
   static contextType = UserContext;
   constructor(props) {

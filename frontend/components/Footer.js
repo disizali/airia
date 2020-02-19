@@ -55,25 +55,9 @@ export class Footer extends Component {
                       <a>تماس با ما</a>
                     </Link>
                   </li>
-
-                  {/* <li>تماس با ما</li>
-                  <li>چرا آیریا</li>
-                  <li>باشگاه مشتریان</li>
-                  <li>قوانین و مقررات</li>
-                  <li>راهنمای خرید</li>
-                  <li>پرسش و پاسخ</li>
-                  <li>مجله</li>
-                  <li>فرصت های شغلی</li> */}
                 </ul>
               </Col>
-              {/* <Col sm={12} md={4}>
-                <h5>اطلاعات تکمیلی</h5>
-                <ul className="p-3">
-                  <li>راهنمای رزرو تور داخلی</li>
-                  <li>راهنمای رزرو تور خارجی</li>
-                  <li>شیوه نامه حقوق مسافر</li>
-                </ul>
-              </Col> */}
+    
               <Col sm={12} md={4}>
                 <img
                   src="/static/images/logo.png"

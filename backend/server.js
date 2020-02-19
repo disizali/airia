@@ -46,7 +46,6 @@ app.get("/tours", async (req, res) => {
   res.send(data);
 });
 app.put("/tours/:id", async (req, res) => {
-  console.log(req.body);
   const { data: result } = await axios.put(
     `${TOUR_SERVICE}/tours/${req.body.id}`,
     req.body

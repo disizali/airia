@@ -14,6 +14,9 @@ export class Tours extends Component {
     this.changeTour = this.changeTour.bind(this);
     this.searchTour = this.searchTour.bind(this);
     this.updateTour = this.updateTour.bind(this);
+    this.addDetailItem = this.addDetailItem.bind(this);
+    this.deleteDetailItem = this.deleteDetailItem.bind(this);
+    this.handleEditingTexts = this.handleEditingTexts.bind(this);
   }
   changeTour(selectedTour) {
     const { tours } = this.props;
@@ -45,6 +48,52 @@ export class Tours extends Component {
         break;
     }
   }
+  handleEditingTexts(e) {
+    _.set(this.state, e.target.name, e.target.value);
+  }
+  deleteDetailItem(data) {
+    const { editables, selectedTour } = this.state;
+    const newSelectedTour = selectedTour;
+    _.remove(newSelectedTour.Details, { type: 1, data });
+    const newEditable = {
+      ...editables,
+      details: {
+        ...editables.details,
+        detailItems: _.filter(newSelectedTour.Details, { type: 1 })
+      }
+    };
+    this.setState({ selectedTour, editables: newEditable });
+  }
+
+  addDetailItem() {
+    const { editables, selectedTour, editing } = this.state;
+    if (
+      editing.newItem.title != undefined &&
+      editing.newItem.icon != undefined &&
+      editing.newItem.text != undefined
+    ) {
+      const newDetails = _.concat(selectedTour.Details, {
+        type: 1,
+        data: JSON.stringify({
+          ...editing.newItem,
+          icon: editing.newItem.icon.toString().toLowerCase()
+        })
+      });
+
+      const newEditable = {
+        ...editables,
+        details: {
+          ...editables.details,
+          detailItems: _.filter(newDetails, { type: 1 })
+        }
+      };
+      this.setState({
+        selectedTour: { ...selectedTour, Details: newDetails },
+        editables: newEditable
+      });
+    }
+  }
+
   async updateTour() {
     const edited = { id: this.state.selectedTour.id, ...this.state.editables };
     const result = await api.updateTour(edited);
@@ -53,7 +102,7 @@ export class Tours extends Component {
     );
   }
   render() {
-    const { selectedTour, listedTours } = this.state;
+    const { selectedTour, listedTours, editing } = this.state;
     return (
       <div className="dashboard-tours d-flex">
         <div className="mt-3 w-25 mx-3 border-left pl-3">
@@ -93,7 +142,6 @@ export class Tours extends Component {
               onChange={e => this.textChangeHandler(e)}
             />
           </div>
-
           <div className="my-2 rounded border p-3">
             <label htmlFor="tour-name">تصاویر</label>
             <Row>
@@ -126,10 +174,11 @@ export class Tours extends Component {
                   <li className="my-3" key={index}>
                     <i
                       className={`bg-danger text-white mx-1 rounded p-1  fad fa-trash`}
+                      onClick={e => this.deleteDetailItem(item.data)}
                     />
-                    <i
+                    {/* <i
                       className={`bg-warning text-white mx-1 rounded p-1 fad fa-pen`}
-                    />
+                    /> */}
                     <i className={`text-main fad p-1 fa-${data.icon}`} />
                     <span className="mx-2 text-main">{data.title}</span>
                     <span className="mx-2"> : </span>
@@ -137,6 +186,45 @@ export class Tours extends Component {
                   </li>
                 );
               })}
+              <li>
+                <Row>
+                  <Col sm={2}>
+                    <input
+                      type="text"
+                      placeholder="آیکون"
+                      className="form-control"
+                      name="editing.newItem.icon"
+                      onChange={this.handleEditingTexts}
+                    />
+                  </Col>
+                  <Col sm={4}>
+                    <input
+                      type="text"
+                      placeholder="عنوان"
+                      className="form-control"
+                      name="editing.newItem.title"
+                      onChange={this.handleEditingTexts}
+                    />
+                  </Col>
+                  <Col sm={4}>
+                    <input
+                      type="text"
+                      placeholder="توضیحات"
+                      className="form-control"
+                      name="editing.newItem.text"
+                      onChange={this.handleEditingTexts}
+                    />
+                  </Col>
+                  <Col sm={2}>
+                    <button
+                      className="btn btn-primary"
+                      onClick={this.addDetailItem}
+                    >
+                      افزودن
+                    </button>
+                  </Col>
+                </Row>
+              </li>
             </ul>
           </div>
           <div className="my-2 rounded border p-3">

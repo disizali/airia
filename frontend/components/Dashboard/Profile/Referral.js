@@ -12,10 +12,6 @@ export default class Referral extends Component {
           <span className="w-100 bg-transparent text-white border-none">
             {config.HOST}?referral={this.context.user.id}
           </span>
-          {/* <i
-            className="fad fa-copy text-white rounded p-1 mr-1"
-            onClick={this.copy}
-          ></i> */}
         </div>
         <p className="text-center text-muted m-2">
           با این لینک میتونید دوستان خودتون رو به آیریا دعوت کنید

@@ -76,7 +76,7 @@ export default class Signin extends Component {
             ثبت نام
           </button>
         )}
-       
+      
       </div>
     );
   }

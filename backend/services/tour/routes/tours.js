@@ -73,9 +73,56 @@ router.get("/:id", async (req, res) => {
 
 router.put("/:id", async (req, res) => {
   let data = {};
-  data.name = req.body.general.name;
-  const result = await Tour.update(data, { where: { id: req.body.id } });
-  res.send(result ? "updated" : "error");
+  if (req.body.general != undefined) {
+    let general = req.body.general;
+    data.name = general.name;
+    await Tour.update(data, {
+      where: { id: req.body.id }
+    });
+  }
+  if (req.body.details != undefined) {
+    let details = req.body.details;
+    if (details.gravity) {
+      await Detail.update(
+        { data: details.gravity },
+        {
+          where: { TourId: req.body.id, type: 3 }
+        }
+      );
+    }
+    if (details.detailItems) {
+      const currentDetailItems = await Detail.findAll({
+        where: { type: 1, TourId: req.body.id },
+        raw: true
+      });
+      let compareForDelete = currentDetailItems.filter(item => {
+        const currentData = JSON.parse(item.data);
+        return details.detailItems.some(deailItem => {
+          const data = JSON.parse(deailItem.data);
+          return data.title === currentData.title;
+        })
+          ? null
+          : item.id;
+      });
+      compareForDelete = compareForDelete.map(item => item.id);
+      Detail.destroy({ where: { id: compareForDelete } });
+      // DELETE QUERY
+      let compareForInsert = details.detailItems.filter(item => {
+        const currentData = JSON.parse(item.data);
+        return !currentDetailItems.some(deailItem => {
+          const data = JSON.parse(deailItem.data);
+          return data.title === currentData.title;
+        });
+      });
+      compareForInsert = compareForInsert.map(item => {
+        return { ...item, TourId: req.body.id };
+      });
+
+      // console.log(compareForInsert);
+      Detail.bulkCreate(compareForInsert);
+    }
+  }
+  res.send("updated");
 });
 
 router.get("/", async (req, res) => {
