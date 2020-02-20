@@ -11,6 +11,7 @@ const TOUR_SERVICE = "http://localhost:3002";
 const USER_SERVICE = "http://localhost:3003";
 const PAYMENT_SERVICE = "http://localhost:3004";
 const MAGAZINE_SERVICE = "http://localhost:3005";
+const FILES_SERVICE = "http://localhost:3006";
 
 app.use(cors(corsOptions));
 app.use(express.json());
@@ -161,6 +162,11 @@ app.get("/magazine/search/:query", async (req, res) => {
   const { data } = await axios.get(
     `${MAGAZINE_SERVICE}/search/${encodeURI(req.params.query)}`
   );
+  res.send(data);
+});
+
+app.post("/files", async (req, res) => {
+  const { data } = await axios.post(`${FILES_SERVICE}`, req.body);
   res.send(data);
 });
 
